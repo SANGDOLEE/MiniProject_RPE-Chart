@@ -13,6 +13,7 @@ class MySBDViewModel: ObservableObject {
         squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
         benchValue = UserDefaults.standard.string(forKey: "benchValue") ?? ""
         deadValue = UserDefaults.standard.string(forKey: "deadValue") ?? ""
+        
     }
     
     func saveData() {
@@ -21,9 +22,12 @@ class MySBDViewModel: ObservableObject {
         UserDefaults.standard.setValue(benchValue, forKey: "benchValue")
         UserDefaults.standard.setValue(deadValue, forKey: "deadValue")
         
+        
     }
     
 }
+
+
 struct ContentView: View {
     
     @StateObject private var viewModel = MySBDViewModel()
@@ -48,30 +52,33 @@ struct ContentView: View {
     
     // Color Picker
     @State private var typeColor = Color.blue
+    @State private var textColor = Color.black
     
     var body: some View {
         TabView {
             VStack {
-                HStack() {
-                    
-                    Spacer()
-                    Text("What's")
-                        .bold()
-                        .scaleEffect(1.5)
-                        .padding()
+                ZStack{
+                    HStack() {
+                        ColorPicker("", selection: $typeColor).padding(30)
+                        Spacer()
                         
-                    Spacer()
-                    
-                    ColorPicker("", selection: $typeColor)
-                        .padding()
+                    }
+                    HStack() {
+                        ColorPicker("", selection: $textColor)
+                    }
+                    HStack() {
+                        Text("What's")
+                            .bold()
+                            .scaleEffect(1.5)
+                            .padding()
                         
+                    }
                 }
                 
                 Picker("Choose a type", selection: $workout) {
                     ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
                         Text($0)
                     }
-                    
                 }
                 .pickerStyle(.segmented)
                 .padding()
@@ -125,7 +132,6 @@ struct ContentView: View {
                 Text(getWeightLabel())
                     .scaleEffect(3.0)
                     .bold()
-                    .foregroundColor(textColor)
                 
                 Text("\(workout.isEmpty ? "" : workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? String(format: "%.1f", rpeValue) : "")")
                     .padding(.top, 20)
