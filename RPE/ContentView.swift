@@ -47,6 +47,9 @@ struct ContentView: View {
     
     
     /// SettingView에서 한글버전 선택시 바꿀 변수들
+    @State private var sq = "Squat"
+    @State private var bp = "Benchpress"
+    @State private var dl = "Deadlift"
     
     var body: some View {
         TabView {
