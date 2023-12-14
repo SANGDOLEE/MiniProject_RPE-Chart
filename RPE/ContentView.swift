@@ -57,7 +57,8 @@ struct ContentView: View {
     var body: some View {
         TabView {
             VStack {
-                ZStack{
+                ZStack() {
+                
                     HStack() {
                         ColorPicker("", selection: $typeColor).padding(30)
                         Spacer()
@@ -71,6 +72,7 @@ struct ContentView: View {
                             .bold()
                             .scaleEffect(1.5)
                             .padding()
+                            .foregroundColor(textColor)
                         
                     }
                 }
@@ -78,6 +80,7 @@ struct ContentView: View {
                 Picker("Choose a type", selection: $workout) {
                     ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
                         Text($0)
+                            
                     }
                 }
                 .pickerStyle(.segmented)
@@ -89,6 +92,7 @@ struct ContentView: View {
                 VStack {
                     HStack {
                         Text("RPE     ")
+                            .foregroundColor(textColor)
                         Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
                             if !editing {
                                 // 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
@@ -97,18 +101,22 @@ struct ContentView: View {
                         })
                         
                         Text("10")
+                            .foregroundColor(textColor)
                     }
                     .padding(10)
                     
                     if rpeValue != 0.0 {
                         Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") // 정수로 떨어지면 소수점 표기 안함
+                            .foregroundColor(textColor)
                     } else {
                         Text("") // 슬라이더 안건드렸다면
+                            .foregroundColor(textColor)
                     }
                 }
                 VStack {
                     HStack {
                         Text("REPS")
+                            .foregroundColor(textColor)
                         Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
                             if !editing {
                                 // 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
@@ -117,24 +125,29 @@ struct ContentView: View {
                         })
                         .padding()
                         Text("12")
+                            .foregroundColor(textColor)
                     }
                     .padding(10)
                     
                     if repsValue != 0.0 {
                         Text("Reps : \(repsValue, specifier: "%.0f")")
+                            .foregroundColor(textColor)
                     } else {
                         Text("")
+                            .foregroundColor(textColor)
                     }
                 }
                 
                 Spacer()
                 
                 Text(getWeightLabel())
-                    .scaleEffect(3.0)
+                    .scaleEffect(4.0)
                     .bold()
+                    .foregroundColor(textColor)
                 
                 Text("\(workout.isEmpty ? "" : workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? String(format: "%.1f", rpeValue) : "")")
                     .padding(.top, 20)
+                    .foregroundColor(textColor)
                 
                 Spacer()
             }
