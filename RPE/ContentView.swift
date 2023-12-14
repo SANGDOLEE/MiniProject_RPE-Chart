@@ -52,10 +52,20 @@ struct ContentView: View {
     var body: some View {
         TabView {
             VStack {
-                Text("What's")
-                    .bold()
-                    .scaleEffect(1.5)
-                    .padding(.top, 0)
+                HStack() {
+                    
+                    Spacer()
+                    Text("What's")
+                        .bold()
+                        .scaleEffect(1.5)
+                        .padding()
+                        
+                    Spacer()
+                    
+                    ColorPicker("", selection: $typeColor)
+                        .padding()
+                        
+                }
                 
                 Picker("Choose a type", selection: $workout) {
                     ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
@@ -65,7 +75,7 @@ struct ContentView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding()
-                .background(Color.blue)
+                .background(typeColor)
                 .cornerRadius(20)
                 .padding()
                 
@@ -115,9 +125,9 @@ struct ContentView: View {
                 Text(getWeightLabel())
                     .scaleEffect(3.0)
                     .bold()
+                    .foregroundColor(textColor)
                 
                 Text("\(workout.isEmpty ? "" : workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? String(format: "%.1f", rpeValue) : "")")
-                
                     .padding(.top, 20)
                 
                 Spacer()
