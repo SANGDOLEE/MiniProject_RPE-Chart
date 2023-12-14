@@ -46,10 +46,8 @@ struct ContentView: View {
     let rpeModel = RpeDataModel() // RpeDatModel 객체 생성
     
     
-    /// SettingView에서 한글버전 선택시 바꿀 변수들
-    @State private var sq = "Squat"
-    @State private var bp = "Benchpress"
-    @State private var dl = "Deadlift"
+    // Color Picker
+    @State private var typeColor = Color.blue
     
     var body: some View {
         TabView {
@@ -122,40 +120,21 @@ struct ContentView: View {
                 
                     .padding(.top, 20)
                 
-                
-                
                 Spacer()
-                
             }
-            
             .padding()
             .tabItem {
                 Text("RPE Chart")
             }
             
-            
             // Second Tab
             NavigationView{
                 VStack {
-                    
-                   
-                     
-                    
-                    /*
-                    Text("Setting Weight")
-                        .bold()
-                        .scaleEffect(1.5)
-                        .padding(.top, 0)
-                    */
-                    // Spacer().frame(height: 50) // 간격을 두기 위한 Spacer
-                    
                     Spacer()
                     
                     HStack {
                         Text("total")
                             .font(.system(size:27))
-                        
-                        
                         let squatValue = Double(viewModel.squatValue) ?? 0.0
                         let benchValue = Double(viewModel.benchValue) ?? 0.0
                         let deadValue = Double(viewModel.deadValue) ?? 0.0
@@ -224,9 +203,6 @@ struct ContentView: View {
                             }
                         Text("\(kgValue)")
                     }
-                    
-                    
-                    
                     Spacer().frame(height: 40) // 간격을 두기 위한 Spacer
                     
                     HStack {
@@ -263,8 +239,6 @@ struct ContentView: View {
                             .foregroundColor(.black)
                         }
                     )
-                
-                
             }
             .tabItem {
                 Text("My SBD")
@@ -276,8 +250,10 @@ struct ContentView: View {
     func getWeightLabel() -> String {
         
         // 오류 확인 디버깅용 출력 메세지
+        /*
         print("Selected workout: \(workout)")
         print("selectRpe: \(selectRpe), selectReps: \(selectReps)")
+        */
         
         // Weight 데이터가 입력되어있지 않다면 "Weight" 기본 표기
         guard !viewModel.squatValue.isEmpty, !viewModel.benchValue.isEmpty, !viewModel.deadValue.isEmpty else {
@@ -289,32 +265,34 @@ struct ContentView: View {
         case "Squat":
             if let squatValue = Double(viewModel.squatValue) {
                 let calculatedValue = squatValue * rpeModel.rpeArray[selectRpe][selectReps]
-                return String(format: "%.1f", calculatedValue)
+                return calculatedValue.isWhole ? String(Int(calculatedValue)) : String(format: "%.1f", calculatedValue)
             } else {
                 return "Invalid squat value"
             }
         case "Benchpress":
             if let benchValue = Double(viewModel.benchValue) {
                 let calculatedValue = benchValue * rpeModel.rpeArray[selectRpe][selectReps]
-                return String(format: "%.1f", calculatedValue)
+                return calculatedValue.isWhole ? String(Int(calculatedValue)) : String(format: "%.1f", calculatedValue)
             } else {
                 return "Invalid bench value"
             }
         case "Deadlift":
             if let deadValue = Double(viewModel.deadValue) {
                 let calculatedValue = deadValue * rpeModel.rpeArray[selectRpe][selectReps]
-                return String(format: "%.1f", calculatedValue)
+                return calculatedValue.isWhole ? String(Int(calculatedValue)) : String(format: "%.1f", calculatedValue)
             } else {
                 return "Invalid deadlift value"
             }
         default:
             return ""
         }
-        
-        
-        
     }
-    
+}
+// getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 X
+extension Double {
+    var isWhole: Bool {
+        return floor(self) == self
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
