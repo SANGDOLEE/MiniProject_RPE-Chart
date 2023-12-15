@@ -10,12 +10,20 @@ struct settingView: View {
     @State private var weightText = ""
     @State private var lanText = ""
     
+    
+    // showModal 바인딩
+    @Binding var showModal: Bool  // 바인딩 추가
+    init(showModal: Binding<Bool>) {
+        _showModal = showModal
+    }
+    
     var body: some View {
         
         NavigationView{
             VStack{
                 
                 HStack {
+                    Spacer()
                     Spacer()
                     Spacer()
                     Spacer()
@@ -49,6 +57,7 @@ struct settingView: View {
                     Spacer()
                     Spacer()
                     Spacer()
+                    Spacer()
                     Text("Languages :")
                     Toggle(isOn: $lanToggle) {
                         if lanToggle {
@@ -68,11 +77,24 @@ struct settingView: View {
                     Spacer()
                     Spacer()
                 }
+                
             }.navigationBarTitle("Setting",displayMode: .inline)
+                .navigationBarItems(trailing:
+                                        Button(action: {
+                    self.showModal.toggle()
+                }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.black)
+                }
+                )
+            
+            
         }
     }
 }
 
-#Preview {
-    settingView()
+struct settingView_Previews: PreviewProvider {
+    static var previews: some View {
+        settingView(showModal: .constant(true))
+    }
 }

@@ -53,12 +53,16 @@ struct ContentView: View {
     // Color Picker
     @State private var typeColor = Color.blue
     @State private var textColor = Color.black
+    @State private var bgColor = Color.white
+    
+    // 2번째 탭 - Setting시 Modal로 가는 변수
+    @State var isModalSheetShown:Bool = false
     
     var body: some View {
         TabView {
             VStack {
                 ZStack() {
-                
+                    
                     HStack() {
                         ColorPicker("", selection: $typeColor).padding(30)
                         Spacer()
@@ -66,6 +70,7 @@ struct ContentView: View {
                     }
                     HStack() {
                         ColorPicker("", selection: $textColor)
+                    
                     }
                     HStack() {
                         Text("What's")
@@ -80,7 +85,7 @@ struct ContentView: View {
                 Picker("Choose a type", selection: $workout) {
                     ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
                         Text($0)
-                            
+                        
                     }
                 }
                 .pickerStyle(.segmented)
@@ -260,14 +265,25 @@ struct ContentView: View {
                 }
                 .padding()
                 
+                
+                
                 /// Navigation 영역
                 .navigationBarTitle("Setting Weight", displayMode: .inline) // Set navigation title here
-                    .navigationBarItems(trailing:
-                        NavigationLink(destination: settingView()) {
+                
+                
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        isModalSheetShown.toggle()
+                    }) {
                         Image(systemName: "gear")
                             .foregroundColor(.black)
-                        }
-                    )
+                    }
+                    .sheet(isPresented: $isModalSheetShown) {
+                        settingView(showModal: $isModalSheetShown)
+                    }
+                )
+                
+                
             }
             .tabItem {
                 Text("My SBD")
@@ -280,9 +296,9 @@ struct ContentView: View {
         
         // 오류 확인 디버깅용 출력 메세지
         /*
-        print("Selected workout: \(workout)")
-        print("selectRpe: \(selectRpe), selectReps: \(selectReps)")
-        */
+         print("Selected workout: \(workout)")
+         print("selectRpe: \(selectRpe), selectReps: \(selectReps)")
+         */
         
         // Weight 데이터가 입력되어있지 않다면 "Weight" 기본 표기
         guard !viewModel.squatValue.isEmpty, !viewModel.benchValue.isEmpty, !viewModel.deadValue.isEmpty else {
