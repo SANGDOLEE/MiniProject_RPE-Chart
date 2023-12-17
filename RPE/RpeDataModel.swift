@@ -2,7 +2,7 @@
 import Foundation
 
 class RpeDataModel {
-    
+     
     var rpeArray : [[Double]]
     
     init() {

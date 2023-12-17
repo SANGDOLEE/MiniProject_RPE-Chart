@@ -170,18 +170,19 @@ struct ContentView: View {
                         
                         let totalValue = squatValue + benchValue + deadValue
                         if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
-                            // 정수형일 경우
-                            Text("\(Int(totalValue))")
-                                .font(.system(size: 24))
-                                .bold()
-                                .foregroundColor(Color.blue)
-                        } else {
-                            // 소수점 1자리까지 표시
-                            Text("\(String(format: "%.1f", totalValue))")
-                                .font(.system(size: 24))
-                                .bold()
-                                .foregroundColor(Color.blue)
-                        }
+                             // 정수형일 경우
+                             Text("\(Int(totalValue))")
+                                 .font(.system(size: 24))
+                                 .bold()
+                                 .foregroundColor(Color.blue)
+                         } else {
+                             // 소수점 1자리까지 표시
+                             let formattedTotal = formatTotalValue(totalValue)
+                             Text(formattedTotal)
+                                 .font(.system(size: 24))
+                                 .bold()
+                                 .foregroundColor(Color.blue)
+                         }
                         
                         Text("\(kgValue)")
                             .font(.system(size:24))
@@ -346,6 +347,17 @@ struct ContentView: View {
                 .background(Capsule().fill(backgroundColor))
                 .scaleEffect(configuration.isPressed ? 0.88 : 1.0)
         }
+    }
+    // Function to format totalValue without commas
+    private func formatTotalValue(_ totalValue: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 1
+        formatter.groupingSeparator = ""
+        formatter.usesGroupingSeparator = false
+        
+        return formatter.string(from: NSNumber(value: totalValue)) ?? "\(totalValue)"
     }
     
 }

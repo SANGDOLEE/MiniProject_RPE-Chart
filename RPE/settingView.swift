@@ -85,10 +85,7 @@ struct settingView: View {
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(.black)
-                }
-                )
-            
-            
+                })
         }
     }
 }
