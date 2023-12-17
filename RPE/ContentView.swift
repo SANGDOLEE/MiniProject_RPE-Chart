@@ -47,7 +47,7 @@ struct ContentView: View {
     @State private var typeColor = Color.blue
     @State private var textColor = Color.black
     @State private var bgColor = Color.white
-
+    
     // 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
     
@@ -55,7 +55,7 @@ struct ContentView: View {
         TabView {
             VStack {
                 ZStack() {
-                        
+                    
                     HStack() {
                         ColorPicker("", selection: $typeColor).padding(30)
                         Spacer()
@@ -153,8 +153,8 @@ struct ContentView: View {
             .tabItem {
                 Text("RPE Chart")
             }
-           
-                   
+            
+            
             
             // Second Tab
             NavigationView{
@@ -247,6 +247,7 @@ struct ContentView: View {
                         .buttonStyle(InsetRoundScaleButton(labelColor: .white, backgroundColor: .blue))
                         .bold()
                         .font(.system(size: 24))
+                        
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(
@@ -280,6 +281,9 @@ struct ContentView: View {
                 )
                 
                 
+            }
+            .onTapGesture {
+                hideKeyboard()
             }
             .tabItem {
                 Text("My SBD")
@@ -331,19 +335,22 @@ struct ContentView: View {
     }
     
     struct InsetRoundScaleButton: ButtonStyle {
-      var labelColor = Color.white
-      var backgroundColor = Color.blue
-      
+        var labelColor = Color.white
+        var backgroundColor = Color.blue
+        
         func makeBody(configuration: Configuration) -> some View {
-                configuration.label
-                    .padding(.horizontal, 19)
-                    .padding(.vertical, 5)
-                    .foregroundColor(labelColor)
-                    .background(Capsule().fill(backgroundColor))
-            }
+            configuration.label
+                .padding(.horizontal, 19)
+                .padding(.vertical, 5)
+                .foregroundColor(labelColor)
+                .background(Capsule().fill(backgroundColor))
+                .scaleEffect(configuration.isPressed ? 0.88 : 1.0)
+        }
     }
     
 }
+
+
 // getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 X
 extension Double {
     var isWhole: Bool {
@@ -357,3 +364,10 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif

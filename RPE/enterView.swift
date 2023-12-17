@@ -16,10 +16,12 @@ struct EnterView: View {
                 HStack {
                     Text("SQ")
                         .font(.system(size: 24))
+                        .fontWeight(.light)
                     TextField("Enter Weight", text: $viewModel.squatValue)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .font(.system(size:14))
                         .keyboardType(.decimalPad)
+                        .fontWeight(.thin)
                         .multilineTextAlignment(.center)
                         .frame(width: 115)
                         .onChange(of: viewModel.squatValue) { newValue in
@@ -32,9 +34,11 @@ struct EnterView: View {
                 HStack {
                     Text("BP")
                         .font(.system(size: 24))
+                        .fontWeight(.light)
                     TextField("Enter Weight", text: $viewModel.benchValue)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .font(.system(size:14))
+                        .fontWeight(.thin)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.center)
                         .frame(width: 115)
@@ -47,10 +51,12 @@ struct EnterView: View {
                 HStack {
                     Text("DL")
                         .font(.system(size: 24))
+                        .fontWeight(.light)
                     TextField("Enter Weight", text: $viewModel.deadValue)
                         .font(.system(size:14))
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .fontWeight(.thin)
                         .multilineTextAlignment(.center)
                         .frame(width: 115)
                         .onChange(of: viewModel.deadValue) { newValue in
