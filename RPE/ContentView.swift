@@ -7,13 +7,11 @@ class MySBDViewModel: ObservableObject {
     @Published var benchValue = ""
     @Published var deadValue = ""
     
-    
     init() {
         // 앱 시작 시 UserDefaults에서 값을 불러옴 ( 값 계속 사용 )
         squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
         benchValue = UserDefaults.standard.string(forKey: "benchValue") ?? ""
         deadValue = UserDefaults.standard.string(forKey: "deadValue") ?? ""
-        
     }
     
     func saveData() {
@@ -21,12 +19,8 @@ class MySBDViewModel: ObservableObject {
         UserDefaults.standard.setValue(squatValue, forKey: "squatValue")
         UserDefaults.standard.setValue(benchValue, forKey: "benchValue")
         UserDefaults.standard.setValue(deadValue, forKey: "deadValue")
-        
-        
     }
-    
 }
-
 
 struct ContentView: View {
     
@@ -49,15 +43,11 @@ struct ContentView: View {
     
     let rpeModel = RpeDataModel() // RpeDatModel 객체 생성
     
-    
     // Color Picker
-    
     @State private var typeColor = Color.blue
     @State private var textColor = Color.black
     @State private var bgColor = Color.white
-    
-    
-    
+
     // 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
     
@@ -65,7 +55,7 @@ struct ContentView: View {
         TabView {
             VStack {
                 ZStack() {
-                    
+                        
                     HStack() {
                         ColorPicker("", selection: $typeColor).padding(30)
                         Spacer()
@@ -73,7 +63,7 @@ struct ContentView: View {
                     }
                     HStack() {
                         ColorPicker("", selection: $textColor)
-                    
+                        
                     }
                     HStack() {
                         Text("What's")
@@ -163,6 +153,8 @@ struct ContentView: View {
             .tabItem {
                 Text("RPE Chart")
             }
+           
+                   
             
             // Second Tab
             NavigationView{
@@ -252,6 +244,7 @@ struct ContentView: View {
                                 UIApplication.shared.windows.first?.endEditing(true)
                             }
                         }
+                        .buttonStyle(InsetRoundScaleButton(labelColor: .white, backgroundColor: .blue))
                         .bold()
                         .font(.system(size: 24))
                     }
@@ -275,12 +268,12 @@ struct ContentView: View {
                 
                 
                 .navigationBarItems(trailing:
-                    Button(action: {
-                        isModalSheetShown.toggle()
-                    }) {
-                        Image(systemName: "gear")
-                            .foregroundColor(.black)
-                    }
+                                        Button(action: {
+                    isModalSheetShown.toggle()
+                }) {
+                    Image(systemName: "gear")
+                        .foregroundColor(.black)
+                }
                     .sheet(isPresented: $isModalSheetShown) {
                         settingView(showModal: $isModalSheetShown)
                     }
@@ -293,6 +286,7 @@ struct ContentView: View {
             }
         }
     }
+    
     
     // 사용자가 입력한 종목에 따라서 입력 중량 , RPE, REPS를 계산하여 표시하여줌
     func getWeightLabel() -> String {
@@ -335,6 +329,20 @@ struct ContentView: View {
             return ""
         }
     }
+    
+    struct InsetRoundScaleButton: ButtonStyle {
+      var labelColor = Color.white
+      var backgroundColor = Color.blue
+      
+        func makeBody(configuration: Configuration) -> some View {
+                configuration.label
+                    .padding(.horizontal, 19)
+                    .padding(.vertical, 5)
+                    .foregroundColor(labelColor)
+                    .background(Capsule().fill(backgroundColor))
+            }
+    }
+    
 }
 // getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 X
 extension Double {

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct EnterView: View {
     
-    
     @StateObject private var viewModel = MySBDViewModel()
     @State private var showAlert = false
     @Binding var isPresented: Bool
@@ -19,13 +18,14 @@ struct EnterView: View {
                         .font(.system(size: 24))
                     TextField("Enter Weight", text: $viewModel.squatValue)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.system(size:14))
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.center)
                         .frame(width: 115)
                         .onChange(of: viewModel.squatValue) { newValue in
                             viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                         }
-                    Text("kg")
+                    // Text("kg")
                 }
                 .padding(.top,20)
                 
@@ -34,19 +34,21 @@ struct EnterView: View {
                         .font(.system(size: 24))
                     TextField("Enter Weight", text: $viewModel.benchValue)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.system(size:14))
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.center)
                         .frame(width: 115)
                         .onChange(of: viewModel.benchValue) { newValue in
                             viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                         }
-                    Text("kg")
+                    // Text("kg")
                 }
                 
                 HStack {
                     Text("DL")
                         .font(.system(size: 24))
                     TextField("Enter Weight", text: $viewModel.deadValue)
+                        .font(.system(size:14))
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.center)
@@ -54,7 +56,7 @@ struct EnterView: View {
                         .onChange(of: viewModel.deadValue) { newValue in
                             viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                         }
-                    Text("kg")
+                    // Text("kg")
                 }
                 
                 Button("OK") {
@@ -83,17 +85,19 @@ struct EnterView: View {
                 
             }
             .padding(.top, 20) // 추가된 부분: 상단에 여백 추가
-                        
-                        Spacer() // 추가된 부분: 남은 공간을 차지하여 화면 상단으로 이동
+            
+            Spacer() // 추가된 부분: 남은 공간을 차지하여 화면 상단으로 이동
             // .padding(.bottom,200)
-            .onTapGesture {
-                UIApplication.shared.windows.first?.endEditing(true)
-            }
+                .onTapGesture {
+                    UIApplication.shared.windows.first?.endEditing(true)
+                }
             
         }
         .padding(.top,75) // 추가된 부분: 전체적인 여백 추가
     }
 }
+
+
 
 #Preview {
     EnterView(isPresented: .constant(true))
