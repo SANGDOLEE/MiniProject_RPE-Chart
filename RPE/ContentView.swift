@@ -51,9 +51,12 @@ struct ContentView: View {
     
     
     // Color Picker
+    
     @State private var typeColor = Color.blue
     @State private var textColor = Color.black
     @State private var bgColor = Color.white
+    
+    
     
     // 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
@@ -240,7 +243,7 @@ struct ContentView: View {
                     Spacer().frame(height: 40) // 간격을 두기 위한 Spacer
                     
                     HStack {
-                        Button("SAVE") {
+                        Button("UPDATE") {
                             // 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
                             if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
                                 showAlert = true
