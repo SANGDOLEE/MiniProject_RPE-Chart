@@ -12,11 +12,10 @@ struct EnterView: View {
                 HStack {
                     Spacer()
                     Button("SKIP") {
-                        
+                        isPresented = false
                     }
                     .buttonStyle(PlainButtonStyle())
                     .font(.system(size: 24))
-                    .fontWeight(.light)
                     .foregroundColor(.blue)
                     .bold()
                     .padding(.top, 20)
@@ -45,7 +44,6 @@ struct EnterView: View {
                                     viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                                 }
                         }
-                        .padding(.top, 20)
                         
                         HStack {
                             Text("BP")
@@ -89,6 +87,7 @@ struct EnterView: View {
                                 isPresented = false // Dismiss the sheet
                             }
                         }
+                        
                         .buttonStyle(PlainButtonStyle())
                         .font(.system(size: 24))
                         .foregroundColor(.blue)

@@ -143,9 +143,11 @@ struct ContentView: View {
                     .bold()
                     .foregroundColor(textColor)
                 
-                Text("\(workout.isEmpty ? "" : workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? String(format: "%.1f", rpeValue) : "")")
+                Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                     .padding(.top, 20)
                     .foregroundColor(textColor)
+
+
                 
                 Spacer()
             }
@@ -191,11 +193,12 @@ struct ContentView: View {
                     
                     HStack {
                         Text("SQ")
-                        //.bold()
                             .font(.system(size: 24))
+                            .fontWeight(.light)
                         TextField("Enter Weight", text: $viewModel.squatValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
+                            .fontWeight(.thin)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
                             .onChange(of: viewModel.squatValue) { newValue in
@@ -206,13 +209,14 @@ struct ContentView: View {
                     
                     HStack {
                         Text("BP")
-                        //.bold()
                             .font(.system(size: 24))
+                            .fontWeight(.light)
                         TextField("Enter Weight", text: $viewModel.benchValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
+                            .fontWeight(.thin)
                             .onChange(of: viewModel.benchValue) { newValue in
                                 viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }
@@ -221,13 +225,14 @@ struct ContentView: View {
                     
                     HStack {
                         Text("DL")
-                        //.bold()
                             .font(.system(size: 24))
+                            .fontWeight(.light)
                         TextField("Enter Weight", text: $viewModel.deadValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
+                            .fontWeight(.thin)
                             .onChange(of: viewModel.deadValue) { newValue in
                                 viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }
