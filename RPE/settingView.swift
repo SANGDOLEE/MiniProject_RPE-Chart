@@ -34,9 +34,12 @@ struct settingView: View {
                     Toggle(isOn: $weightToggle) {
                         if weightToggle {
                             Text("Lbs")
+                                .foregroundColor(.blue)
                         } else {
                             Text("Kg")
+                                
                         }
+                            
                     }
                     Spacer()
                     Spacer()
@@ -62,6 +65,7 @@ struct settingView: View {
                     Toggle(isOn: $lanToggle) {
                         if lanToggle {
                             Text("Korean")
+                                .foregroundColor(.blue)
                         } else {
                             Text("English")
                         }

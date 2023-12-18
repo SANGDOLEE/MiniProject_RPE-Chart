@@ -6,6 +6,7 @@ struct EnterView: View {
     @State private var showAlert = false
     @Binding var isPresented: Bool
     
+    
     var body: some View {
         NavigationView {
             VStack {
