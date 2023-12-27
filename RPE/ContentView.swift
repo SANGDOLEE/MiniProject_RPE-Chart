@@ -7,6 +7,7 @@ class MySBDViewModel: ObservableObject {
     @Published var benchValue = ""
     @Published var deadValue = ""
     
+    
     init() {
         // 앱 시작 시 UserDefaults에서 값을 불러옴 ( 값 계속 사용 )
         squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
@@ -22,9 +23,11 @@ class MySBDViewModel: ObservableObject {
     }
 }
 
+
 struct ContentView: View {
     
     @StateObject private var viewModel = MySBDViewModel()
+    @StateObject private var isItextViewModel = IsTextViewModel()
     
     @State private var workout = ""
     
@@ -37,10 +40,10 @@ struct ContentView: View {
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    // 단위 변환으로 사용할 변수 ( 키로그램 , 파운드 )
-    @State private var kgValue = "kg"
-    @State private var lbsValue = "lbs"
+    // 단위 변환 변수 ( kg <-> lbs )
+    @State private var isText : Bool = false
     
+
     let rpeModel = RpeDataModel() // RpeDatModel 객체 생성
     
     // Color Picker
@@ -50,6 +53,7 @@ struct ContentView: View {
     
     // 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
+    
     
     var body: some View {
         TabView {
@@ -146,8 +150,8 @@ struct ContentView: View {
                 Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                     .padding(.top, 20)
                     .foregroundColor(textColor)
-
-
+                
+                
                 
                 Spacer()
             }
@@ -172,22 +176,23 @@ struct ContentView: View {
                         
                         let totalValue = squatValue + benchValue + deadValue
                         if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
-                             // 정수형일 경우
-                             Text("\(Int(totalValue))")
-                                 .font(.system(size: 24))
-                                 .bold()
-                                 .foregroundColor(Color.blue)
-                         } else {
-                             // 소수점 1자리까지 표시
-                             let formattedTotal = formatTotalValue(totalValue)
-                             Text(formattedTotal)
-                                 .font(.system(size: 24))
-                                 .bold()
-                                 .foregroundColor(Color.blue)
-                         }
+                            // 정수형일 경우
+                            Text("\(Int(totalValue))")
+                                .font(.system(size: 24))
+                                .bold()
+                                .foregroundColor(Color.blue)
+                        } else {
+                            // 소수점 1자리까지 표시
+                            let formattedTotal = formatTotalValue(totalValue)
+                            Text(formattedTotal)
+                                .font(.system(size: 24))
+                                .bold()
+                                .foregroundColor(Color.blue)
+                        }
                         
-                        Text("\(kgValue)")
+                        Text("\(isText ? "lb" : "kg")")
                             .font(.system(size:24))
+                         
                     }
                     Spacer().frame(height: 40)
                     
@@ -195,7 +200,7 @@ struct ContentView: View {
                         Text("SQ")
                             .font(.system(size: 24))
                             .fontWeight(.light)
-                        TextField("Enter Weight", text: $viewModel.squatValue)
+                        TextField("Enter weight", text: $viewModel.squatValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
                             .fontWeight(.thin)
@@ -204,14 +209,14 @@ struct ContentView: View {
                             .onChange(of: viewModel.squatValue) { newValue in
                                 viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }
-                        Text("\(kgValue)")
+                        Text("\(isText ? "lb" : "kg")")
                     }
                     
                     HStack {
                         Text("BP")
                             .font(.system(size: 24))
                             .fontWeight(.light)
-                        TextField("Enter Weight", text: $viewModel.benchValue)
+                        TextField("Enter weight", text: $viewModel.benchValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
@@ -220,14 +225,14 @@ struct ContentView: View {
                             .onChange(of: viewModel.benchValue) { newValue in
                                 viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }
-                        Text("\(kgValue)")
+                        Text("\(isText ? "lb" : "kg")")
                     }
                     
                     HStack {
                         Text("DL")
                             .font(.system(size: 24))
                             .fontWeight(.light)
-                        TextField("Enter Weight", text: $viewModel.deadValue)
+                        TextField("Enter weight", text: $viewModel.deadValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
@@ -236,7 +241,7 @@ struct ContentView: View {
                             .onChange(of: viewModel.deadValue) { newValue in
                                 viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }
-                        Text("\(kgValue)")
+                        Text("\(isText ? "lb" : "kg")")
                     }
                     Spacer().frame(height: 40) // 간격을 두기 위한 Spacer
                     
@@ -282,12 +287,16 @@ struct ContentView: View {
                         .foregroundColor(.black)
                 }
                     .sheet(isPresented: $isModalSheetShown) {
-                        settingView(showModal: $isModalSheetShown)
+                        SettingView(showModal: $isModalSheetShown,isText:$isText)
                     }
                 )
                 
                 
             }
+            .onAppear {
+                        // Load the saved data when the view appears
+                       isText = UserDefaults.standard.bool(forKey: "isText")
+                    }
             .onTapGesture {
                 hideKeyboard()
             }

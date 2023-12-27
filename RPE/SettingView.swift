@@ -1,27 +1,37 @@
 import SwiftUI
 
-import SwiftUI
 
-struct settingView: View {
+class IsTextViewModel: ObservableObject {
+    @Published var isText: Bool
     
-    @State private var weightToggle = false // Kg <-> Lbs
-    @State private var lanToggle = false // Eng <-> Korean
+    init() {
+        self.isText = UserDefaults.standard.bool(forKey: "isText")
+    }
     
-    @State private var weightText = ""
-    @State private var lanText = ""
+    func saveData() {
+        UserDefaults.standard.setValue(self.isText, forKey: "isText")
+    }
+}
+
+
+struct SettingView: View {
     
+    @StateObject private var viewModel = IsTextViewModel()
     
-    // showModal 바인딩
-    @Binding var showModal: Bool  // 바인딩 추가
-    init(showModal: Binding<Bool>) {
+    @State var weightToggle = false
+    
+    @Binding var isText : Bool
+    
+    // Binding
+    @Binding var showModal: Bool
+    init(showModal: Binding<Bool>, isText: Binding<Bool>) {
         _showModal = showModal
+        _isText = isText
     }
     
     var body: some View {
-        
         NavigationView{
             VStack{
-                
                 HStack {
                     Spacer()
                     Spacer()
@@ -31,43 +41,18 @@ struct settingView: View {
                     Spacer()
                     Spacer()
                     Text("Weight :")
-                    Toggle(isOn: $weightToggle) {
-                        if weightToggle {
-                            Text("Lbs")
+                    Toggle(isOn: Binding(
+                        get: { viewModel.isText },
+                        set: { newValue in
+                            viewModel.isText = newValue
+                            isText = newValue
+                        }
+                    )) {
+                        if viewModel.isText {
+                            Text("Lb")
                                 .foregroundColor(.blue)
                         } else {
                             Text("Kg")
-                                
-                        }
-                            
-                    }
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                }
-                
-                HStack {
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Text("Languages :")
-                    Toggle(isOn: $lanToggle) {
-                        if lanToggle {
-                            Text("Korean")
-                                .foregroundColor(.blue)
-                        } else {
-                            Text("English")
                         }
                     }
                     Spacer()
@@ -81,21 +66,25 @@ struct settingView: View {
                     Spacer()
                     Spacer()
                 }
-                
             }.navigationBarTitle("Setting",displayMode: .inline)
                 .navigationBarItems(trailing:
                                         Button(action: {
                     self.showModal.toggle()
+                    self.viewModel.saveData()
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(.black)
                 })
         }
+        .onAppear {
+            // Load the saved data when the view appears
+            viewModel.isText = UserDefaults.standard.bool(forKey: "isText")
+        }
     }
 }
 
-struct settingView_Previews: PreviewProvider {
+struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        settingView(showModal: .constant(true))
+        SettingView(showModal: .constant(true), isText: .constant(false))
     }
 }
