@@ -6,7 +6,6 @@ struct EnterView: View {
     @State private var showAlert = false
     @Binding var isPresented: Bool
     
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -19,10 +18,11 @@ struct EnterView: View {
                     .font(.system(size: 24))
                     .foregroundColor(.blue)
                     .bold()
-                    .padding(.top, 20)
+                    // .padding(.top, 20)
                     .padding(.trailing, 20)
                 }
                 .padding(.horizontal) // Add some horizontal padding
+                Spacer()
                 
                 VStack(alignment: .center, spacing: 10) {
                     Text("Hello\n ")
@@ -110,14 +110,14 @@ struct EnterView: View {
                         UIApplication.shared.windows.first?.endEditing(true)
                     }
             }
-            .padding(.top, 75) // 전체적인 여백 추가
+            .padding(.bottom, 100) // top으로부터 여백 0
+            
         }
         .onTapGesture {
             hideKeyboardEnterView()
         }
     }
 }
-
 
 #if canImport(UIKit)
 extension View {
@@ -126,7 +126,6 @@ extension View {
     }
 }
 #endif
-
 
 #Preview {
     EnterView(isPresented: .constant(true))

@@ -1,7 +1,7 @@
 import SwiftUI
 
-
 class IsTextViewModel: ObservableObject {
+    
     @Published var isText: Bool
     
     init() {
@@ -12,7 +12,6 @@ class IsTextViewModel: ObservableObject {
         UserDefaults.standard.setValue(self.isText, forKey: "isText")
     }
 }
-
 
 struct SettingView: View {
     

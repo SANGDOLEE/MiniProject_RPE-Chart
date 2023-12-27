@@ -7,12 +7,12 @@ class MySBDViewModel: ObservableObject {
     @Published var benchValue = ""
     @Published var deadValue = ""
     
-    
     init() {
         // 앱 시작 시 UserDefaults에서 값을 불러옴 ( 값 계속 사용 )
         squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
         benchValue = UserDefaults.standard.string(forKey: "benchValue") ?? ""
         deadValue = UserDefaults.standard.string(forKey: "deadValue") ?? ""
+        
     }
     
     func saveData() {
@@ -23,7 +23,60 @@ class MySBDViewModel: ObservableObject {
     }
 }
 
+class TypeColorData {
+    private let COLOR_KEY = "TYPECOLOR"
+    private let userDefaults = UserDefaults.standard
+    
+    func saveColor(color: Color) {
+        let color = UIColor(color).cgColor
+        
+        if let components = color.components {
+            userDefaults.set(components, forKey: COLOR_KEY)
+        }
+    }
+    
+    func loadColor() -> Color {
+        guard let colorComponents = userDefaults.object(forKey: COLOR_KEY) as? [CGFloat] else {
+            return Color.blue // 처음 기본색은 BLUE
+        }
+        
+        let color = Color(.sRGB,
+                          red: colorComponents[0],
+                          green: colorComponents[1],
+                          blue: colorComponents[2],
+                          opacity: colorComponents[3]
+        )
+        return color
+    }
+}
 
+class TextColorData {
+    private let COLOR_KEY = "TEXTCOLOR"
+    private let userDefaults = UserDefaults.standard
+    
+    func saveColor(color: Color) {
+        let color = UIColor(color).cgColor
+        
+        if let components = color.components {
+            userDefaults.set(components, forKey: COLOR_KEY)
+        }
+    }
+    
+    func loadColor() -> Color {
+        guard let colorComponents = userDefaults.object(forKey: COLOR_KEY) as? [CGFloat] else {
+            return Color.black // 처음 기본색은 Black
+        }
+        
+        let color = Color(.sRGB,
+                          red: colorComponents[0],
+                          green: colorComponents[1],
+                          blue: colorComponents[2],
+                          opacity: colorComponents[3]
+        )
+        return color
+        
+    }
+}
 struct ContentView: View {
     
     @StateObject private var viewModel = MySBDViewModel()
@@ -43,17 +96,18 @@ struct ContentView: View {
     // 단위 변환 변수 ( kg <-> lbs )
     @State private var isText : Bool = false
     
-
+    
     let rpeModel = RpeDataModel() // RpeDatModel 객체 생성
     
     // Color Picker
     @State private var typeColor = Color.blue
+    private var colorData = TypeColorData()
     @State private var textColor = Color.black
+    private var colorData2 = TextColorData()
     @State private var bgColor = Color.white
     
     // 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
-    
     
     var body: some View {
         TabView {
@@ -63,10 +117,15 @@ struct ContentView: View {
                     HStack() {
                         ColorPicker("", selection: $typeColor).padding(30)
                         Spacer()
-                        
+                            .onChange(of: typeColor) { newValue in
+                                colorData.saveColor(color: typeColor)
+                            }
                     }
                     HStack() {
                         ColorPicker("", selection: $textColor)
+                            .onChange(of: textColor) { newValue in
+                                colorData2.saveColor(color: textColor)
+                            }
                         
                     }
                     HStack() {
@@ -155,6 +214,10 @@ struct ContentView: View {
                 
                 Spacer()
             }
+            .onAppear(perform: {
+                typeColor = colorData.loadColor()
+                textColor = colorData2.loadColor()
+            })
             .padding()
             .tabItem {
                 Text("RPE Chart")
@@ -192,7 +255,7 @@ struct ContentView: View {
                         
                         Text("\(isText ? "lb" : "kg")")
                             .font(.system(size:24))
-                         
+                        
                     }
                     Spacer().frame(height: 40)
                     
@@ -294,9 +357,9 @@ struct ContentView: View {
                 
             }
             .onAppear {
-                        // Load the saved data when the view appears
-                       isText = UserDefaults.standard.bool(forKey: "isText")
-                    }
+                // Load the saved data when the view appears
+                isText = UserDefaults.standard.bool(forKey: "isText")
+            }
             .onTapGesture {
                 hideKeyboard()
             }
