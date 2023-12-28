@@ -4,7 +4,7 @@ import SwiftUI
 // 수정완료
 struct EnterView: View {
     
-    @StateObject private var viewModel = MySBDViewModel()
+    @StateObject private var viewModel = MySBDViewModel() // EnterView에서 사용자가 Weight 입력했을시 데이터 저장
     @State private var showAlert = false
     @Binding var isPresented: Bool
     
@@ -20,17 +20,15 @@ struct EnterView: View {
                     .font(.system(size: 24))
                     .foregroundColor(.blue)
                     .bold()
-                    // .padding(.top, 20)
                     .padding(.trailing, 20)
                 }
-                .padding(.horizontal) // Add some horizontal padding
+                .padding(.horizontal)
                 Spacer()
                 
                 VStack(alignment: .center, spacing: 10) {
                     Text("Hello\n ")
                     Text("Please enter 1RM records of\nyour three major weight to take\nadvantage of the RPE chart.")
                         .multilineTextAlignment(.center)
-                    
                 }
                 VStack {
                     HStack {
@@ -91,7 +89,6 @@ struct EnterView: View {
                             isPresented = false // Dismiss the sheet
                         }
                     }
-                    
                     .buttonStyle(PlainButtonStyle())
                     .font(.system(size: 24))
                     .foregroundColor(.blue)
@@ -113,7 +110,6 @@ struct EnterView: View {
                     }
             }
             .padding(.bottom, 100) // top으로부터 여백 0
-            
         }
         .onTapGesture {
             hideKeyboardEnterView()

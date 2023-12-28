@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 class MySBDViewModel: ObservableObject {
     
     @Published var squatValue = ""
@@ -23,6 +22,7 @@ class MySBDViewModel: ObservableObject {
     }
 }
 
+// ColorPicker 1
 class TypeColorData {
     private let COLOR_KEY = "TYPECOLOR"
     private let userDefaults = UserDefaults.standard
@@ -49,7 +49,7 @@ class TypeColorData {
         return color
     }
 }
-
+// ColorPicker 2
 class TextColorData {
     private let COLOR_KEY = "TEXTCOLOR"
     private let userDefaults = UserDefaults.standard
@@ -96,8 +96,7 @@ struct MainView: View {
     // 단위 변환 변수 ( kg <-> lbs )
     @State private var isText : Bool = false
     
-    
-    let rpeModel = RpeDataModel() // RpeDatModel 객체 생성
+    let rpeModel = RpeDataModel() // RpeDataModel 객체 생성
     
     // Color Picker
     @State private var typeColor = Color.blue
@@ -113,7 +112,6 @@ struct MainView: View {
         TabView {
             VStack {
                 ZStack() {
-                    
                     HStack() {
                         ColorPicker("", selection: $typeColor).padding(30)
                         Spacer()
@@ -174,6 +172,7 @@ struct MainView: View {
                             .foregroundColor(textColor)
                     }
                 }
+                
                 VStack {
                     HStack {
                         Text("REPS")
@@ -198,7 +197,6 @@ struct MainView: View {
                             .foregroundColor(textColor)
                     }
                 }
-                
                 Spacer()
                 
                 Text(getWeightLabel())
@@ -209,8 +207,6 @@ struct MainView: View {
                 Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                     .padding(.top, 20)
                     .foregroundColor(textColor)
-                
-                
                 
                 Spacer()
             }
@@ -321,10 +317,9 @@ struct MainView: View {
                         .buttonStyle(InsetRoundScaleButton(labelColor: .white, backgroundColor: .blue))
                         .bold()
                         .font(.system(size: 24))
-                        
                     }
                     .alert(isPresented: $showAlert) {
-                        Alert(
+                        Alert( // 사용자가 3가지중 1가지라도 공백으로 둘 시 Alert
                             title: Text("Message"),
                             message: Text("Please enter weight values for all types."),
                             dismissButton: .default(Text("OK"))
@@ -336,12 +331,8 @@ struct MainView: View {
                 }
                 .padding()
                 
-                
-                
                 /// Navigation 영역
                 .navigationBarTitle("Setting Weight", displayMode: .inline) // Set navigation title here
-                
-                
                 .navigationBarItems(trailing:
                                         Button(action: {
                     isModalSheetShown.toggle()
@@ -354,10 +345,9 @@ struct MainView: View {
                     }
                 )
                 
-                
             }
             .onAppear {
-                // Load the saved data when the view appears
+                // 중량 표시 단위 kg/lb 중 사용자가 마지막에 설정한것으로 띄워준다.
                 isText = UserDefaults.standard.bool(forKey: "isText")
             }
             .onTapGesture {
@@ -369,22 +359,19 @@ struct MainView: View {
         }
     }
     
-    
-    // 사용자가 입력한 종목에 따라서 입력 중량 , RPE, REPS를 계산하여 표시하여줌
+    // 사용자가 입력한 종목에 따라서 입력 중량 , RPE, REPS를 계산하여 표시해줌
     func getWeightLabel() -> String {
         
-        // 오류 확인 디버깅용 출력 메세지
-        /*
+         // 테스트용 출력
          print("Selected workout: \(workout)")
          print("selectRpe: \(selectRpe), selectReps: \(selectReps)")
-         */
         
-        // Weight 데이터가 입력되어있지 않다면 "Weight" 기본 표기
+        // EnterView에서 Weight 데이터가 입력되어있지 않다면 "Weight" 기본 표기
         guard !viewModel.squatValue.isEmpty, !viewModel.benchValue.isEmpty, !viewModel.deadValue.isEmpty else {
             return "Weight"
         }
         
-        // Reps와 Rpe에 따라서 해당 값의 해당 하는 데이터를 곱하여 계산하여 보여준다.
+        // 사용자가 설정하는 Reps와 Rpe에 따라서 해당 값의 해당 하는 데이터를 곱하여 계산하여 보여준다.
         switch workout {
         case "Squat":
             if let squatValue = Double(viewModel.squatValue) {
@@ -393,6 +380,7 @@ struct MainView: View {
             } else {
                 return "Invalid squat value"
             }
+            
         case "Benchpress":
             if let benchValue = Double(viewModel.benchValue) {
                 let calculatedValue = benchValue * rpeModel.rpeArray[selectRpe][selectReps]
@@ -400,6 +388,7 @@ struct MainView: View {
             } else {
                 return "Invalid bench value"
             }
+            
         case "Deadlift":
             if let deadValue = Double(viewModel.deadValue) {
                 let calculatedValue = deadValue * rpeModel.rpeArray[selectRpe][selectReps]
@@ -425,7 +414,8 @@ struct MainView: View {
                 .scaleEffect(configuration.isPressed ? 0.88 : 1.0)
         }
     }
-    // Function to format totalValue without commas
+    
+    // total 무게 포맷
     private func formatTotalValue(_ totalValue: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -440,16 +430,10 @@ struct MainView: View {
 }
 
 
-// getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 X
+// getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 안함
 extension Double {
     var isWhole: Bool {
         return floor(self) == self
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
     }
 }
 
@@ -460,3 +444,10 @@ extension View {
     }
 }
 #endif
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+    }
+}
