@@ -77,7 +77,7 @@ class TextColorData {
         
     }
 }
-struct ContentView: View {
+struct MainView: View {
     
     @StateObject private var viewModel = MySBDViewModel()
     @StateObject private var isItextViewModel = IsTextViewModel()
@@ -449,7 +449,7 @@ extension Double {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }
 

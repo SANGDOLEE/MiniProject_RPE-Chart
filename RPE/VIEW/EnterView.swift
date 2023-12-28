@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+// 수정완료
 struct EnterView: View {
     
     @StateObject private var viewModel = MySBDViewModel()
