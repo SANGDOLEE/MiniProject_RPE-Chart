@@ -1,8 +1,15 @@
-//
-//  IsTextViewModel.swift
-//  RPE
-//
-//  Created by 이상도 on 12/28/23.
-//
+import SwiftUI
 
-import Foundation
+// MARK: - Setting화면에서 중량단위 kg <-> lb 변경
+class IsTextViewModel: ObservableObject {
+    
+    @Published var isText: Bool /// kg <-> lb
+    
+    init() {
+        self.isText = UserDefaults.standard.bool(forKey: "isText")
+    }
+    
+    func saveData() {
+        UserDefaults.standard.setValue(self.isText, forKey: "isText")
+    }
+}

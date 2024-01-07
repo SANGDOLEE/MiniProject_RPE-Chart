@@ -1,82 +1,6 @@
 import SwiftUI
 
-class MySBDViewModel: ObservableObject {
-    
-    @Published var squatValue = ""
-    @Published var benchValue = ""
-    @Published var deadValue = ""
-    
-    init() {
-        // 앱 시작 시 UserDefaults에서 값을 불러옴 ( 값 계속 사용 )
-        squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
-        benchValue = UserDefaults.standard.string(forKey: "benchValue") ?? ""
-        deadValue = UserDefaults.standard.string(forKey: "deadValue") ?? ""
-        
-    }
-    
-    func saveData() {
-        // 데이터 저장로직 추가
-        UserDefaults.standard.setValue(squatValue, forKey: "squatValue")
-        UserDefaults.standard.setValue(benchValue, forKey: "benchValue")
-        UserDefaults.standard.setValue(deadValue, forKey: "deadValue")
-    }
-}
-
-// ColorPicker 1
-class TypeColorData {
-    private let COLOR_KEY = "TYPECOLOR"
-    private let userDefaults = UserDefaults.standard
-    
-    func saveColor(color: Color) {
-        let color = UIColor(color).cgColor
-        
-        if let components = color.components {
-            userDefaults.set(components, forKey: COLOR_KEY)
-        }
-    }
-    
-    func loadColor() -> Color {
-        guard let colorComponents = userDefaults.object(forKey: COLOR_KEY) as? [CGFloat] else {
-            return Color.blue // 처음 기본색은 BLUE
-        }
-        
-        let color = Color(.sRGB,
-                          red: colorComponents[0],
-                          green: colorComponents[1],
-                          blue: colorComponents[2],
-                          opacity: colorComponents[3]
-        )
-        return color
-    }
-}
-// ColorPicker 2
-class TextColorData {
-    private let COLOR_KEY = "TEXTCOLOR"
-    private let userDefaults = UserDefaults.standard
-    
-    func saveColor(color: Color) {
-        let color = UIColor(color).cgColor
-        
-        if let components = color.components {
-            userDefaults.set(components, forKey: COLOR_KEY)
-        }
-    }
-    
-    func loadColor() -> Color {
-        guard let colorComponents = userDefaults.object(forKey: COLOR_KEY) as? [CGFloat] else {
-            return Color.black // 처음 기본색은 Black
-        }
-        
-        let color = Color(.sRGB,
-                          red: colorComponents[0],
-                          green: colorComponents[1],
-                          blue: colorComponents[2],
-                          opacity: colorComponents[3]
-        )
-        return color
-        
-    }
-}
+// MARK: - 2개의 탭이 있는 메인뷰
 struct MainView: View {
     
     @StateObject private var viewModel = MySBDViewModel()
@@ -89,27 +13,28 @@ struct MainView: View {
     
     @State private var showAlert = false
     
-    // 사용자가 슬라이더에서 사용한 값을 RpeDataModel에서 배열 위치 값으로 사용 할 변수
+    /// 사용자가 슬라이더에서 사용한 값을 RpeDataModel에서 배열 위치 값으로 사용 할 변수
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    // 단위 변환 변수 ( kg <-> lbs )
+    /// 단위 변환 변수 ( kg <-> lbs )
     @State private var isText : Bool = false
     
     let rpeModel = RpeDataModel() // RpeDataModel 객체 생성
     
-    // Color Picker
+    /// Color Picker
     @State private var typeColor = Color.blue
-    private var colorData = TypeColorData()
+    private var colorData = ColorPickers.TypeColorData()
     @State private var textColor = Color.black
-    private var colorData2 = TextColorData()
+    private var colorData2 = ColorPickers.TextColorData()
     @State private var bgColor = Color.white
     
-    // 2번째 탭 - Setting시 Modal로 가는 변수
+    /// 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
     
     var body: some View {
         TabView {
+            // MARK: - Frist Tab ( RPE Chart )
             VStack {
                 ZStack() {
                     HStack() {
@@ -124,7 +49,6 @@ struct MainView: View {
                             .onChange(of: textColor) { newValue in
                                 colorData2.saveColor(color: textColor)
                             }
-                        
                     }
                     HStack() {
                         Text("What's")
@@ -132,7 +56,6 @@ struct MainView: View {
                             .scaleEffect(1.5)
                             .padding()
                             .foregroundColor(textColor)
-                        
                     }
                 }
                 
@@ -154,21 +77,20 @@ struct MainView: View {
                             .foregroundColor(textColor)
                         Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
                             if !editing {
-                                // 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
+                                /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
                                 selectRpe = Int((10 - rpeValue) / 0.5)
                             }
                         })
-                        
                         Text("10")
                             .foregroundColor(textColor)
                     }
                     .padding(10)
                     
                     if rpeValue != 0.0 {
-                        Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") // 정수로 떨어지면 소수점 표기 안함
+                        Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") /// 정수로 떨어지면 소수점 표기 안함
                             .foregroundColor(textColor)
                     } else {
-                        Text("") // 슬라이더 안건드렸다면
+                        Text("") /// 슬라이더 안건드렸다면
                             .foregroundColor(textColor)
                     }
                 }
@@ -179,7 +101,7 @@ struct MainView: View {
                             .foregroundColor(textColor)
                         Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
                             if !editing {
-                                // 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
+                                /// 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
                                 selectReps = Int(repsValue-1)
                             }
                         })
@@ -219,9 +141,7 @@ struct MainView: View {
                 Text("RPE Chart")
             }
             
-            
-            
-            // Second Tab
+            // MARK: - Second Tab ( MySBD )
             NavigationView{
                 VStack {
                     Spacer()
@@ -331,7 +251,7 @@ struct MainView: View {
                 }
                 .padding()
                 
-                /// Navigation 영역
+                // MARK: - Navigation 영역
                 .navigationBarTitle("Setting Weight", displayMode: .inline) // Set navigation title here
                 .navigationBarItems(trailing:
                                         Button(action: {
@@ -359,7 +279,7 @@ struct MainView: View {
         }
     }
     
-    // 사용자가 입력한 종목에 따라서 입력 중량 , RPE, REPS를 계산하여 표시해줌
+    // MARK: - 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
     func getWeightLabel() -> String {
         
          // 테스트용 출력
@@ -426,7 +346,6 @@ struct MainView: View {
         
         return formatter.string(from: NSNumber(value: totalValue)) ?? "\(totalValue)"
     }
-    
 }
 
 
@@ -444,7 +363,6 @@ extension View {
     }
 }
 #endif
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

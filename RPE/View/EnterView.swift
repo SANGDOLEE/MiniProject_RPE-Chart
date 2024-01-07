@@ -1,10 +1,11 @@
 import SwiftUI
 
 
-// 수정완료
+// MARK: - 앱의 첫 사용시에만 등장하는 뷰
 struct EnterView: View {
     
-    @StateObject private var viewModel = MySBDViewModel() // EnterView에서 사용자가 Weight 입력했을시 데이터 저장
+    ///
+    @StateObject private var viewModel = MySBDViewModel() /// // EnterView에서 사용자가 Weight 입력했을시 데이터 저장
     @State private var showAlert = false
     @Binding var isPresented: Bool
     
@@ -80,13 +81,13 @@ struct EnterView: View {
                     }
                     
                     Button("OK") {
-                        // 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
+                        /// 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
                         if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
                             showAlert = true
                         } else {
                             viewModel.saveData()
                             UIApplication.shared.windows.first?.endEditing(true)
-                            isPresented = false // Dismiss the sheet
+                            isPresented = false /// Dismiss the sheet
                         }
                     }
                     .buttonStyle(PlainButtonStyle())
@@ -102,14 +103,14 @@ struct EnterView: View {
                         )
                     }
                 }
-                .padding(.top, 20) // 상단에 여백 추가
+                .padding(.top, 20) /// 상단에 여백 추가
                 
-                Spacer() // 남은 공간을 차지하여 화면 상단으로 이동
+                Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
                     .onTapGesture {
                         UIApplication.shared.windows.first?.endEditing(true)
                     }
             }
-            .padding(.bottom, 100) // top으로부터 여백 0
+            .padding(.bottom, 100) /// top으로부터 여백 0
         }
         .onTapGesture {
             hideKeyboardEnterView()
@@ -117,6 +118,7 @@ struct EnterView: View {
     }
 }
 
+// MARK: HideKeyboard Import(UIkit)
 #if canImport(UIKit)
 extension View {
     func hideKeyboardEnterView() {

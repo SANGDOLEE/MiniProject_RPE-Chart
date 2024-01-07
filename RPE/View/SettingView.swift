@@ -1,24 +1,11 @@
 import SwiftUI
 
-class IsTextViewModel: ObservableObject {
-    
-    @Published var isText: Bool
-    
-    init() {
-        self.isText = UserDefaults.standard.bool(forKey: "isText")
-    }
-    
-    func saveData() {
-        UserDefaults.standard.setValue(self.isText, forKey: "isText")
-    }
-}
-
+// MARK: - SettingView ( kg <-> lb )
 struct SettingView: View {
     
     @StateObject private var viewModel = IsTextViewModel()
     
     @State var weightToggle = false
-    
     @Binding var isText : Bool
     
     // Binding
@@ -30,53 +17,57 @@ struct SettingView: View {
     
     var body: some View {
         NavigationView{
-            VStack{
-                HStack {
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Text("Weight :")
-                    Toggle(isOn: Binding(
-                        get: { viewModel.isText },
-                        set: { newValue in
-                            viewModel.isText = newValue
-                            isText = newValue
-                        }
-                    )) {
-                        if viewModel.isText {
-                            Text("Lb")
-                                .foregroundColor(.blue)
-                        } else {
-                            Text("Kg")
-                        }
+            
+            HStack(){
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                Text("Weight :")
+                Toggle(isOn: Binding(
+                    get: { viewModel.isText },
+                    set: { newValue in
+                        viewModel.isText = newValue
+                        isText = newValue
                     }
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
+                )) {
+                    if viewModel.isText {
+                        Text("Lb")
+                            .foregroundColor(.blue)
+                    } else {
+                        Text("Kg")
+                        
+                    }
                 }
-            }.navigationBarTitle("Setting",displayMode: .inline)
-                .navigationBarItems(trailing:
-                                        Button(action: {
-                    self.showModal.toggle()
-                    self.viewModel.saveData()
-                }) {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.black)
-                })
+                .onChange(of: viewModel.isText) { newValue in
+                    // 현재 토글 상태 확인 
+                    print("Toggle state changed to \(newValue)")
+                }
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+            }
+            .navigationBarTitle("Setting",displayMode: .inline)
+            .navigationBarItems(trailing:
+                                    Button(action: {
+                self.showModal.toggle()
+                self.viewModel.saveData()
+            }) {
+                Image(systemName: "xmark")
+                    .foregroundColor(.black)
+            })
         }
         .onAppear {
-            // Load the saved data when the view appears
             viewModel.isText = UserDefaults.standard.bool(forKey: "isText")
         }
     }

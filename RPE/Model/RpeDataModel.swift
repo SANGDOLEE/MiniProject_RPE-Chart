@@ -1,6 +1,6 @@
-
 import Foundation
 
+// MARK: - RPE 계산 데이터 
 class RpeDataModel {
      
     var rpeArray : [[Double]]
