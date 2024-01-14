@@ -21,10 +21,10 @@
 <br/>
 
 <h1> Stacks 📚 </h1>
-<h4> Environment </h4>
+<h3> Environment </h3>
 <p><img src="https://img.shields.io/badge/XCODE-147EFB?style=for-the-badge&logo=xcode&logoColor=white"> <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white"></p>
 
-<h4> Development </h4>
+<h3> Development </h3>
 <p><img src="https://img.shields.io/badge/SWIFT-F05138?style=for-the-badge&logo=swift&logoColor=white"> <img src="https://img.shields.io/badge/SWIFTUI-2396F3?style=for-the-badge&logo=swiftUI&logoColor=white"></p>
 
 <br/>
@@ -71,14 +71,14 @@
 <br/>
 
 <h1> 주요 기능 </h1>
-<h4> ⭐️ 맞춤 강도 계산 기능 </h4>
+<h3> ⭐️ 맞춤 강도 계산 기능 </h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; - 선택한 Reps와 Rpe에 따라 원하는 강도 제공 </p>
 
-<h4> ⭐️ 자유로운 사용자 중량 업데이트 기능 </h4>
+<h3> ⭐️ 자유로운 사용자 중량 업데이트 기능 </h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; - 언제든지 편하게 사용자의 기록을 업데이트하며 강도를 계산 가능 </p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; - 추후 운동종목을 추가 혹은 변경하는 기능 업데이트 예정 </p>
 
-<h4> ⭐️ UI 변경 기능 </h4>
+<h3> ⭐️ UI 변경 기능 </h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; - BackgroundColor, FontColor를 사용자가 지정 가능 </p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; - 중량단위를 KG와 LBS중 변환 가능 </p>
 
