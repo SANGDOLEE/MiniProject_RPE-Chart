@@ -1,5 +1,5 @@
 <h1>RPE Chart</h1>
-// 이미지 추가
+![appIcon](https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/3e803547-ba2c-4bbe-a12e-42266a5e7d0a)
 
 <br/>
 
