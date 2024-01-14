@@ -4,8 +4,8 @@
 
 
 <h1>RPE Chart v1.0</h1>
-<h5> MVP (Minimum Viable Product) 미니 프로젝트 </h5>
-<h5> 개발기간 : 2023.12 ~ 2024.01 </h5>
+<p> MVP (Minimum Viable Product) 미니 프로젝트 </p>
+<p> 개발기간 : 2023.12 ~ 2024.01 </p>
 
 <br/>
 
