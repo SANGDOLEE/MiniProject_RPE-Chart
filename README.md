@@ -10,7 +10,7 @@
 <br/>
 
 <h2> 배포 주소 </h2>
-<h5> 앱스토어 : https://apps.apple.com/kr/app/rpe-chart/id6475646908 </h5>
+<p> 앱스토어 : https://apps.apple.com/kr/app/rpe-chart/id6475646908 </p>
 
 <br/>
 
