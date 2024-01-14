@@ -46,6 +46,8 @@
   </tbody>
 </table>
 
+<br/>
+
 <h1> 주요 기능 </h1>
 <h4> ⭐️ 맞춤 강도 계산 기능 </h4>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp; - 선택한 Reps와 Rpe에 따라 원하는 강도 제공 </h5>
