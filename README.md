@@ -39,7 +39,7 @@
     </tr>
     <!-- 두 번째 줄 -->
     <tr>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/a7f0f8db-1481-4c75-a8b2-46350671ac63" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
     </tr>
 </table>
 <table>
