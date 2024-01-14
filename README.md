@@ -1,6 +1,5 @@
 <h1>RPE Chart</h1>
-![appIcon](https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/3e803547-ba2c-4bbe-a12e-42266a5e7d0a)
-
+<img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/3e803547-ba2c-4bbe-a12e-42266a5e7d0a" width="200px;" alt=""/>
 <br/>
 
 
@@ -31,41 +30,43 @@
 <br/>
 
 <h1> 화면 구성 </h1>
+<!-- 첫번째 테이블 -->
 <table>
    <tbody>
-    <!-- 첫 번째 줄 -->
     <tr>
       <td colspan="1" align="center"><b>시작 화면</b></td>
     </tr>
-    <!-- 두 번째 줄 -->
     <tr>
-      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/a7f0f8db-1481-4c75-a8b2-46350671ac63" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/a7f0f8db-1481-4c75-a8b2-46350671ac63" width="200px;" alt=""/><br /><sub><b></b></sub></a></td>
     </tr>
 </table>
+<!-- 두번째 테이블 -->
 <table>
   <tbody>
-    <!-- 세 번째 줄 -->
     <tr>
       <td colspan="1" align="center"><b>메인 화면 1</b></td>
       <td colspan="1" align="center"><b>메인 화면 2</b></td>
     </tr>
-    <!-- 네 번째 줄 -->
     <tr>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/f6a02ceb-d347-480d-861a-c8f15bbe064e" width="200px;" alt=""/><br /><sub><b></b></sub></a></td>
+      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/a3e5c754-fede-440c-b369-6edbeb293daa" width="200px;" alt=""/><br /><sub><b></b></sub></a></td>
     </tr>
-    <tr>
+   
+  </tbody>
+</table>
+<!-- 세번째 테이블 -->
+<table>
+   <tbody>
+   <tr>
       <td colspan="1" align="center"><b>설정 화면 1</b></td>
       <td colspan="1" align="center"><b>설정 화면 2</b></td>
     </tr>
-    <!-- 네 번째 줄 -->
     <tr>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/38d47304-9422-4377-bbf9-3c9d0b6f6e42" width="200px;" alt=""/><br /><sub><b></b></sub></a></td>
+      <td align="center"><a href=""><img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/9cf8b4fd-9191-493e-9936-f8a2b6962e0a" width="200px;" alt=""/><br /><sub><b></b></sub></a></td>
     </tr>
-  </tbody>
+   </tbody>
 </table>
-
 
 <br/>
 
