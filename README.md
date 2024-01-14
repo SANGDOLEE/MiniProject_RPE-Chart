@@ -32,19 +32,40 @@
 
 <h1> 화면 구성 </h1>
 <table>
-  <tbody>
+   <tbody>
+    <!-- 첫 번째 줄 -->
     <tr>
-      <td align="center"><a href=""><img src="width="100px;" alt=""/><br /><sub><b>FE 팀장 : </b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>FE 팀원 : </b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>FE 팀원 : </b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>FE 팀원 : </b></sub></a><br /></td>
-     <tr/>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>BE 부팀장 : </b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>BE 팀원 : </b></sub></a><br /></td>
-      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>BE 팀원 : </b></sub></a><br /></td>
+      <td colspan="1" align="center"><b>시작 화면</b></td>
+    </tr>
+    <!-- 두 번째 줄 -->
+    <tr>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+    </tr>
+</table>
+<table>
+  <tbody>
+    <!-- 세 번째 줄 -->
+    <tr>
+      <td colspan="1" align="center"><b>메인 화면 1</b></td>
+      <td colspan="1" align="center"><b>메인 화면 2</b></td>
+    </tr>
+    <!-- 네 번째 줄 -->
+    <tr>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+    </tr>
+    <tr>
+      <td colspan="1" align="center"><b>설정 화면 1</b></td>
+      <td colspan="1" align="center"><b>설정 화면 2</b></td>
+    </tr>
+    <!-- 네 번째 줄 -->
+    <tr>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b></b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
+
 
 <br/>
 
