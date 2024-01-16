@@ -25,7 +25,7 @@
 <p><img src="https://img.shields.io/badge/XCODE-147EFB?style=for-the-badge&logo=xcode&logoColor=white"> <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white"></p>
 
 <h3> Development </h3>
-<p><img src="https://img.shields.io/badge/SWIFTUI-2396F3?style=for-the-badge&logo=swiftUI&logoColor=white"></p>
+<p><img src="https://img.shields.io/badge/SWIFTUI-FF9A00?style=for-the-badge&logo=swiftUI&logoColor=white"></p>
 
 <br/>
 
