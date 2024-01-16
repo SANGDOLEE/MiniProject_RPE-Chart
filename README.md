@@ -4,7 +4,7 @@
 
 
 <h1>RPE Chart v1.0</h1>
-<p> MVP (Minimum Viable Product) 미니 프로젝트 </p>
+<p> MVP (Minimum Viable Product) 미니 개인프로젝트 </p>
 <p> 개발기간 : 2023.12 ~ 2024.01 </p>
 
 <br/>
@@ -25,7 +25,7 @@
 <p><img src="https://img.shields.io/badge/XCODE-147EFB?style=for-the-badge&logo=xcode&logoColor=white"> <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white"></p>
 
 <h3> Development </h3>
-<p><img src="https://img.shields.io/badge/SWIFT-F05138?style=for-the-badge&logo=swift&logoColor=white"> <img src="https://img.shields.io/badge/SWIFTUI-2396F3?style=for-the-badge&logo=swiftUI&logoColor=white"></p>
+<p><img src="https://img.shields.io/badge/SWIFTUI-2396F3?style=for-the-badge&logo=swiftUI&logoColor=white"></p>
 
 <br/>
 
