@@ -2,6 +2,7 @@ import SwiftUI
 
 // MARK: - Squat, BenchPress, Deadlfit 사용자 입력 값 저장&호출
 class MySBDViewModel: ObservableObject {
+    
     @Published var squatValue: String = ""
     @Published var benchValue: String = ""
     @Published var deadValue: String = ""
