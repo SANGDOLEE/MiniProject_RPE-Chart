@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - 2개의 탭이 있는 메인뷰
 struct MainView: View {
     
-    @StateObject private var viewModel = MySBDViewModel()
+    @ObservedObject var viewModel: MySBDViewModel
     @StateObject private var isItextViewModel = IsTextViewModel()
     
     @State private var workout = ""
@@ -31,6 +31,13 @@ struct MainView: View {
     
     /// 2번째 탭 - Setting시 Modal로 가는 변수
     @State var isModalSheetShown:Bool = false
+    
+    public init(viewModel: MySBDViewModel) {
+            self.viewModel = viewModel
+            // 다른 프로퍼티들의 초기화가 필요하다면 여기에 추가
+            _isItextViewModel = StateObject(wrappedValue: IsTextViewModel())
+            // ... 다른 프로퍼티 초기화 ...
+        }
     
     var body: some View {
        
@@ -186,7 +193,7 @@ struct MainView: View {
     }
     
     // total 무게 포맷
-    private func formatTotalValue(_ totalValue: Double) -> String {
+     func formatTotalValue(_ totalValue: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 1
@@ -214,6 +221,6 @@ extension View {
 }
 #endif
 
-#Preview {
-    MainView()
-}
+//#Preview {
+//    MainView()
+//}

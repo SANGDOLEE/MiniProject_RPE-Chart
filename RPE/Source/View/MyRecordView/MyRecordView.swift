@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyRecordView: View {
     
-    @StateObject private var viewModel = MySBDViewModel()
+    @ObservedObject var viewModel: MySBDViewModel
     @State private var isText : Bool = false
     
     @State private var showAlert = false
@@ -174,6 +174,6 @@ struct InsetRoundScaleButton: ButtonStyle {
     }
 }
 
-#Preview {
-    MyRecordView()
-}
+//#Preview {
+//    MyRecordView()
+//}
