@@ -143,6 +143,10 @@ extension MyRecordView {
         
         return formatter.string(from: NSNumber(value: totalValue)) ?? "\(totalValue)"
     }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 #Preview {

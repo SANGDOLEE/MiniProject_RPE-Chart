@@ -31,93 +31,92 @@ struct MainView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("What's")
+                Text("RPE")
                     .bold()
-                    .scaleEffect(1.5)
-                    .padding()
+                    .font(.largeTitle)
                     .foregroundColor(textColor)
             }
             
             HStack {
+                Spacer()
                 ColorPicker("", selection: $typeColor)
                     .onChange(of: typeColor) { newValue in
                         colorData.saveColor(color: typeColor)
                     }
-                    .background(.yellow)
+                    .frame(width: 30)
                 
                 ColorPicker("", selection: $textColor)
                     .onChange(of: textColor) { newValue in
                         colorData2.saveColor(color: textColor)
                     }
-                    .background(.yellow)
+                    .frame(width: 30)
             }
             
-            Picker("Choose a type", selection: $workout) {
-                ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
-                    Text($0)
+            HStack {
+                Picker("Choose a type", selection: $workout) {
+                    ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
+                        Text($0)
+                    }
                 }
+                .pickerStyle(.segmented)
+                .padding()
+                .background(typeColor)
+                .cornerRadius(20)
+                .padding()
             }
-            .pickerStyle(.segmented)
-            .padding()
-            .background(typeColor)
-            .cornerRadius(20)
-            .padding()
             
-            VStack {
-                HStack {
-                    Text("RPE     ")
-                        .foregroundColor(textColor)
-                    Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
-                        if !editing {
-                            /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
-                            selectRpe = Int((10 - rpeValue) / 0.5)
-                        }
-                    })
-                    Text("10")
-                        .foregroundColor(textColor)
-                }
-                .padding(10)
+            HStack {
+                Text("RPE")
+                    .foregroundColor(textColor)
+                    .frame(width: 50)
                 
-                if rpeValue != 0.0 {
-                    Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") /// 정수로 떨어지면 소수점 표기 안함
-                        .foregroundColor(textColor)
-                } else {
-                    Text("") /// 슬라이더 안건드렸다면
-                        .foregroundColor(textColor)
-                }
+                Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
+                    if !editing {
+                        /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
+                        selectRpe = Int((10 - rpeValue) / 0.5)
+                    }
+                })
+                Text("10")
+                    .foregroundColor(textColor)
+            }
+            .padding(10)
+            
+            if rpeValue != 0.0 {
+                Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") /// 정수로 떨어지면 소수점 표기 안함
+                    .foregroundColor(textColor)
+            } else {
+                Text("") /// 슬라이더 안건드렸다면
+                    .foregroundColor(textColor)
             }
             
-            VStack {
-                HStack {
-                    Text("REPS")
-                        .foregroundColor(textColor)
-                    Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
-                        if !editing {
-                            /// 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
-                            selectReps = Int(repsValue-1)
-                        }
-                    })
-                    .padding()
-                    
-                    Text("12")
-                        .foregroundColor(textColor)
-                }
-                .padding(10)
+            HStack {
+                Text("REPS")
+                    .foregroundColor(textColor)
+                    .frame(width: 50)
                 
-                if repsValue != 0.0 {
-                    Text("Reps : \(repsValue, specifier: "%.0f")")
-                        .foregroundColor(textColor)
-                } else {
-                    Text("")
-                        .foregroundColor(textColor)
-                }
+                Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
+                    if !editing {
+                        /// 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
+                        selectReps = Int(repsValue-1)
+                    }
+                })
+                
+                Text("12")
+                    .foregroundColor(textColor)
             }
+            .padding(10)
             
+            if repsValue != 0.0 {
+                Text("Reps : \(repsValue, specifier: "%.0f")")
+                    .foregroundColor(textColor)
+            } else {
+                Text("")
+                    .foregroundColor(textColor)
+            }
             Spacer()
             
             Text(getWeightLabel())
-                .scaleEffect(4.0)
-                .bold()
+                .font(.system(size: 44, weight: .bold))
                 .foregroundColor(textColor)
             
             Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
@@ -181,14 +180,6 @@ extension Double {
         return floor(self) == self
     }
 }
-
-#if canImport(UIKit)
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-#endif
 
 #Preview {
     MainView(viewModel: MySBDViewModel())

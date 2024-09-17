@@ -94,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				1F9DA1DD2C988BA20024BD72 /* Onboarding */,
-				1F9DA1E12C98919C0024BD72 /* TabManager */,
 				1F9DA1E42C9892600024BD72 /* MyRecordView */,
 				1F9DA1E02C988C710024BD72 /* Setting */,
 				1F9DA1DF2C988C620024BD72 /* Main */,
@@ -114,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				1F08D64D2B284F0700EEE82B /* RPEApp.swift */,
+				1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */,
 			);
 			name = Application;
 			path = ../Application;
@@ -169,14 +169,6 @@
 				1FE6E1492B2AFAA400FC5CB2 /* SettingView.swift */,
 			);
 			path = Setting;
-			sourceTree = "<group>";
-		};
-		1F9DA1E12C98919C0024BD72 /* TabManager */ = {
-			isa = PBXGroup;
-			children = (
-				1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */,
-			);
-			path = TabManager;
 			sourceTree = "<group>";
 		};
 		1F9DA1E42C9892600024BD72 /* MyRecordView */ = {
