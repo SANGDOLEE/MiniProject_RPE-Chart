@@ -19,7 +19,7 @@ class ColorPickers {
         
         func loadColor() -> Color {
             guard let colorComponents = userDefaults.object(forKey: COLOR_KEY) as? [CGFloat] else {
-                return Color.blue /// 처음 기본색상 BLUE
+                return Color.white /// 처음 기본색상 BLUE
             }
             
             let color = Color(.sRGB,

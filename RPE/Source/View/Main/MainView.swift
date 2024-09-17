@@ -11,7 +11,7 @@ struct MainView: View {
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    @State private var typeColor = Color.blue
+    @State private var typeColor = Color.white
     @State private var textColor = Color.black
     
     private let rpeModel = RpeData()
@@ -23,112 +23,136 @@ struct MainView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("RPE")
-                    .bold()
-                    .font(.largeTitle)
-                    .foregroundColor(textColor)
-            }
+        ZStack {
+            Color.gray.opacity(0.2)
+                .ignoresSafeArea()
             
-            HStack {
-                Spacer()
-                ColorPicker("", selection: $typeColor)
-                    .onChange(of: typeColor) { newValue in
-                        colorData.saveColor(color: typeColor)
-                    }
-                    .frame(width: 30)
-                
-                ColorPicker("", selection: $textColor)
-                    .onChange(of: textColor) { newValue in
-                        colorData2.saveColor(color: textColor)
-                    }
-                    .frame(width: 30)
-            }
-            
-            HStack {
-                Picker("Choose a type", selection: $workout) {
-                    ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
-                        Text($0)
-                    }
+            VStack {
+                HStack {
+                    Text("RPE")
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(textColor)
                 }
-                .pickerStyle(.segmented)
+                
+                HStack {
+                    Spacer()
+                    
+                    ColorPicker("", selection: $typeColor)
+                        .onChange(of: typeColor) { newValue in
+                            colorData.saveColor(color: typeColor)
+                        }
+                        .frame(width: 30)
+                    
+                    ColorPicker("", selection: $textColor)
+                        .onChange(of: textColor) { newValue in
+                            colorData2.saveColor(color: textColor)
+                        }
+                        .frame(width: 30)
+                }
+                
+                HStack {
+                    Picker("Choose a type", selection: $workout) {
+                        ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding()
+                    .background(typeColor)
+                    .cornerRadius(20)
+                    .padding(.vertical)
+                }
+                
+                VStack {
+                    HStack {
+                        Text("RPE")
+                            .bold()
+                            .foregroundColor(textColor)
+                            .frame(width: 50)
+                        
+                        Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
+                            if !editing {
+                                /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
+                                selectRpe = Int((10 - rpeValue) / 0.5)
+                            }
+                        })
+                        
+                        Text("10")
+                            .foregroundColor(textColor)
+                        
+                    }
+                    HStack {
+                        if rpeValue != 0.0 {
+                            Text("Selected Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
+                                .foregroundColor(.gray)
+                        } else {
+                            Text("Selected Rpe : ")
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                    }
+                    .padding(.leading, 5)
+                }
                 .padding()
                 .background(typeColor)
                 .cornerRadius(20)
+                
+                VStack {
+                    HStack {
+                        Text("REPS")
+                            .bold()
+                            .foregroundColor(textColor)
+                            .frame(width: 50)
+                        
+                        Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
+                            if !editing {
+                                selectReps = Int(repsValue-1)
+                            }
+                        })
+                        
+                        Text("12")
+                            .foregroundColor(textColor)
+                    }
+                    
+                    HStack {
+                        if repsValue != 0.0 {
+                            Text("Selected Reps : \(repsValue, specifier: "%.0f")")
+                                .foregroundColor(.gray)
+                        } else {
+                            Text("Selected Reps : ")
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                    }
+                    .padding(.leading, 5)
+                }
                 .padding()
-            }
-            
-            HStack {
-                Text("RPE")
-                    .bold()
-                    .foregroundColor(textColor)
-                    .frame(width: 50)
+                .background(typeColor)
+                .cornerRadius(20)
+                .padding(.bottom)
                 
-                Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
-                    if !editing {
-                        /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
-                        selectRpe = Int((10 - rpeValue) / 0.5)
-                    }
-                })
-                
-                Text("10")
-                    .foregroundColor(textColor)
-            }
-            .padding(10)
-            
-            if rpeValue != 0.0 {
-                Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") /// 정수로 떨어지면 소수점 표기 안함
-                    .foregroundColor(textColor)
-            } else {
-                Text("") /// 슬라이더 안건드렸다면
-                    .foregroundColor(textColor)
-            }
-            
-            HStack {
-                Text("REPS")
-                    .bold()
-                    .foregroundColor(textColor)
-                    .frame(width: 50)
-                
-                Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
-                    if !editing {
-                        /// 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
-                        selectReps = Int(repsValue-1)
-                    }
-                })
-                
-                Text("12")
-                    .foregroundColor(textColor)
-            }
-            .padding(10)
-            
-            if repsValue != 0.0 {
-                Text("Reps : \(repsValue, specifier: "%.0f")")
-                    .foregroundColor(textColor)
-            } else {
-                Text("")
-                    .foregroundColor(textColor)
-            }
-            Spacer()
-            
-            Text(getWeightLabel())
-                .font(.system(size: 44, weight: .bold))
-                .foregroundColor(textColor)
-            
-            Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
-                .padding(.top, 20)
-                .foregroundColor(textColor)
-            
-            Spacer()
+                VStack {
+                    Text(getWeightLabel())
+                        .font(.system(size: 44, weight: .bold))
+                        .foregroundColor(textColor)
+                    
+                    
+                    Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
+                        .padding(.top, 20)
+                        .foregroundColor(textColor)
+                }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(typeColor)
+                .cornerRadius(20)            }
+            .onAppear(perform: {
+                typeColor = colorData.loadColor()
+                textColor = colorData2.loadColor()
+            })
+            .padding()
         }
-        .onAppear(perform: {
-            typeColor = colorData.loadColor()
-            textColor = colorData2.loadColor()
-        })
-        .padding()
     }
-    
     /// 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
     func getWeightLabel() -> String {
         
