@@ -35,21 +35,21 @@ struct MainView: View {
                         .foregroundColor(textColor)
                 }
                 
-                HStack {
-                    Spacer()
-                    
-                    ColorPicker("", selection: $typeColor)
-                        .onChange(of: typeColor) { newValue in
-                            colorData.saveColor(color: typeColor)
-                        }
-                        .frame(width: 30)
-                    
-                    ColorPicker("", selection: $textColor)
-                        .onChange(of: textColor) { newValue in
-                            colorData2.saveColor(color: textColor)
-                        }
-                        .frame(width: 30)
-                }
+//                HStack {
+//                    Spacer()
+//                    
+//                    ColorPicker("", selection: $typeColor)
+//                        .onChange(of: typeColor) { newValue in
+//                            colorData.saveColor(color: typeColor)
+//                        }
+//                        .frame(width: 30)
+//                    
+//                    ColorPicker("", selection: $textColor)
+//                        .onChange(of: textColor) { newValue in
+//                            colorData2.saveColor(color: textColor)
+//                        }
+//                        .frame(width: 30)
+//                }
                 
                 HStack {
                     Picker("Choose a type", selection: $workout) {
@@ -87,7 +87,7 @@ struct MainView: View {
                             Text("Selected Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
                                 .foregroundColor(.gray)
                         } else {
-                            Text("Selected Rpe : ")
+                            Text("Selected Rpe")
                                 .foregroundColor(.gray)
                         }
                         Spacer()
@@ -120,7 +120,7 @@ struct MainView: View {
                             Text("Selected Reps : \(repsValue, specifier: "%.0f")")
                                 .foregroundColor(.gray)
                         } else {
-                            Text("Selected Reps : ")
+                            Text("Selected Reps")
                                 .foregroundColor(.gray)
                         }
                         Spacer()
@@ -134,18 +134,19 @@ struct MainView: View {
                 
                 VStack {
                     Text(getWeightLabel())
-                        .font(.system(size: 44, weight: .bold))
+                        .font(.system(size: 54, weight: .bold))
                         .foregroundColor(textColor)
                     
-                    
-                    Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
+                    Text("\(workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                         .padding(.top, 20)
                         .foregroundColor(textColor)
+
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(typeColor)
-                .cornerRadius(20)            }
+                .cornerRadius(20)
+            }
             .onAppear(perform: {
                 typeColor = colorData.loadColor()
                 textColor = colorData2.loadColor()
@@ -153,6 +154,7 @@ struct MainView: View {
             .padding()
         }
     }
+    
     /// 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
     func getWeightLabel() -> String {
         
