@@ -24,7 +24,7 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.2)
+            Color(UIColor.systemGray).opacity(0.3)
                 .ignoresSafeArea()
             
             VStack {
@@ -34,7 +34,6 @@ struct MainView: View {
                         .font(.largeTitle)
                         .foregroundColor(textColor)
                 }
-                
 //                HStack {
 //                    Spacer()
 //                    
@@ -80,7 +79,6 @@ struct MainView: View {
                         
                         Text("10")
                             .foregroundColor(textColor)
-                        
                     }
                     HStack {
                         if rpeValue != 0.0 {
@@ -140,7 +138,6 @@ struct MainView: View {
                     Text("\(workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                         .padding(.top, 20)
                         .foregroundColor(textColor)
-
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
