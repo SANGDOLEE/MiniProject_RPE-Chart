@@ -5,6 +5,7 @@ class ColorPickers {
     
     // ColorPicker 1
     class TypeColorData {
+        
         private let COLOR_KEY = "TYPECOLOR"
         private let userDefaults = UserDefaults.standard
         
@@ -33,6 +34,7 @@ class ColorPickers {
     
     // ColorPicker 2
     class TextColorData {
+        
         private let COLOR_KEY = "TEXTCOLOR"
         private let userDefaults = UserDefaults.standard
         
@@ -56,8 +58,6 @@ class ColorPickers {
                               opacity: colorComponents[3]
             )
             return color
-            
         }
     }
-    
 }
