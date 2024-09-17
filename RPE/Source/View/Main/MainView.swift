@@ -6,131 +6,150 @@ struct MainView: View {
     @ObservedObject var viewModel: MySBDViewModel
     
     @State private var workout = ""
-    
     @State private var rpeValue = 0.0
     @State private var repsValue = 0.0
-    
-    @State private var showAlert = false
-    
-    /// 사용자가 슬라이더에서 사용한 값을 RpeDataModel에서 배열 위치 값으로 사용 할 변수
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    let rpeModel = RpeData() // RpeData 객체 생성
-    
-    /// Color Picker
-    @State private var typeColor = Color.blue
-    private var colorData = ColorPickers.TypeColorData()
+    @State private var typeColor = Color.white
     @State private var textColor = Color.black
-    private var colorData2 = ColorPickers.TextColorData()
     
-    public init(viewModel: MySBDViewModel) {
+    private let rpeModel = RpeData()
+    private let colorData = ColorPickers.TypeColorData()
+    private let colorData2 = ColorPickers.TextColorData()
+    
+    init(viewModel: MySBDViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("What's")
-                    .bold()
-                    .scaleEffect(1.5)
-                    .padding()
-                    .foregroundColor(textColor)
-            }
-            
-            HStack {
-                ColorPicker("", selection: $typeColor)
-                    .onChange(of: typeColor) { newValue in
-                        colorData.saveColor(color: typeColor)
-                    }
-                    .background(.yellow)
-                
-                ColorPicker("", selection: $textColor)
-                    .onChange(of: textColor) { newValue in
-                        colorData2.saveColor(color: textColor)
-                    }
-                    .background(.yellow)
-            }
-            
-            Picker("Choose a type", selection: $workout) {
-                ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
-                    Text($0)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding()
-            .background(typeColor)
-            .cornerRadius(20)
-            .padding()
+        ZStack {
+            Color(UIColor.systemGray).opacity(0.3)
+                .ignoresSafeArea()
             
             VStack {
                 HStack {
-                    Text("RPE     ")
-                        .foregroundColor(textColor)
-                    Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
-                        if !editing {
-                            /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
-                            selectRpe = Int((10 - rpeValue) / 0.5)
-                        }
-                    })
-                    Text("10")
+                    Text("RPE")
+                        .bold()
+                        .font(.largeTitle)
                         .foregroundColor(textColor)
                 }
-                .padding(10)
+//                HStack {
+//                    Spacer()
+//                    
+//                    ColorPicker("", selection: $typeColor)
+//                        .onChange(of: typeColor) { newValue in
+//                            colorData.saveColor(color: typeColor)
+//                        }
+//                        .frame(width: 30)
+//                    
+//                    ColorPicker("", selection: $textColor)
+//                        .onChange(of: textColor) { newValue in
+//                            colorData2.saveColor(color: textColor)
+//                        }
+//                        .frame(width: 30)
+//                }
                 
-                if rpeValue != 0.0 {
-                    Text("Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")") /// 정수로 떨어지면 소수점 표기 안함
-                        .foregroundColor(textColor)
-                } else {
-                    Text("") /// 슬라이더 안건드렸다면
-                        .foregroundColor(textColor)
-                }
-            }
-            
-            VStack {
                 HStack {
-                    Text("REPS")
-                        .foregroundColor(textColor)
-                    Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
-                        if !editing {
-                            /// 사용자가 슬라이더 조작을 마치면 selectReps에 선택된 값을 할당
-                            selectReps = Int(repsValue-1)
+                    Picker("Choose a type", selection: $workout) {
+                        ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
+                            Text($0)
                         }
-                    })
+                    }
+                    .pickerStyle(.segmented)
                     .padding()
+                    .background(typeColor)
+                    .cornerRadius(20)
+                    .padding(.vertical)
+                }
+                
+                VStack {
+                    HStack {
+                        Text("RPE")
+                            .bold()
+                            .foregroundColor(textColor)
+                            .frame(width: 50)
+                        
+                        Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
+                            if !editing {
+                                /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
+                                selectRpe = Int((10 - rpeValue) / 0.5)
+                            }
+                        })
+                        
+                        Text("10")
+                            .foregroundColor(textColor)
+                    }
+                    HStack {
+                        if rpeValue != 0.0 {
+                            Text("Selected Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
+                                .foregroundColor(.gray)
+                        } else {
+                            Text("Selected Rpe")
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                    }
+                    .padding(.leading, 5)
+                }
+                .padding()
+                .background(typeColor)
+                .cornerRadius(20)
+                
+                VStack {
+                    HStack {
+                        Text("REPS")
+                            .bold()
+                            .foregroundColor(textColor)
+                            .frame(width: 50)
+                        
+                        Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
+                            if !editing {
+                                selectReps = Int(repsValue-1)
+                            }
+                        })
+                        
+                        Text("12")
+                            .foregroundColor(textColor)
+                    }
                     
-                    Text("12")
-                        .foregroundColor(textColor)
+                    HStack {
+                        if repsValue != 0.0 {
+                            Text("Selected Reps : \(repsValue, specifier: "%.0f")")
+                                .foregroundColor(.gray)
+                        } else {
+                            Text("Selected Reps")
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                    }
+                    .padding(.leading, 5)
                 }
-                .padding(10)
+                .padding()
+                .background(typeColor)
+                .cornerRadius(20)
+                .padding(.bottom)
                 
-                if repsValue != 0.0 {
-                    Text("Reps : \(repsValue, specifier: "%.0f")")
+                VStack {
+                    Text(getWeightLabel())
+                        .font(.system(size: 54, weight: .bold))
                         .foregroundColor(textColor)
-                } else {
-                    Text("")
+                    
+                    Text("\(workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
+                        .padding(.top, 20)
                         .foregroundColor(textColor)
                 }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(typeColor)
+                .cornerRadius(20)
             }
-            
-            Spacer()
-            
-            Text(getWeightLabel())
-                .scaleEffect(4.0)
-                .bold()
-                .foregroundColor(textColor)
-            
-            Text("\(workout.isEmpty ? "" : String(workout.prefix(1))) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
-                .padding(.top, 20)
-                .foregroundColor(textColor)
-            
-            Spacer()
+            .onAppear(perform: {
+                typeColor = colorData.loadColor()
+                textColor = colorData2.loadColor()
+            })
+            .padding()
         }
-        .onAppear(perform: {
-            typeColor = colorData.loadColor()
-            textColor = colorData2.loadColor()
-        })
-        .padding()
     }
     
     /// 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
@@ -181,14 +200,6 @@ extension Double {
         return floor(self) == self
     }
 }
-
-#if canImport(UIKit)
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-#endif
 
 #Preview {
     MainView(viewModel: MySBDViewModel())
