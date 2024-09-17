@@ -4,7 +4,6 @@ import SwiftUI
 struct MainView: View {
     
     @ObservedObject var viewModel: MySBDViewModel
-    @StateObject private var isItextViewModel = IsTextViewModel()
     
     @State private var workout = ""
     
@@ -27,7 +26,6 @@ struct MainView: View {
     
     public init(viewModel: MySBDViewModel) {
         self.viewModel = viewModel
-        _isItextViewModel = StateObject(wrappedValue: IsTextViewModel())
     }
     
     var body: some View {

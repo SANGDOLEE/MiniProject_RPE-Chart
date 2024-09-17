@@ -1,26 +1,20 @@
-//
-//  MyRecordView.swift
-//  RPE
-//
-//  Created by 이상도 on 9/17/24.
-//
 
 import SwiftUI
 
 struct MyRecordView: View {
     
     @ObservedObject var viewModel: MySBDViewModel
-    @State private var isText : Bool = false
+    @AppStorage("isText") private var isText: Bool = false
     
     @State private var showAlert = false
-    @State var isModalSheetShown:Bool = false
+    @State var isModalSheetShown: Bool = false
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack {
                 HStack {
                     Text("total")
-                        .font(.system(size:27))
+                        .font(.system(size: 27))
                     
                     let squatValue = Double(viewModel.squatValue) ?? 0.0
                     let benchValue = Double(viewModel.benchValue) ?? 0.0
@@ -28,19 +22,17 @@ struct MyRecordView: View {
                     
                     let totalValue = squatValue + benchValue + deadValue
                     if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
-                        // 정수형일 경우
                         Text("\(Int(totalValue))")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.blue)
                     } else {
-                        // 소수점 1자리까지 표시
                         let formattedTotal = formatTotalValue(totalValue)
                         Text(formattedTotal)
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.blue)
                     }
-                    Text("\(isText ? "lb" : "kg")")
-                        .font(.system(size:24))
+                    Text(isText ? "lb" : "kg")
+                        .font(.system(size: 24))
                 }
                 
                 HStack {
@@ -55,7 +47,7 @@ struct MyRecordView: View {
                         .onChange(of: viewModel.squatValue) { newValue in
                             viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                         }
-                    Text("\(isText ? "lb" : "kg")")
+                    Text(isText ? "lb" : "kg")
                 }
                 
                 HStack {
@@ -70,7 +62,7 @@ struct MyRecordView: View {
                         .onChange(of: viewModel.benchValue) { newValue in
                             viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                         }
-                    Text("\(isText ? "lb" : "kg")")
+                    Text(isText ? "lb" : "kg")
                 }
                 
                 HStack {
@@ -85,13 +77,13 @@ struct MyRecordView: View {
                         .onChange(of: viewModel.deadValue) { newValue in
                             viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                         }
-                    Text("\(isText ? "lb" : "kg")")
+                    Text(isText ? "lb" : "kg")
                 }
                 
                 HStack {
                     Button(action: {
-                        totalUpdate() // 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
-                    }, label: {
+                        totalUpdate()
+                    }) {
                         Text("UPDATE")
                             .padding(.horizontal)
                             .padding(.vertical, 5)
@@ -99,11 +91,10 @@ struct MyRecordView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 24, weight: .bold))
                             .cornerRadius(20)
-                    })
+                    }
                 }
                 .alert(isPresented: $showAlert) {
                     Alert(
-                        // 사용자가 3가지중 1가지라도 공백으로 둘 시 Alert
                         title: Text("Message"),
                         message: Text("Please enter weight values for all types."),
                         dismissButton: .default(Text("OK"))
@@ -122,13 +113,12 @@ struct MyRecordView: View {
                     .foregroundColor(.black)
             }
                 .sheet(isPresented: $isModalSheetShown) {
-                    SettingView(showModal: $isModalSheetShown,isText:$isText)
+                    SettingView(showModal: $isModalSheetShown)
                 }
             )
         }
         .onAppear {
-            // 중량 표시 단위 kg/lb 중 사용자가 마지막에 설정한것으로 띄워준다.
-            isText = UserDefaults.standard.bool(forKey: "isText")
+            // `@AppStorage`에서 자동으로 값을 읽어오므로 이 코드 필요 없음
         }
         .onTapGesture {
             hideKeyboard()
