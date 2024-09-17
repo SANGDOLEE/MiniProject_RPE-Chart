@@ -117,9 +117,6 @@ struct MyRecordView: View {
                 }
             )
         }
-        .onAppear {
-            // `@AppStorage`에서 자동으로 값을 읽어오므로 이 코드 필요 없음
-        }
         .onTapGesture {
             hideKeyboard()
         }
