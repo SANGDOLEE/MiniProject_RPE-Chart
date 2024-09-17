@@ -16,14 +16,12 @@ struct MyRecordView: View {
     @State var isModalSheetShown:Bool = false
     
     var body: some View {
-        
         NavigationView{
             VStack {
-                Spacer()
-                
                 HStack {
                     Text("total")
                         .font(.system(size:27))
+                    
                     let squatValue = Double(viewModel.squatValue) ?? 0.0
                     let benchValue = Double(viewModel.benchValue) ?? 0.0
                     let deadValue = Double(viewModel.deadValue) ?? 0.0
@@ -38,17 +36,12 @@ struct MyRecordView: View {
                         // 소수점 1자리까지 표시
                         let formattedTotal = formatTotalValue(totalValue)
                         Text(formattedTotal)
-                            .font(.system(size: 24))
-                            .bold()
-                            .foregroundColor(Color.blue)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.blue)
                     }
-                    
                     Text("\(isText ? "lb" : "kg")")
                         .font(.system(size:24))
-                    
                 }
-                Spacer()
-                    .frame(height: 40)
                 
                 HStack {
                     Text("SQ")
@@ -94,38 +87,33 @@ struct MyRecordView: View {
                         }
                     Text("\(isText ? "lb" : "kg")")
                 }
-                Spacer().frame(height: 40) // 간격을 두기 위한 Spacer
                 
                 HStack {
-                    Button("UPDATE") {
-                        // 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
-                        if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
-                            showAlert = true
-                        } else {
-                            viewModel.saveData()
-                            UIApplication.shared.windows.first?.endEditing(true)
-                        }
-                    }
-                    .buttonStyle(InsetRoundScaleButton(labelColor: .white, backgroundColor: .blue))
-                    .bold()
-                    .font(.system(size: 24))
+                    Button(action: {
+                        totalUpdate() // 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
+                    }, label: {
+                        Text("UPDATE")
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
+                            .background(.blue)
+                            .foregroundColor(.white)
+                            .font(.system(size: 24, weight: .bold))
+                            .cornerRadius(20)
+                    })
                 }
                 .alert(isPresented: $showAlert) {
-                    Alert( // 사용자가 3가지중 1가지라도 공백으로 둘 시 Alert
+                    Alert(
+                        // 사용자가 3가지중 1가지라도 공백으로 둘 시 Alert
                         title: Text("Message"),
                         message: Text("Please enter weight values for all types."),
                         dismissButton: .default(Text("OK"))
                     )
                 }
-                Spacer()
             }
             .onTapGesture {
                 UIApplication.shared.windows.first?.endEditing(true)
             }
-            .padding()
-            
-            // MARK: - Navigation 영역
-            .navigationBarTitle("Setting Weight", displayMode: .inline) // Set navigation title here
+            .navigationBarTitle("Setting Weight", displayMode: .inline)
             .navigationBarItems(trailing:
                                     Button(action: {
                 isModalSheetShown.toggle()
@@ -137,7 +125,6 @@ struct MyRecordView: View {
                     SettingView(showModal: $isModalSheetShown,isText:$isText)
                 }
             )
-            
         }
         .onAppear {
             // 중량 표시 단위 kg/lb 중 사용자가 마지막에 설정한것으로 띄워준다.
@@ -148,6 +135,17 @@ struct MyRecordView: View {
         }
     }
     
+    private func totalUpdate() {
+        if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
+            showAlert = true
+        } else {
+            viewModel.saveData()
+            UIApplication.shared.windows.first?.endEditing(true)
+        }
+    }
+}
+
+extension MyRecordView {
     private func formatTotalValue(_ totalValue: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -160,20 +158,6 @@ struct MyRecordView: View {
     }
 }
 
-struct InsetRoundScaleButton: ButtonStyle {
-    var labelColor = Color.white
-    var backgroundColor = Color.blue
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, 19)
-            .padding(.vertical, 5)
-            .foregroundColor(labelColor)
-            .background(Capsule().fill(backgroundColor))
-            .scaleEffect(configuration.isPressed ? 0.88 : 1.0)
-    }
+#Preview {
+    MyRecordView(viewModel: MySBDViewModel())
 }
-
-//#Preview {
-//    MyRecordView()
-//}
