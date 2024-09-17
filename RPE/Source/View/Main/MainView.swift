@@ -6,25 +6,19 @@ struct MainView: View {
     @ObservedObject var viewModel: MySBDViewModel
     
     @State private var workout = ""
-    
     @State private var rpeValue = 0.0
     @State private var repsValue = 0.0
-    
-    @State private var showAlert = false
-    
-    /// 사용자가 슬라이더에서 사용한 값을 RpeDataModel에서 배열 위치 값으로 사용 할 변수
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    let rpeModel = RpeData() // RpeData 객체 생성
-    
-    /// Color Picker
     @State private var typeColor = Color.blue
-    private var colorData = ColorPickers.TypeColorData()
     @State private var textColor = Color.black
-    private var colorData2 = ColorPickers.TextColorData()
     
-    public init(viewModel: MySBDViewModel) {
+    private let rpeModel = RpeData()
+    private let colorData = ColorPickers.TypeColorData()
+    private let colorData2 = ColorPickers.TextColorData()
+    
+    init(viewModel: MySBDViewModel) {
         self.viewModel = viewModel
     }
     
@@ -67,6 +61,7 @@ struct MainView: View {
             
             HStack {
                 Text("RPE")
+                    .bold()
                     .foregroundColor(textColor)
                     .frame(width: 50)
                 
@@ -76,6 +71,7 @@ struct MainView: View {
                         selectRpe = Int((10 - rpeValue) / 0.5)
                     }
                 })
+                
                 Text("10")
                     .foregroundColor(textColor)
             }
@@ -91,6 +87,7 @@ struct MainView: View {
             
             HStack {
                 Text("REPS")
+                    .bold()
                     .foregroundColor(textColor)
                     .frame(width: 50)
                 
