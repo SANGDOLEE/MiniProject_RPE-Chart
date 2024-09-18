@@ -3,31 +3,57 @@ import SwiftUI
 
 struct SettingView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @AppStorage("isText") private var isText: Bool = false
-    @Binding var showModal: Bool
     
     var body: some View {
-        NavigationView {
-            HStack {
-                Text("Weight :")
-                
-                Toggle(isOn: $isText) {
+        ZStack {
+            Color(hex: "F3F2F8")
+                .ignoresSafeArea()
+            
+            VStack {
+                HStack {
+                    Text("Unit of Weight :")
+                        .padding(.leading)
+                    
                     Text(isText ? "Lb" : "Kg")
+                        .bold()
                         .foregroundColor(isText ? .blue : .primary)
+                    
+                    Spacer()
+                    
+                    Toggle(isOn: $isText) { }
+                        .frame(width: 80)
+                        .padding(.trailing)
                 }
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
+                .background(.white)
+                .cornerRadius(10)
+                .padding()
+                
+                Spacer()
             }
-            .navigationBarTitle("Setting", displayMode: .inline)
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                showModal.toggle()
-            }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.black)
-            })
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
+    }
+    
+    // Custom navigation back button
+    var backButton : some View {
+        Button{
+            self.presentationMode.wrappedValue.dismiss()
+        } label: {
+            HStack {
+                Image(systemName: "chevron.left") // 화살표 Image
+                    .aspectRatio(contentMode: .fit)
+                    .bold()
+            }
         }
     }
 }
 
 #Preview {
-    SettingView(showModal: .constant(true))
+    SettingView()
 }

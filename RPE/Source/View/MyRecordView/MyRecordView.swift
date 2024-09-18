@@ -6,7 +6,7 @@ struct MyRecordView: View {
     @AppStorage("isText") private var isText: Bool = false
     
     @State private var showAlert = false
-    @State var isModalSheetShown: Bool = false
+//    @State var isModalSheetShown: Bool = false
     
     var body: some View {
         NavigationView {
@@ -26,7 +26,7 @@ struct MyRecordView: View {
                         }
                         
                         Section(header: Text("Configuration")) {
-                            NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel())) {
+                            NavigationLink(destination: SettingView()) {
                                 HStack {
                                     Text("Weight Unit Conversion")
                                     Spacer()
@@ -37,17 +37,17 @@ struct MyRecordView: View {
                     .listStyle(.insetGrouped)
                 }
                 .navigationBarTitle("Setting", displayMode: .inline)
-                .navigationBarItems(trailing:
-                                        Button(action: {
-                    isModalSheetShown.toggle()
-                }) {
-                    Image(systemName: "gear")
-                        .foregroundColor(.black)
-                }
-                    .sheet(isPresented: $isModalSheetShown) {
-                        SettingView(showModal: $isModalSheetShown)
-                    }
-                )
+//                .navigationBarItems(trailing:
+//                                        Button(action: {
+//                    isModalSheetShown.toggle()
+//                }) {
+//                    Image(systemName: "gear")
+//                        .foregroundColor(.black)
+//                }
+//                    .sheet(isPresented: $isModalSheetShown) {
+//                        SettingView(showModal: $isModalSheetShown)
+//                    }
+//                )
             }
         }
     }
