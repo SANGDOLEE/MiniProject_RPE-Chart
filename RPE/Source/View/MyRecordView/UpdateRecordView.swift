@@ -17,123 +17,121 @@ struct UpdateRecordView: View {
     @State private var showAlert = false
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color(hex: "F3F2F8")
-                    .ignoresSafeArea()
-                
-                VStack(spacing: 0) {
-                    HStack {
-                        Text("Congratulations!\nBe careful of your injuries.")
-                            .padding(.leading, 30)
-                            .foregroundColor(Color(hex: "9D9DA3"))
-                        
-                        Spacer()
-                    }
-                    
-                    VStack {
-                        HStack {
-                            Text("TOTAL")
-                                .font(.system(size: 27))
-                            
-                            let squatValue = Double(viewModel.squatValue) ?? 0.0
-                            let benchValue = Double(viewModel.benchValue) ?? 0.0
-                            let deadValue = Double(viewModel.deadValue) ?? 0.0
-                            
-                            let totalValue = squatValue + benchValue + deadValue
-                            if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
-                                Text("\(Int(totalValue))")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(.blue)
-                            } else {
-                                let formattedTotal = formatTotalValue(totalValue)
-                                Text(formattedTotal)
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(.blue)
-                            }
-                            Text(isText ? "lb" : "kg")
-                                .font(.system(size: 24))
-                        }
-                        .padding(.top)
-                        
-                        HStack {
-                            Text("SQ")
-                                .font(.system(size: 24, weight: .light))
-                            TextField("Enter weight", text: $viewModel.squatValue)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.decimalPad)
-                                .fontWeight(.thin)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 115)
-                                .onChange(of: viewModel.squatValue) { newValue in
-                                    viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
-                                }
-                            Text(isText ? "lb" : "kg")
-                        }
-                        
-                        HStack {
-                            Text("BP")
-                                .font(.system(size: 24, weight: .light))
-                            TextField("Enter weight", text: $viewModel.benchValue)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.decimalPad)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 115)
-                                .fontWeight(.thin)
-                                .onChange(of: viewModel.benchValue) { newValue in
-                                    viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
-                                }
-                            Text(isText ? "lb" : "kg")
-                        }
-                        
-                        HStack {
-                            Text("DL")
-                                .font(.system(size: 24, weight: .light))
-                            TextField("Enter weight", text: $viewModel.deadValue)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.decimalPad)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 115)
-                                .fontWeight(.thin)
-                                .onChange(of: viewModel.deadValue) { newValue in
-                                    viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
-                                }
-                            Text(isText ? "lb" : "kg")
-                        }
-                        
-                        HStack {
-                            Button(action: {
-                                totalUpdate()
-                            }) {
-                                Text("UPDATE")
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 5)
-                                    .background(.blue)
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 24, weight: .bold))
-                                    .cornerRadius(20)
-                            }
-                        }
-                        .alert(isPresented: $showAlert) {
-                            Alert(
-                                title: Text("Message"),
-                                message: Text("Please enter weight values for all types."),
-                                dismissButton: .default(Text("OK"))
-                            )
-                        }
-                        .padding(.bottom)
-                        
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 300)
-                    .background(.white)
-                    .cornerRadius(20)
-                    .padding()
+        ZStack {
+            Color(hex: "F3F2F8")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Congratulations!\nBe careful of your injuries.")
+                        .padding(.leading, 30)
+                        .foregroundColor(Color(hex: "9D9DA3"))
                     
                     Spacer()
                 }
-                .onTapGesture {
-                    UIApplication.shared.windows.first?.endEditing(true)
+                
+                VStack {
+                    HStack {
+                        Text("TOTAL")
+                            .font(.system(size: 27))
+                        
+                        let squatValue = Double(viewModel.squatValue) ?? 0.0
+                        let benchValue = Double(viewModel.benchValue) ?? 0.0
+                        let deadValue = Double(viewModel.deadValue) ?? 0.0
+                        
+                        let totalValue = squatValue + benchValue + deadValue
+                        if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
+                            Text("\(Int(totalValue))")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.blue)
+                        } else {
+                            let formattedTotal = formatTotalValue(totalValue)
+                            Text(formattedTotal)
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.blue)
+                        }
+                        Text(isText ? "lb" : "kg")
+                            .font(.system(size: 24))
+                    }
+                    .padding(.top)
+                    
+                    HStack {
+                        Text("SQ")
+                            .font(.system(size: 24, weight: .light))
+                        TextField("Enter weight", text: $viewModel.squatValue)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
+                            .fontWeight(.thin)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 115)
+                            .onChange(of: viewModel.squatValue) { newValue in
+                                viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                            }
+                        Text(isText ? "lb" : "kg")
+                    }
+                    
+                    HStack {
+                        Text("BP")
+                            .font(.system(size: 24, weight: .light))
+                        TextField("Enter weight", text: $viewModel.benchValue)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 115)
+                            .fontWeight(.thin)
+                            .onChange(of: viewModel.benchValue) { newValue in
+                                viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                            }
+                        Text(isText ? "lb" : "kg")
+                    }
+                    
+                    HStack {
+                        Text("DL")
+                            .font(.system(size: 24, weight: .light))
+                        TextField("Enter weight", text: $viewModel.deadValue)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 115)
+                            .fontWeight(.thin)
+                            .onChange(of: viewModel.deadValue) { newValue in
+                                viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                            }
+                        Text(isText ? "lb" : "kg")
+                    }
+                    
+                    HStack {
+                        Button(action: {
+                            totalUpdate()
+                        }) {
+                            Text("UPDATE")
+                                .padding(.horizontal)
+                                .padding(.vertical, 5)
+                                .background(.blue)
+                                .foregroundColor(.white)
+                                .font(.system(size: 24, weight: .bold))
+                                .cornerRadius(20)
+                        }
+                    }
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("Message"),
+                            message: Text("Please enter weight values for all types."),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
+                    .padding(.bottom)
+                    
                 }
+                .frame(maxWidth: .infinity, maxHeight: 300)
+                .background(.white)
+                .cornerRadius(20)
+                .padding()
+                
+                Spacer()
+            }
+            .onTapGesture {
+                UIApplication.shared.windows.first?.endEditing(true)
             }
         }
         .navigationBarBackButtonHidden(true)
