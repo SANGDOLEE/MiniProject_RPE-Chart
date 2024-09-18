@@ -113,7 +113,6 @@ struct FirstInputView: View {
     }
 }
 
-// MARK: HideKeyboard Import(UIkit)
 #if canImport(UIKit)
 extension View {
     func hideKeyboardEnterView() {

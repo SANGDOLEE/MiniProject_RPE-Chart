@@ -17,6 +17,7 @@
 		1F9DA1E32C9891D10024BD72 /* TabViewManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */; };
 		1F9DA1E62C9892870024BD72 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E52C9892870024BD72 /* MyRecordView.swift */; };
 		1FD792E32B2EBE7600D1482E /* FirstInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD792E22B2EBE7600D1482E /* FirstInputView.swift */; };
+		1FE068852C9AB21400896830 /* UpdateRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE068842C9AB21400896830 /* UpdateRecordView.swift */; };
 		1FE6E14A2B2AFAA400FC5CB2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6E1492B2AFAA400FC5CB2 /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManagement.swift; sourceTree = "<group>"; };
 		1F9DA1E52C9892870024BD72 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
 		1FD792E22B2EBE7600D1482E /* FirstInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstInputView.swift; sourceTree = "<group>"; };
+		1FE068842C9AB21400896830 /* UpdateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRecordView.swift; sourceTree = "<group>"; };
 		1FE6E1492B2AFAA400FC5CB2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		1FE9F63F2B4A7A1600BB46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				1F9DA1E52C9892870024BD72 /* MyRecordView.swift */,
+				1FE068842C9AB21400896830 /* UpdateRecordView.swift */,
 			);
 			path = MyRecordView;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FE068852C9AB21400896830 /* UpdateRecordView.swift in Sources */,
 				1F08D6502B284F0700EEE82B /* MainView.swift in Sources */,
 				1FE6E14A2B2AFAA400FC5CB2 /* SettingView.swift in Sources */,
 				1FD792E32B2EBE7600D1482E /* FirstInputView.swift in Sources */,
