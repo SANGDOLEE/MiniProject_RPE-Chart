@@ -24,7 +24,7 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            Color(UIColor.systemGray).opacity(0.3)
+            Color(hex: "F3F2F8")
                 .ignoresSafeArea()
             
             VStack {

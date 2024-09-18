@@ -112,6 +112,7 @@ struct UpdateRecordView: View {
                 UIApplication.shared.windows.first?.endEditing(true)
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     private func totalUpdate() {
