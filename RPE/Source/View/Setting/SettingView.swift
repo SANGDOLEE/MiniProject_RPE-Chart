@@ -3,52 +3,39 @@ import SwiftUI
 
 struct SettingView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     @AppStorage("isText") private var isText: Bool = false
     
-    var body: some View {
-        ZStack {
-            Color(hex: "F3F2F8")
-                .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Text("Unit of Weight :")
-                        .padding(.leading)
-                    
-                    Text(isText ? "Lb" : "Kg")
-                        .bold()
-                        .foregroundColor(isText ? .blue : .primary)
-                    
-                    Spacer()
-                    
-                    Toggle(isOn: $isText) { }
-                        .frame(width: 80)
-                        .padding(.trailing)
-                }
-                .padding(.vertical)
-                .frame(maxWidth: .infinity)
-                .background(.white)
-                .cornerRadius(10)
-                .padding()
-                
-                Spacer()
-            }
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
-    }
+    @State private var showAlert = false
     
-    // Custom navigation back button
-    var backButton : some View {
-        Button{
-            self.presentationMode.wrappedValue.dismiss()
-        } label: {
-            HStack {
-                Image(systemName: "chevron.left") // 화살표 Image
-                    .aspectRatio(contentMode: .fit)
-                    .bold()
+    var body: some View {
+        NavigationView {
+            ZStack {
+                Color(hex: "F3F2F8")
+                    .ignoresSafeArea()
+                
+                VStack {
+                    List {
+                        Section(header: Text("Update")) {
+                            NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel())) {
+                                HStack {
+                                    Text("My BigThree")
+                                    Spacer()
+                                }
+                            }
+                        }
+                        
+                        Section(header: Text("Configuration")) {
+                            NavigationLink(destination: WeightUnitView()) {
+                                HStack {
+                                    Text("Weight Unit Conversion")
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(.insetGrouped)
+                }
+                .navigationBarTitle("Setting", displayMode: .inline)
             }
         }
     }

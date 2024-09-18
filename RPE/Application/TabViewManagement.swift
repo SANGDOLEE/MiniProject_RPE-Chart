@@ -18,7 +18,7 @@ struct TabViewManagement: View {
                     Image(systemName: "chart.bar.fill")
                 }
             
-            MyRecordView() // 뷰 모델 전달
+           SettingView() // 뷰 모델 전달
                 .tabItem {
                     Image(systemName: "person")
                 }
