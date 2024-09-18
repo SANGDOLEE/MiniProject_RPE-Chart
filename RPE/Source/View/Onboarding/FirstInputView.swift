@@ -88,7 +88,7 @@ struct FirstInputView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.blue)
+                    .foregroundColor(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .blue)
                     .padding(.top, 20)
                     .alert(isPresented: $showAlert) {
                         Alert(
@@ -101,11 +101,11 @@ struct FirstInputView: View {
                 .padding(.top, 20)
                 
                 Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
-                    .onTapGesture {
-                        UIApplication.shared.windows.first?.endEditing(true)
-                    }
             }
             .padding(.bottom, 100) /// top으로부터 여백 0
+            .onTapGesture {
+                UIApplication.shared.windows.first?.endEditing(true)
+            }
         }
         .onTapGesture {
             hideKeyboardEnterView()
@@ -113,7 +113,6 @@ struct FirstInputView: View {
     }
 }
 
-// MARK: HideKeyboard Import(UIkit)
 #if canImport(UIKit)
 extension View {
     func hideKeyboardEnterView() {

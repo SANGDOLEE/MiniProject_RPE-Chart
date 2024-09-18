@@ -4,30 +4,43 @@ import SwiftUI
 struct SettingView: View {
     
     @AppStorage("isText") private var isText: Bool = false
-    @Binding var showModal: Bool
+    
+    @State private var showAlert = false
     
     var body: some View {
         NavigationView {
-            HStack {
-                Text("Weight :")
+            ZStack {
+                Color(hex: "F3F2F8")
+                    .ignoresSafeArea()
                 
-                Toggle(isOn: $isText) {
-                    Text(isText ? "Lb" : "Kg")
-                        .foregroundColor(isText ? .blue : .primary)
+                VStack {
+                    List {
+                        Section(header: Text("Update")) {
+                            NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel())) {
+                                HStack {
+                                    Text("My BigThree")
+                                    Spacer()
+                                }
+                            }
+                        }
+                        
+                        Section(header: Text("Configuration")) {
+                            NavigationLink(destination: WeightUnitView()) {
+                                HStack {
+                                    Text("Weight Unit Conversion")
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(.insetGrouped)
                 }
+                .navigationBarTitle("Setting", displayMode: .inline)
             }
-            .navigationBarTitle("Setting", displayMode: .inline)
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                showModal.toggle()
-            }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.black)
-            })
         }
     }
 }
 
 #Preview {
-    SettingView(showModal: .constant(true))
+    SettingView()
 }
