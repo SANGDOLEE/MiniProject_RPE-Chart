@@ -1,9 +1,9 @@
+
 import SwiftUI
 
-// MARK: - 2개의 탭이 있는 메인뷰
 struct MainView: View {
     
-    @ObservedObject var viewModel: MySBDViewModel
+    @StateObject var viewModel: MySBDViewModel
     
     @State private var workout = ""
     @State private var rpeValue = 0.0
@@ -18,9 +18,9 @@ struct MainView: View {
     private let colorData = ColorPickers.TypeColorData()
     private let colorData2 = ColorPickers.TextColorData()
     
-    init(viewModel: MySBDViewModel) {
-        self.viewModel = viewModel
-    }
+    //    init(viewModel: MySBDViewModel) {
+    //        self.viewModel = viewModel
+    //    }
     
     var body: some View {
         ZStack {
@@ -34,21 +34,22 @@ struct MainView: View {
                         .font(.largeTitle)
                         .foregroundColor(textColor)
                 }
-//                HStack {
-//                    Spacer()
-//                    
-//                    ColorPicker("", selection: $typeColor)
-//                        .onChange(of: typeColor) { newValue in
-//                            colorData.saveColor(color: typeColor)
-//                        }
-//                        .frame(width: 30)
-//                    
-//                    ColorPicker("", selection: $textColor)
-//                        .onChange(of: textColor) { newValue in
-//                            colorData2.saveColor(color: textColor)
-//                        }
-//                        .frame(width: 30)
-//                }
+                
+                //                HStack {
+                //                    Spacer()
+                //
+                //                    ColorPicker("", selection: $typeColor)
+                //                        .onChange(of: typeColor) { newValue in
+                //                            colorData.saveColor(color: typeColor)
+                //                        }
+                //                        .frame(width: 30)
+                //
+                //                    ColorPicker("", selection: $textColor)
+                //                        .onChange(of: textColor) { newValue in
+                //                            colorData2.saveColor(color: textColor)
+                //                        }
+                //                        .frame(width: 30)
+                //                }
                 
                 HStack {
                     Picker("Choose a type", selection: $workout) {
@@ -144,11 +145,14 @@ struct MainView: View {
                 .background(typeColor)
                 .cornerRadius(20)
             }
-            .onAppear(perform: {
-                typeColor = colorData.loadColor()
-                textColor = colorData2.loadColor()
-            })
             .padding()
+//            .onAppear(perform: {
+//                typeColor = colorData.loadColor()
+//                textColor = colorData2.loadColor()
+//            })
+        }
+        .onAppear {
+            viewModel.loadData()   // 뷰가 나타날 때마다 데이터를 새로 고침
         }
     }
     

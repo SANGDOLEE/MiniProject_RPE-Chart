@@ -101,7 +101,7 @@ struct FirstInputView: View {
                 .padding(.top, 20)
                 
                 Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
-                    .onTapGesture {
+                    .onTapGesture { // 음 모디파이어 위치가 이상한데 나중에 다시 체크해봐야함
                         UIApplication.shared.windows.first?.endEditing(true)
                     }
             }
