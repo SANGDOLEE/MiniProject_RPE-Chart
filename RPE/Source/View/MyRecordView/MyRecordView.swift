@@ -11,7 +11,7 @@ struct MyRecordView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(UIColor.systemGray).opacity(0.3)
+                Color(hex: "F3F2F8")
                     .ignoresSafeArea()
                 
                 VStack {

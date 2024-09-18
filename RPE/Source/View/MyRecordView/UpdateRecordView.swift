@@ -19,10 +19,18 @@ struct UpdateRecordView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(UIColor.systemGray).opacity(0.3)
+                Color(hex: "F3F2F8")
                     .ignoresSafeArea()
                 
-                VStack {
+                VStack(spacing: 0) {
+                    HStack {
+                        Text("Congratulations!\nBe careful of your injuries.")
+                            .padding(.leading, 30)
+                            .foregroundColor(Color(hex: "9D9DA3"))
+                        
+                        Spacer()
+                    }
+                    
                     VStack {
                         HStack {
                             Text("TOTAL")
@@ -114,8 +122,9 @@ struct UpdateRecordView: View {
                             )
                         }
                         .padding(.bottom)
+                        
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: 300)
                     .background(.white)
                     .cornerRadius(20)
                     .padding()
@@ -125,7 +134,6 @@ struct UpdateRecordView: View {
                 .onTapGesture {
                     UIApplication.shared.windows.first?.endEditing(true)
                 }
-                
             }
         }
         .navigationBarBackButtonHidden(true)
