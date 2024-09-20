@@ -1,10 +1,9 @@
+
 import SwiftUI
 
-
 // MARK: - 앱의 첫 사용시에만 등장하는 뷰
-struct EnterView: View {
+struct FirstInputView: View {
     
-    ///
     @StateObject private var viewModel = MySBDViewModel() /// // EnterView에서 사용자가 Weight 입력했을시 데이터 저장
     @State private var showAlert = false
     @Binding var isPresented: Bool
@@ -18,12 +17,12 @@ struct EnterView: View {
                         isPresented = false
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .font(.system(size: 24))
+                    .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.blue)
-                    .bold()
                     .padding(.trailing, 20)
                 }
                 .padding(.horizontal)
+                
                 Spacer()
                 
                 VStack(alignment: .center, spacing: 10) {
@@ -31,16 +30,15 @@ struct EnterView: View {
                     Text("Please enter 1RM records of\nyour three major weight to take\nadvantage of the RPE chart.")
                         .multilineTextAlignment(.center)
                 }
+                
                 VStack {
                     HStack {
                         Text("SQ")
-                            .font(.system(size: 24))
-                            .fontWeight(.light)
+                            .font(.system(size: 24, weight: .light))
                         TextField("Enter Weight", text: $viewModel.squatValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .font(.system(size: 14))
+                            .font(.system(size: 14, weight: .thin))
                             .keyboardType(.decimalPad)
-                            .fontWeight(.thin)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
                             .onChange(of: viewModel.squatValue) { newValue in
@@ -54,8 +52,7 @@ struct EnterView: View {
                             .fontWeight(.light)
                         TextField("Enter Weight", text: $viewModel.benchValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .font(.system(size: 14))
-                            .fontWeight(.thin)
+                            .font(.system(size: 14, weight: .thin))
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
@@ -69,10 +66,9 @@ struct EnterView: View {
                             .font(.system(size: 24))
                             .fontWeight(.light)
                         TextField("Enter Weight", text: $viewModel.deadValue)
-                            .font(.system(size: 14))
+                            .font(.system(size: 14, weight: .thin))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
-                            .fontWeight(.thin)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
                             .onChange(of: viewModel.deadValue) { newValue in
@@ -91,9 +87,8 @@ struct EnterView: View {
                         }
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .font(.system(size: 24))
-                    .foregroundColor(.blue)
-                    .bold()
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .blue)
                     .padding(.top, 20)
                     .alert(isPresented: $showAlert) {
                         Alert(
@@ -103,14 +98,14 @@ struct EnterView: View {
                         )
                     }
                 }
-                .padding(.top, 20) /// 상단에 여백 추가
+                .padding(.top, 20)
                 
                 Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
-                    .onTapGesture {
-                        UIApplication.shared.windows.first?.endEditing(true)
-                    }
             }
             .padding(.bottom, 100) /// top으로부터 여백 0
+            .onTapGesture {
+                UIApplication.shared.windows.first?.endEditing(true)
+            }
         }
         .onTapGesture {
             hideKeyboardEnterView()
@@ -118,7 +113,6 @@ struct EnterView: View {
     }
 }
 
-// MARK: HideKeyboard Import(UIkit)
 #if canImport(UIKit)
 extension View {
     func hideKeyboardEnterView() {
@@ -128,5 +122,5 @@ extension View {
 #endif
 
 #Preview {
-    EnterView(isPresented: .constant(true))
+    FirstInputView(isPresented: .constant(true))
 }

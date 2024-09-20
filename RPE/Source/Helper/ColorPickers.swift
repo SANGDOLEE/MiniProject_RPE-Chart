@@ -5,6 +5,7 @@ class ColorPickers {
     
     // ColorPicker 1
     class TypeColorData {
+        
         private let COLOR_KEY = "TYPECOLOR"
         private let userDefaults = UserDefaults.standard
         
@@ -18,7 +19,7 @@ class ColorPickers {
         
         func loadColor() -> Color {
             guard let colorComponents = userDefaults.object(forKey: COLOR_KEY) as? [CGFloat] else {
-                return Color.blue /// 처음 기본색상 BLUE
+                return Color.white /// 처음 기본색상 BLUE
             }
             
             let color = Color(.sRGB,
@@ -33,6 +34,7 @@ class ColorPickers {
     
     // ColorPicker 2
     class TextColorData {
+        
         private let COLOR_KEY = "TEXTCOLOR"
         private let userDefaults = UserDefaults.standard
         
@@ -56,8 +58,6 @@ class ColorPickers {
                               opacity: colorComponents[3]
             )
             return color
-            
         }
     }
-    
 }
