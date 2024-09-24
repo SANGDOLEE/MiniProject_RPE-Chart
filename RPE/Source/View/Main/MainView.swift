@@ -109,7 +109,6 @@ struct MainView: View {
                                 selectReps = Int(repsValue-1)
                             }
                         })
-                        
                         Text("12")
                             .foregroundColor(textColor)
                     }
@@ -156,7 +155,7 @@ struct MainView: View {
         }
     }
     
-    /// 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
+    // 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
     func getWeightLabel() -> String {
         
         print("Selected workout: \(workout)")
@@ -199,8 +198,8 @@ struct MainView: View {
 }
 
 extension Double {
-    // getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 안함
     var isWhole: Bool {
+        // getWeightLabel() 에서 무게가 정수형으로 떨어지면 소수점은 표기 안함
         return floor(self) == self
     }
 }
