@@ -9,13 +9,14 @@ struct WeightUnitView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "F3F2F8")
+            Color.mainBackground
                 .ignoresSafeArea()
             
             VStack {
                 HStack {
                     Text("Unit of Weight :")
                         .padding(.leading)
+                        .foregroundStyle(Color.font)
                     
                     Text(isText ? "Lb" : "Kg")
                         .bold()
@@ -29,7 +30,7 @@ struct WeightUnitView: View {
                 }
                 .padding(.vertical)
                 .frame(maxWidth: .infinity)
-                .background(.white)
+                .background(Color.stackBackground)
                 .cornerRadius(10)
                 .padding()
                 
