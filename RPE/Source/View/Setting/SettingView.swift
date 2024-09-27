@@ -6,6 +6,7 @@ struct SettingView: View {
     @AppStorage("isText") private var isText: Bool = false
     
     @State private var showAlert = false
+    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled: Bool = false
     
     var body: some View {
         NavigationView {
@@ -25,11 +26,24 @@ struct SettingView: View {
                         }
                         
                         Section(header: Text("Configuration")) {
+                            
                             NavigationLink(destination: WeightUnitView()) {
                                 HStack {
                                     Text("Weight Unit Conversion")
                                     Spacer()
                                 }
+                            }
+                            
+                            HStack {
+                                Text("Display Mode")
+                                Spacer()
+                                Toggle("Auto Switch Mode", isOn: $isDarkModeEnabled)
+                                    .labelsHidden()
+                                    .onChange(of: isDarkModeEnabled) { value in
+                                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                                            windowScene.windows.first?.overrideUserInterfaceStyle = value ? .dark : .light
+                                        }
+                                    }
                             }
                         }
                     }
