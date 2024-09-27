@@ -32,24 +32,8 @@ struct MainView: View {
                     Text("RPE")
                         .bold()
                         .font(.largeTitle)
-                        .foregroundColor(textColor)
+                        .foregroundColor(Color.basic)
                 }
-                
-                //                HStack {
-                //                    Spacer()
-                //
-                //                    ColorPicker("", selection: $typeColor)
-                //                        .onChange(of: typeColor) { newValue in
-                //                            colorData.saveColor(color: typeColor)
-                //                        }
-                //                        .frame(width: 30)
-                //
-                //                    ColorPicker("", selection: $textColor)
-                //                        .onChange(of: textColor) { newValue in
-                //                            colorData2.saveColor(color: textColor)
-                //                        }
-                //                        .frame(width: 30)
-                //                }
                 
                 HStack {
                     Picker("Choose a type", selection: $workout) {
@@ -145,10 +129,6 @@ struct MainView: View {
                 .cornerRadius(20)
             }
             .padding()
-//            .onAppear(perform: {
-//                typeColor = colorData.loadColor()
-//                textColor = colorData2.loadColor()
-//            })
         }
         .onAppear {
             viewModel.loadData()   // 뷰가 나타날 때마다 데이터를 새로 고침
