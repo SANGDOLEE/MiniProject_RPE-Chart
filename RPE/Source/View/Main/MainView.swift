@@ -24,7 +24,7 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "F3F2F8")
+            Color.mainBackground
                 .ignoresSafeArea()
             
             VStack {
@@ -32,7 +32,7 @@ struct MainView: View {
                     Text("RPE")
                         .bold()
                         .font(.largeTitle)
-                        .foregroundColor(Color.basic)
+                        .foregroundColor(Color.font)
                 }
                 
                 HStack {
@@ -43,7 +43,7 @@ struct MainView: View {
                     }
                     .pickerStyle(.segmented)
                     .padding()
-                    .background(typeColor)
+                    .background(Color.stackBackground)
                     .cornerRadius(20)
                     .padding(.vertical)
                 }
@@ -52,7 +52,7 @@ struct MainView: View {
                     HStack {
                         Text("RPE")
                             .bold()
-                            .foregroundColor(textColor)
+                            .foregroundColor(Color.font)
                             .frame(width: 50)
                         
                         Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
@@ -63,7 +63,7 @@ struct MainView: View {
                         })
                         
                         Text("10")
-                            .foregroundColor(textColor)
+                            .foregroundColor(Color.font)
                     }
                     HStack {
                         if rpeValue != 0.0 {
@@ -78,14 +78,14 @@ struct MainView: View {
                     .padding(.leading, 5)
                 }
                 .padding()
-                .background(typeColor)
+                .background(Color.stackBackground)
                 .cornerRadius(20)
                 
                 VStack {
                     HStack {
                         Text("REPS")
                             .bold()
-                            .foregroundColor(textColor)
+                            .foregroundColor(Color.font)
                             .frame(width: 50)
                         
                         Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
@@ -94,7 +94,7 @@ struct MainView: View {
                             }
                         })
                         Text("12")
-                            .foregroundColor(textColor)
+                            .foregroundColor(Color.font)
                     }
                     
                     HStack {
@@ -110,22 +110,22 @@ struct MainView: View {
                     .padding(.leading, 5)
                 }
                 .padding()
-                .background(typeColor)
+                .background(Color.stackBackground)
                 .cornerRadius(20)
                 .padding(.bottom)
                 
                 VStack {
                     Text(getWeightLabel())
                         .font(.system(size: 54, weight: .bold))
-                        .foregroundColor(textColor)
+                        .foregroundColor(Color.font)
                     
                     Text("\(workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                         .padding(.top, 20)
-                        .foregroundColor(textColor)
+                        .foregroundColor(Color.font)
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(typeColor)
+                .background(Color.stackBackground)
                 .cornerRadius(20)
             }
             .padding()
