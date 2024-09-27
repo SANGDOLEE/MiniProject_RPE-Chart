@@ -18,7 +18,7 @@ struct UpdateRecordView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "F3F2F8")
+            Color.mainBackground
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -34,6 +34,8 @@ struct UpdateRecordView: View {
                     HStack {
                         Text("TOTAL")
                             .font(.system(size: 27))
+                            .foregroundStyle(Color.font)
+                            .foregroundStyle(Color.font)
                         
                         let squatValue = Double(viewModel.squatValue) ?? 0.0
                         let benchValue = Double(viewModel.benchValue) ?? 0.0
@@ -52,12 +54,14 @@ struct UpdateRecordView: View {
                         }
                         Text(isText ? "lb" : "kg")
                             .font(.system(size: 24))
+                            .foregroundStyle(Color.font)
                     }
                     .padding(.top)
                     
                     HStack {
                         Text("SQ")
                             .font(.system(size: 24, weight: .light))
+                            .foregroundStyle(Color.font)
                         TextField("Enter weight", text: $viewModel.squatValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
@@ -73,6 +77,7 @@ struct UpdateRecordView: View {
                     HStack {
                         Text("BP")
                             .font(.system(size: 24, weight: .light))
+                            .foregroundStyle(Color.font)
                         TextField("Enter weight", text: $viewModel.benchValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
@@ -88,6 +93,7 @@ struct UpdateRecordView: View {
                     HStack {
                         Text("DL")
                             .font(.system(size: 24, weight: .light))
+                            .foregroundStyle(Color.font)
                         TextField("Enter weight", text: $viewModel.deadValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
@@ -124,7 +130,7 @@ struct UpdateRecordView: View {
                     
                 }
                 .frame(maxWidth: .infinity, maxHeight: 300)
-                .background(.white)
+                .background(Color.stackBackground)
                 .cornerRadius(20)
                 .padding()
                 

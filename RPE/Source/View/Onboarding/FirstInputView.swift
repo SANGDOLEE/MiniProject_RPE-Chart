@@ -10,105 +10,113 @@ struct FirstInputView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    Spacer()
-                    Button("SKIP") {
-                        isPresented = false
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.blue)
-                    .padding(.trailing, 20)
-                }
-                .padding(.horizontal)
-                
-                Spacer()
-                
-                VStack(alignment: .center, spacing: 10) {
-                    Text("Hello\n ")
-                    Text("Please enter 1RM records of\nyour three major weight to take\nadvantage of the RPE chart.")
-                        .multilineTextAlignment(.center)
-                }
+            ZStack {
+                Color.mainBackground
+                    .ignoresSafeArea()
                 
                 VStack {
                     HStack {
-                        Text("SQ")
-                            .font(.system(size: 24, weight: .light))
-                        TextField("Enter Weight", text: $viewModel.squatValue)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .font(.system(size: 14, weight: .thin))
-                            .keyboardType(.decimalPad)
+                        Spacer()
+                        Button("SKIP") {
+                            isPresented = false
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.blue)
+                        .padding(.trailing, 20)
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .center, spacing: 10) {
+                        Text("Hello\n ")
+                            .foregroundStyle(Color.font)
+                        Text("Please enter 1RM records of\nyour three major weight to take\nadvantage of the RPE chart.")
                             .multilineTextAlignment(.center)
-                            .frame(width: 115)
-                            .onChange(of: viewModel.squatValue) { newValue in
-                                viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
-                            }
+                            .foregroundStyle(Color.font)
                     }
                     
-                    HStack {
-                        Text("BP")
-                            .font(.system(size: 24))
-                            .fontWeight(.light)
-                        TextField("Enter Weight", text: $viewModel.benchValue)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .font(.system(size: 14, weight: .thin))
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.center)
-                            .frame(width: 115)
-                            .onChange(of: viewModel.benchValue) { newValue in
-                                viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                    VStack {
+                        HStack {
+                            Text("SQ")
+                                .font(.system(size: 24, weight: .light))
+                                .foregroundStyle(Color.font)
+                            TextField("Enter Weight", text: $viewModel.squatValue)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .font(.system(size: 14, weight: .thin))
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 115)
+                                .onChange(of: viewModel.squatValue) { newValue in
+                                    viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                }
+                        }
+                        
+                        HStack {
+                            Text("BP")
+                                .font(.system(size: 24, weight: .light))
+                                .foregroundStyle(Color.font)
+                            TextField("Enter Weight", text: $viewModel.benchValue)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .font(.system(size: 14, weight: .thin))
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 115)
+                                .onChange(of: viewModel.benchValue) { newValue in
+                                    viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                }
+                        }
+                        
+                        HStack {
+                            Text("DL")
+                                .font(.system(size: 24, weight: .light))
+                                .foregroundStyle(Color.font)
+                            TextField("Enter Weight", text: $viewModel.deadValue)
+                                .font(.system(size: 14, weight: .thin))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 115)
+                                .onChange(of: viewModel.deadValue) { newValue in
+                                    viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                }
+                        }
+                        
+                        Button("OK") {
+                            /// 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
+                            if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
+                                showAlert = true
+                            } else {
+                                viewModel.saveData()
+                                UIApplication.shared.windows.first?.endEditing(true)
+                                isPresented = false /// Dismiss the sheet
                             }
-                    }
-                    
-                    HStack {
-                        Text("DL")
-                            .font(.system(size: 24))
-                            .fontWeight(.light)
-                        TextField("Enter Weight", text: $viewModel.deadValue)
-                            .font(.system(size: 14, weight: .thin))
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.center)
-                            .frame(width: 115)
-                            .onChange(of: viewModel.deadValue) { newValue in
-                                viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
-                            }
-                    }
-                    
-                    Button("OK") {
-                        /// 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
-                        if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
-                            showAlert = true
-                        } else {
-                            viewModel.saveData()
-                            UIApplication.shared.windows.first?.endEditing(true)
-                            isPresented = false /// Dismiss the sheet
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .blue)
+                        .padding(.top, 20)
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Message"),
+                                message: Text("Please enter weight values \n for all types."),
+                                dismissButton: .default(Text("OK"))
+                            )
                         }
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .blue)
                     .padding(.top, 20)
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("Message"),
-                            message: Text("Please enter weight values \n for all types."),
-                            dismissButton: .default(Text("OK"))
-                        )
-                    }
+                    
+                    Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
                 }
-                .padding(.top, 20)
-                
-                Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
+                .padding(.bottom, 100) /// top으로부터 여백 0
+                .onTapGesture {
+                    UIApplication.shared.windows.first?.endEditing(true)
+                }
             }
-            .padding(.bottom, 100) /// top으로부터 여백 0
             .onTapGesture {
-                UIApplication.shared.windows.first?.endEditing(true)
+                hideKeyboardEnterView()
             }
-        }
-        .onTapGesture {
-            hideKeyboardEnterView()
         }
     }
 }
