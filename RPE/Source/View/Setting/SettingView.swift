@@ -91,7 +91,7 @@ struct SettingView: View {
                     }
                     .listStyle(.insetGrouped)
                 }
-                .navigationBarTitle("Setting", displayMode: .inline)
+                .navigationBarTitle("Setting", displayMode: .large)
             }
         }
     }

@@ -25,6 +25,7 @@ struct UpdateRecordView: View {
                 HStack {
                     Text("Congratulations!\nBe careful of your injuries.")
                         .padding(.leading, 30)
+                        .font(.Pretendard.Regular.size18)
                         .foregroundColor(Color(hex: "9D9DA3"))
                     
                     Spacer()
@@ -33,8 +34,7 @@ struct UpdateRecordView: View {
                 VStack {
                     HStack {
                         Text("TOTAL")
-                            .font(.system(size: 27))
-                            .foregroundStyle(Color.font)
+                            .font(.Pretendard.SemiBold.size24)
                             .foregroundStyle(Color.font)
                         
                         let squatValue = Double(viewModel.squatValue) ?? 0.0
@@ -44,15 +44,16 @@ struct UpdateRecordView: View {
                         let totalValue = squatValue + benchValue + deadValue
                         if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
                             Text("\(Int(totalValue))")
-                                .font(.system(size: 24, weight: .bold))
+                                .font(.Pretendard.Bold.size24)
                                 .foregroundColor(.blue)
                         } else {
                             let formattedTotal = formatTotalValue(totalValue)
                             Text(formattedTotal)
-                                .font(.system(size: 24, weight: .bold))
+                                .font(.Pretendard.Bold.size24)
                                 .foregroundColor(.blue)
                         }
                         Text(isText ? "lb" : "kg")
+                            .font(.Pretendard.Bold.size24)
                             .font(.system(size: 24))
                             .foregroundStyle(Color.font)
                     }
@@ -60,7 +61,7 @@ struct UpdateRecordView: View {
                     
                     HStack {
                         Text("SQ")
-                            .font(.system(size: 24, weight: .light))
+                            .font(.Pretendard.Medium.size24)
                             .foregroundStyle(Color.font)
                         TextField("Enter weight", text: $viewModel.squatValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -76,7 +77,7 @@ struct UpdateRecordView: View {
                     
                     HStack {
                         Text("BP")
-                            .font(.system(size: 24, weight: .light))
+                            .font(.Pretendard.Medium.size24)
                             .foregroundStyle(Color.font)
                         TextField("Enter weight", text: $viewModel.benchValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -92,7 +93,7 @@ struct UpdateRecordView: View {
                     
                     HStack {
                         Text("DL")
-                            .font(.system(size: 24, weight: .light))
+                            .font(.Pretendard.Medium.size24)
                             .foregroundStyle(Color.font)
                         TextField("Enter weight", text: $viewModel.deadValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -111,11 +112,11 @@ struct UpdateRecordView: View {
                             totalUpdate()
                         }) {
                             Text("UPDATE")
+                                .font(.Pretendard.Bold.size24)
                                 .padding(.horizontal)
                                 .padding(.vertical, 5)
                                 .background(.blue)
-                                .foregroundColor(.white)
-                                .font(.system(size: 24, weight: .bold))
+                                .foregroundStyle(.white)
                                 .cornerRadius(20)
                         }
                     }
