@@ -66,7 +66,7 @@ struct UpdateRecordView: View {
                         TextField("Enter weight", text: $viewModel.squatValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.decimalPad)
-                            .fontWeight(.thin)
+                            .font(.Pretendard.Regular.size18)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
                             .onChange(of: viewModel.squatValue) { newValue in
@@ -84,7 +84,7 @@ struct UpdateRecordView: View {
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
-                            .fontWeight(.thin)
+                            .font(.Pretendard.Regular.size18)
                             .onChange(of: viewModel.benchValue) { newValue in
                                 viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }
@@ -100,7 +100,7 @@ struct UpdateRecordView: View {
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
                             .frame(width: 115)
-                            .fontWeight(.thin)
+                            .font(.Pretendard.Regular.size18)
                             .onChange(of: viewModel.deadValue) { newValue in
                                 viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                             }

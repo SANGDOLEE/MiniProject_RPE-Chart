@@ -50,7 +50,7 @@ struct MainView: View {
                 
                 VStack {
                     HStack {
-                        Text("RPE")
+                        Text("RPE  ")
                             .bold()
                             .foregroundColor(Color.font)
                             .frame(width: 50)
