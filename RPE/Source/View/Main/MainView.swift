@@ -31,7 +31,7 @@ struct MainView: View {
                 HStack {
                     Text("RPE")
                         .bold()
-                        .font(.largeTitle)
+                        .font(.Pretendard.Bold.size36)
                         .foregroundColor(Color.font)
                 }
                 
@@ -50,7 +50,7 @@ struct MainView: View {
                 
                 VStack {
                     HStack {
-                        Text("RPE")
+                        Text("RPE  ")
                             .bold()
                             .foregroundColor(Color.font)
                             .frame(width: 50)
@@ -69,9 +69,11 @@ struct MainView: View {
                         if rpeValue != 0.0 {
                             Text("Selected Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
                                 .foregroundColor(.gray)
+                                .font(.Pretendard.Regular.size16)
                         } else {
                             Text("Selected Rpe")
                                 .foregroundColor(.gray)
+                                .font(.Pretendard.Regular.size16)
                         }
                         Spacer()
                     }
@@ -101,9 +103,11 @@ struct MainView: View {
                         if repsValue != 0.0 {
                             Text("Selected Reps : \(repsValue, specifier: "%.0f")")
                                 .foregroundColor(.gray)
+                                .font(.Pretendard.Regular.size16)
                         } else {
                             Text("Selected Reps")
                                 .foregroundColor(.gray)
+                                .font(.Pretendard.Regular.size16)
                         }
                         Spacer()
                     }
@@ -122,6 +126,7 @@ struct MainView: View {
                     Text("\(workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
                         .padding(.top, 20)
                         .foregroundColor(Color.font)
+                        .font(.Pretendard.Regular.size16)
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -21,7 +21,7 @@ struct FirstInputView: View {
                             isPresented = false
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.Pretendard.Bold.size24)
                         .foregroundColor(.blue)
                         .padding(.trailing, 20)
                     }
@@ -31,20 +31,22 @@ struct FirstInputView: View {
                     
                     VStack(alignment: .center, spacing: 10) {
                         Text("Hello\n ")
+                            .font(.Pretendard.Regular.size18)
                             .foregroundStyle(Color.font)
                         Text("Please enter 1RM records of\nyour three major weight to take\nadvantage of the RPE chart.")
                             .multilineTextAlignment(.center)
+                            .font(.Pretendard.Regular.size18)
                             .foregroundStyle(Color.font)
                     }
                     
                     VStack {
                         HStack {
                             Text("SQ")
-                                .font(.system(size: 24, weight: .light))
+                                .font(.Pretendard.Medium.size24)
                                 .foregroundStyle(Color.font)
                             TextField("Enter Weight", text: $viewModel.squatValue)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .font(.system(size: 14, weight: .thin))
+                                .font(.Pretendard.Regular.size18)
                                 .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.center)
                                 .frame(width: 115)
@@ -55,10 +57,11 @@ struct FirstInputView: View {
                         
                         HStack {
                             Text("BP")
-                                .font(.system(size: 24, weight: .light))
+                                .font(.Pretendard.Medium.size24)
                                 .foregroundStyle(Color.font)
                             TextField("Enter Weight", text: $viewModel.benchValue)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .font(.Pretendard.Regular.size18)
                                 .font(.system(size: 14, weight: .thin))
                                 .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.center)
@@ -70,10 +73,10 @@ struct FirstInputView: View {
                         
                         HStack {
                             Text("DL")
-                                .font(.system(size: 24, weight: .light))
+                                .font(.Pretendard.Medium.size24)
                                 .foregroundStyle(Color.font)
                             TextField("Enter Weight", text: $viewModel.deadValue)
-                                .font(.system(size: 14, weight: .thin))
+                                .font(.Pretendard.Regular.size18)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.center)
@@ -94,7 +97,7 @@ struct FirstInputView: View {
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.Pretendard.Bold.size24)
                         .foregroundColor(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .blue)
                         .padding(.top, 20)
                         .alert(isPresented: $showAlert) {
@@ -107,7 +110,7 @@ struct FirstInputView: View {
                     }
                     .padding(.top, 20)
                     
-                    Spacer() /// 남은 공간을 차지하여 화면 상단으로 이동
+                    Spacer()
                 }
                 .padding(.bottom, 100) /// top으로부터 여백 0
                 .onTapGesture {
