@@ -49,27 +49,27 @@ struct SettingView: View {
                         }
                         
                         Section(header: Text("")) {
+                            // 앱 버전 정보
                             HStack{
-                                Text("My Rpe version")
+                                Text("My RPE version")
                                 Spacer()
                                 Text(appVersion)
                             }
                             
                             // 리뷰 남기기
                             HStack{
-                                Button(action: {
-                                    if let scene = UIApplication.shared.connectedScenes
-                                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                                        SKStoreReviewController.requestReview(in: scene)
-                                    }
-                                }) {
-                                    Text("App reviews")
-                                }
+                                Text("App reviews")
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .font(.footnote)
                                     .bold()
                                     .foregroundColor(Color(hex: "555556"))
+                            }
+                            .onTapGesture {
+                                if let scene = UIApplication.shared.connectedScenes
+                                    .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                                    SKStoreReviewController.requestReview(in: scene)
+                                }
                             }
                             
                             // 의견 및 피드백남기기
