@@ -1,5 +1,6 @@
 
 import SwiftUI
+import StoreKit
 
 struct SettingView: View {
     
@@ -44,6 +45,41 @@ struct SettingView: View {
                                             windowScene.windows.first?.overrideUserInterfaceStyle = value ? .dark : .light
                                         }
                                     }
+                            }
+                        }
+                        
+                        Section(header: Text("")) {
+                            // 리뷰 남기기
+                            HStack{
+                                Button(action: {
+                                    if let scene = UIApplication.shared.connectedScenes
+                                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                                        SKStoreReviewController.requestReview(in: scene)
+                                    }
+                                }) {
+                                    Text("App reviews")
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(Color(hex: "555556"))
+                            }
+                            
+                            // 의견 및 피드백남기기
+                            HStack{
+                                Text("Opinion and feedback")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(Color(hex: "555556"))
+                            }
+                            .onTapGesture {
+                                let urlString = "https://apps.apple.com/app/id6475646908?action=write-review"
+                                if let url = URL(string: urlString) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
                             }
                         }
                     }

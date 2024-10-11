@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				1F9DA1DD2C988BA20024BD72 /* Onboarding */,
-				1F9DA1E42C9892600024BD72 /* Setting */,
 				1F9DA1DF2C988C620024BD72 /* Main */,
+				1F9DA1E42C9892600024BD72 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
