@@ -49,6 +49,12 @@ struct SettingView: View {
                         }
                         
                         Section(header: Text("")) {
+                            HStack{
+                                Text("My Rpe version")
+                                Spacer()
+                                Text(appVersion)
+                            }
+                            
                             // 리뷰 남기기
                             HStack{
                                 Button(action: {
@@ -88,6 +94,11 @@ struct SettingView: View {
                 .navigationBarTitle("Setting", displayMode: .inline)
             }
         }
+    }
+    
+    var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        return "\(version)"
     }
 }
 
