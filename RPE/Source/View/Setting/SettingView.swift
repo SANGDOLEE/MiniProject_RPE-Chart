@@ -1,5 +1,6 @@
 
 import SwiftUI
+import StoreKit
 
 struct SettingView: View {
     
@@ -46,12 +47,58 @@ struct SettingView: View {
                                     }
                             }
                         }
+                        
+                        Section(header: Text("")) {
+                            // 앱 버전 정보
+                            HStack{
+                                Text("My RPE version")
+                                Spacer()
+                                Text(appVersion)
+                            }
+                            
+                            // 리뷰 남기기
+                            HStack{
+                                Text("App reviews")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(Color(hex: "555556"))
+                            }
+                            .onTapGesture {
+                                if let scene = UIApplication.shared.connectedScenes
+                                    .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                                    SKStoreReviewController.requestReview(in: scene)
+                                }
+                            }
+                            
+                            // 의견 및 피드백남기기
+                            HStack{
+                                Text("Opinion and feedback")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(Color(hex: "555556"))
+                            }
+                            .onTapGesture {
+                                let urlString = "https://apps.apple.com/app/id6475646908?action=write-review"
+                                if let url = URL(string: urlString) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
                     }
                     .listStyle(.insetGrouped)
                 }
-                .navigationBarTitle("Setting", displayMode: .inline)
+                .navigationBarTitle("Setting", displayMode: .large)
             }
         }
+    }
+    
+    var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        return "\(version)"
     }
 }
 
