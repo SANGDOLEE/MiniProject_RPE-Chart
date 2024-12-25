@@ -154,8 +154,9 @@ struct MainView: View {
                 
                 HStack {
                     Text(getWeightLabel())
-                        .font(.system(size: 54, weight: .bold))
-                        .foregroundStyle(.myAccentcolor)
+                        .font(.setPretendard(weight: .bold, size: getWeightLabel() ==  "Fill out your BigThree\nin Setting" ? 26 : 52))
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(getWeightLabel() ==  "Fill out your BigThree\nin Setting" ? .myA09393 : .myAccentcolor)
                 }
                 .padding(.bottom)
                 Spacer()
@@ -194,7 +195,7 @@ struct MainView: View {
         
         // EnterView에서 Weight 데이터가 입력되어있지 않다면 "Weight" 기본 표기
         guard !viewModel.squatValue.isEmpty, !viewModel.benchValue.isEmpty, !viewModel.deadValue.isEmpty else {
-            return "Weight"
+            return "Fill out your BigThree\nin Setting"
         }
         
         // 사용자가 설정하는 Reps와 Rpe에 따라서 해당 값의 해당 하는 데이터를 곱하여 계산하여 보여준다.
