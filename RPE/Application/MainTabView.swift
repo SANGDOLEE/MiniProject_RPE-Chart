@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TabViewManagement: View {
+struct MainTabView: View {
     
     // 실제로 보여줄 화면에 필요한 ViewModel
     @StateObject private var viewModel = MySBDViewModel()
@@ -163,5 +163,5 @@ struct CustomShape: Shape {
 }
 // MARK: - 프리뷰
 #Preview {
-    TabViewManagement()
+    MainTabView()
 }

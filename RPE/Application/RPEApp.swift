@@ -11,7 +11,7 @@ struct RPEApp: App {
             if isFirstRun {
                 OnboardingView(isPresented: $isFirstRun)
             } else {
-                TabViewManagement()
+                MainTabView()
                     .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
                     .onAppear {
                         updateUserInterfaceStyle()
