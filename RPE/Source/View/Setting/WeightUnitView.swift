@@ -7,6 +7,8 @@ struct WeightUnitView: View {
     
     @AppStorage("isText") private var isText: Bool = false
     
+    @Binding var isTabBarMainVisible: Bool
+    
     var body: some View {
         ZStack {
             VStack {
@@ -36,6 +38,9 @@ struct WeightUnitView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .onAppear {
+            isTabBarMainVisible = false
+        }
         .background(
             LinearGradient(
                 gradient: Gradient(stops: [
@@ -53,6 +58,7 @@ struct WeightUnitView: View {
     var backButton : some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
+            isTabBarMainVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left")
@@ -64,5 +70,5 @@ struct WeightUnitView: View {
 }
 
 #Preview {
-    WeightUnitView()
+    WeightUnitView(isTabBarMainVisible: .constant(true))
 }

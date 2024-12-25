@@ -15,6 +15,7 @@ struct UpdateRecordView: View {
     @AppStorage("isText") private var isText: Bool = false
     
     @State private var showAlert = false
+    @Binding var isTabBarMainVisible: Bool
     
     var body: some View {
         ZStack {
@@ -226,6 +227,9 @@ struct UpdateRecordView: View {
                 Spacer()
             }
         }
+        .onAppear {
+            isTabBarMainVisible = false
+        }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
@@ -256,6 +260,7 @@ struct UpdateRecordView: View {
     var backButton : some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
+            isTabBarMainVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left") // 화살표 Image
@@ -280,6 +285,6 @@ extension UpdateRecordView {
     }
 }
 
-#Preview {
-    UpdateRecordView(viewModel: MySBDViewModel())
-}
+//#Preview {
+//    UpdateRecordView(viewModel: MySBDViewModel())
+//}

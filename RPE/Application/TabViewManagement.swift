@@ -4,6 +4,7 @@ struct TabViewManagement: View {
     
     // 실제로 보여줄 화면에 필요한 ViewModel
     @StateObject private var viewModel = MySBDViewModel()
+    @State var isTabBarMainVisible = true  // 처음엔 보이도록 가정
     
     // 현재 선택된 탭
     @State private var selectedTab = "main"
@@ -15,6 +16,7 @@ struct TabViewManagement: View {
     let tabs = ["main", "settings"]
     
     init() {
+        // 시스템 탭 바 숨기기
         UITabBar.appearance().isHidden = true
     }
     
@@ -26,70 +28,76 @@ struct TabViewManagement: View {
                 MainView(viewModel: viewModel)
                     .tag("main")
                 
-                SettingView()
+                // SettingView는 바인딩으로 isTabBarMainVisible을 전달
+                SettingView(isTabBarMainVisible: $isTabBarMainVisible)
                     .tag("settings")
             }
-            .onChange(of:selectedTab) { oldValue, newValue in
+            .onChange(of: selectedTab) { oldValue, newValue in
                 triggerHaptic()
             }
             
-            // MARK: - 커스텀 탭 바
-            HStack(spacing: 0) {
-                ForEach(tabs, id: \.self) { tab in
-                    GeometryReader { reader in
-                        Button(action: {
-                            withAnimation(.spring()) {
-                                selectedTab = tab
-                                xAxis = reader.frame(in: .global).minX
-                            }
-                        }, label: {
-                            // 탭 아이콘
-                            Image(systemName: getSystemImageName(for: tab))
-                                .resizable()
-                                .renderingMode(.template)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(selectedTab == tab ? getColor(for: tab) : .gray)
-                                .padding(selectedTab == tab ? 15 : 0)
-                                .background(
-                                    Color.myBackBoxcolor
-                                        .opacity(selectedTab == tab ? 1 : 0)
-                                        .clipShape(Circle())
-                                )
-                                .matchedGeometryEffect(id: tab, in: animation)
-                                .offset(
-                                    x: selectedTab == tab
-                                    ? (reader.frame(in: .global).minX - reader.frame(in: .global).midX)
-                                    : 0,
-                                    y: selectedTab == tab ? -50 : 0
-                                )
-                        })
-                        .onAppear {
-                            if tab == tabs.first {
-                                // 초기 위치
-                                xAxis = reader.frame(in: .global).minX
+            HStack {
+                HStack(spacing: 0) {
+                    ForEach(tabs, id: \.self) { tab in
+                        GeometryReader { reader in
+                            Button(action: {
+                                withAnimation(.spring()) {
+                                    selectedTab = tab
+                                    xAxis = reader.frame(in: .global).minX
+                                }
+                            }, label: {
+                                // 탭 아이콘
+                                Image(systemName: getSystemImageName(for: tab))
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(selectedTab == tab ? getColor(for: tab) : .gray)
+                                    .padding(selectedTab == tab ? 15 : 0)
+                                    .background(
+                                        Color.myBackBoxcolor
+                                            .opacity(selectedTab == tab ? 1 : 0)
+                                            .clipShape(Circle())
+                                    )
+                                    .matchedGeometryEffect(id: tab, in: animation)
+                                    .offset(
+                                        x: selectedTab == tab
+                                        ? (reader.frame(in: .global).minX - reader.frame(in: .global).midX)
+                                        : 0,
+                                        y: selectedTab == tab ? -50 : 0
+                                    )
+                            })
+                            .onAppear {
+                                if tab == tabs.first {
+                                    // 초기 위치
+                                    xAxis = reader.frame(in: .global).minX
+                                }
                             }
                         }
+                        .frame(width: 25, height: 30)
+                        
+                        if tab != tabs.last {
+                            Spacer(minLength: 0)
+                        }
                     }
-                    .frame(width: 25, height: 30)
-                    
-                    if tab != tabs.last { Spacer(minLength: 0) }
                 }
+                .padding(.horizontal, 30)
+                .padding(.vertical)
+                .background(
+                    Color.myBackBoxcolor
+                        .clipShape(CustomShape(xAxis: xAxis))
+                        .cornerRadius(12)
+                )
+                .padding(.horizontal)
+                .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
             }
-            .padding(.horizontal, 30)
-            .padding(.vertical)
-            .background(
-                Color.myBackBoxcolor
-                    .clipShape(CustomShape(xAxis: xAxis))
-                    .cornerRadius(12)
-            )
-            .padding(.horizontal)
-            .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
+            .opacity(isTabBarMainVisible ? 1 : 0)
+            
         }
         .ignoresSafeArea(.all, edges: .bottom)
     }
     
-    // MARK: - 탭별 아이콘
+    // 탭별 아이콘
     func getSystemImageName(for tab: String) -> String {
         switch tab {
         case "main":
@@ -101,7 +109,7 @@ struct TabViewManagement: View {
         }
     }
     
-    // MARK: - 탭별 선택 시 색상
+    // 탭별 색상
     func getColor(for tab: String) -> Color {
         switch tab {
         case "main":
@@ -118,10 +126,9 @@ struct TabViewManagement: View {
         let generator = UIImpactFeedbackGenerator(style: .soft)
         generator.impactOccurred()
     }
-    
 }
 
-// MARK: - 곡선 Shape (기존 코드 그대로)
+// 곡선 Shape
 struct CustomShape: Shape {
     
     var xAxis: CGFloat
@@ -154,7 +161,6 @@ struct CustomShape: Shape {
         }
     }
 }
-
 // MARK: - 프리뷰
 #Preview {
     TabViewManagement()

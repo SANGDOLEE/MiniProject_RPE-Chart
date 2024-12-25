@@ -6,7 +6,8 @@ struct SettingView: View {
     @AppStorage("isText") private var isText: Bool = false
     
     @State private var showAlert = false
-    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled: Bool = false
+//    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled: Bool = false
+    @Binding var isTabBarMainVisible: Bool
     
     var body: some View {
         NavigationView {
@@ -28,7 +29,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "My BigThree" 버튼
-                        NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel())) {
+                        NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel(),isTabBarMainVisible: $isTabBarMainVisible)) {
                             HStack {
                                 Text("My BigThree")
                                     .font(.setPretendard(weight: .regular, size: 16))
@@ -53,7 +54,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "Weight Unit Conversion" 버튼
-                        NavigationLink(destination: WeightUnitView()) {
+                        NavigationLink(destination: WeightUnitView(isTabBarMainVisible: $isTabBarMainVisible)) {
                             HStack {
                                 Text("Weight Unit Conversion")
                                     .font(.setPretendard(weight: .regular, size: 16))
@@ -168,5 +169,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    SettingView(isTabBarMainVisible: .constant(true))
 }
