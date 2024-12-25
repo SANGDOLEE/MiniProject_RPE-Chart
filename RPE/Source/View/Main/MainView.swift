@@ -24,7 +24,7 @@ struct MainView: View {
         VStack {
             HStack {
                 Text("RPE Chart")
-                    .font(.setPretendard(weight: .bold, size: 26))
+                    .font(.setPretendard(weight: .bold, size: 34))
                     .foregroundStyle(.white)
                 Spacer()
             }
