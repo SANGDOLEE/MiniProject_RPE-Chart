@@ -31,9 +31,9 @@ struct UpdateRecordView: View {
                 VStack {
                     VStack(spacing: 14) {
                         HStack(spacing: 0) {
-//                            Text("TOTAL")
-//                                .font(.setPretendard(weight: .semiBold, size: 24))
-//                                .foregroundStyle(.white)
+                            //                            Text("TOTAL")
+                            //                                .font(.setPretendard(weight: .semiBold, size: 24))
+                            //                                .foregroundStyle(.white)
                             
                             let squatValue = Double(viewModel.squatValue) ?? 0.0
                             let benchValue = Double(viewModel.benchValue) ?? 0.0
@@ -70,7 +70,7 @@ struct UpdateRecordView: View {
                             HStack {
                                 Text("Squat")
                                     .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.myAccentcolor)
+                                    .foregroundStyle(.myA09393)
                                 Spacer()
                             }
                             HStack {
@@ -113,7 +113,7 @@ struct UpdateRecordView: View {
                             HStack {
                                 Text("BenchPress")
                                     .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.myAccentcolor)
+                                    .foregroundStyle(.myA09393)
                                 Spacer()
                             }
                             HStack {
@@ -155,7 +155,7 @@ struct UpdateRecordView: View {
                             HStack {
                                 Text("Deadlift")
                                     .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.myAccentcolor)
+                                    .foregroundStyle(.myA09393)
                                 Spacer()
                             }
                             HStack {
