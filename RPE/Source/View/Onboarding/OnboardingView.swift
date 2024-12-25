@@ -37,7 +37,7 @@ struct OnboardingView: View {
                     HStack {
                         Text("Squat")
                             .font(.setPretendard(weight: .bold, size: 18))
-                            .foregroundColor(.accentColor)
+                            .foregroundStyle(.myAccentcolor)
                         Spacer()
                     }
                     HStack {

@@ -158,6 +158,7 @@ struct MainView: View {
                         .foregroundStyle(.myAccentcolor)
                 }
                 .padding(.bottom)
+                Spacer()
             }
             .frame(maxWidth: .infinity)
             .frame(height: 136)
