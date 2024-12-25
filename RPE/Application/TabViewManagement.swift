@@ -29,6 +29,9 @@ struct TabViewManagement: View {
                 SettingView()
                     .tag("settings")
             }
+            .onChange(of:selectedTab) { oldValue, newValue in
+                triggerHaptic()
+            }
             
             // MARK: - 커스텀 탭 바
             HStack(spacing: 0) {
@@ -56,8 +59,8 @@ struct TabViewManagement: View {
                                 .matchedGeometryEffect(id: tab, in: animation)
                                 .offset(
                                     x: selectedTab == tab
-                                        ? (reader.frame(in: .global).minX - reader.frame(in: .global).midX)
-                                        : 0,
+                                    ? (reader.frame(in: .global).minX - reader.frame(in: .global).midX)
+                                    : 0,
                                     y: selectedTab == tab ? -50 : 0
                                 )
                         })
@@ -109,6 +112,13 @@ struct TabViewManagement: View {
             return .gray
         }
     }
+    
+    // 햅틱
+    func triggerHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
+    }
+    
 }
 
 // MARK: - 곡선 Shape (기존 코드 그대로)
