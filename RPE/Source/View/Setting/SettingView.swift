@@ -24,7 +24,7 @@ struct SettingView: View {
                     // MARK: - Update
                     VStack(alignment: .leading, spacing: 8) {
                         Text("UPDATE")
-                            .font(.setPretendard(weight: .medium, size: 16))
+                            .font(.setPretendard(weight: .regular, size: 16))
                             .foregroundStyle(.gray)
                             .padding(.leading, 8)
                         
@@ -49,7 +49,7 @@ struct SettingView: View {
                     // MARK: - Configuration
                     VStack(alignment: .leading, spacing: 8) {
                         Text("CONFIGURATION")
-                            .font(.setPretendard(weight: .medium, size: 16))
+                            .font(.setPretendard(weight: .regular, size: 16))
                             .foregroundStyle(.gray)
                             .padding(.leading, 8)
                         
