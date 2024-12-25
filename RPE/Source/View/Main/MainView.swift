@@ -64,6 +64,9 @@ struct MainView: View {
                         }
                     })
                     .tint(.myAccentcolor)
+                    .onChange(of: rpeValue) { oldValue, newValue in
+                        triggerHaptic()
+                    }
                     
                     Text("10")
                         .font(.setPretendard(weight: .semiBold, size: 17))
@@ -96,6 +99,9 @@ struct MainView: View {
                         }
                     })
                     .tint(.myAccentcolor)
+                    .onChange(of: repsValue) { oldValue, newValue in
+                        triggerHaptic()
+                    }
                     
                     Text("12")
                         .font(.setPretendard(weight: .semiBold, size: 17))
@@ -218,6 +224,12 @@ struct MainView: View {
         default:
             return ""
         }
+    }
+    
+    // 햅틱
+    private func triggerHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
     }
 }
 

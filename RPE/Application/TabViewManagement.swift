@@ -122,7 +122,7 @@ struct TabViewManagement: View {
     }
     
     // 햅틱
-    func triggerHaptic() {
+    private func triggerHaptic() {
         let generator = UIImpactFeedbackGenerator(style: .soft)
         generator.impactOccurred()
     }
