@@ -9,7 +9,7 @@ struct RPEApp: App {
     var body: some Scene {
         WindowGroup {
             if isFirstRun {
-                FirstInputView(isPresented: $isFirstRun)
+                OnboardingView(isPresented: $isFirstRun)
             } else {
                 TabViewManagement()
                     .preferredColorScheme(isDarkModeEnabled ? .dark : .light)

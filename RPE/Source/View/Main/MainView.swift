@@ -23,121 +23,162 @@ struct MainView: View {
     //    }
     
     var body: some View {
-        ZStack {
-            Color.mainBackground
-                .ignoresSafeArea()
+        VStack {
+            HStack {
+                Text("RPE Chart")
+                    .font(.setPretendard(weight: .bold, size: 26))
+                    .foregroundStyle(.white)
+                Spacer()
+            }
+            
+            HStack {
+                Picker("Choose a type", selection: $workout) {
+                    ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding()
+                .background(.myBackBoxcolor.opacity(0.5))
+                .cornerRadius(12)
+                .padding(.vertical)
+            }
             
             VStack {
                 HStack {
-                    Text("RPE")
-                        .bold()
-                        .font(.Pretendard.Bold.size36)
-                        .foregroundColor(Color.font)
-                }
-                
-                HStack {
-                    Picker("Choose a type", selection: $workout) {
-                        ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
-                            Text($0)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding()
-                    .background(Color.stackBackground)
-                    .cornerRadius(20)
-                    .padding(.vertical)
-                }
-                
-                VStack {
-                    HStack {
-                        Text("RPE  ")
-                            .bold()
-                            .foregroundColor(Color.font)
-                            .frame(width: 50)
-                        
-                        Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
-                            if !editing {
-                                /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
-                                selectRpe = Int((10 - rpeValue) / 0.5)
-                            }
-                        })
-                        
-                        Text("10")
-                            .foregroundColor(Color.font)
-                    }
-                    HStack {
-                        if rpeValue != 0.0 {
-                            Text("Selected Rpe : \(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
-                                .foregroundColor(.gray)
-                                .font(.Pretendard.Regular.size16)
-                        } else {
-                            Text("Selected Rpe")
-                                .foregroundColor(.gray)
-                                .font(.Pretendard.Regular.size16)
-                        }
-                        Spacer()
-                    }
-                    .padding(.leading, 5)
-                }
-                .padding()
-                .background(Color.stackBackground)
-                .cornerRadius(20)
-                
-                VStack {
-                    HStack {
-                        Text("REPS")
-                            .bold()
-                            .foregroundColor(Color.font)
-                            .frame(width: 50)
-                        
-                        Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
-                            if !editing {
-                                selectReps = Int(repsValue-1)
-                            }
-                        })
-                        Text("12")
-                            .foregroundColor(Color.font)
-                    }
+                    Text("RPE  ")
+                        .font(.setPretendard(weight: .semiBold, size:  18))
+                        .foregroundStyle(.white)
+                        .frame(width: 56)
                     
-                    HStack {
-                        if repsValue != 0.0 {
-                            Text("Selected Reps : \(repsValue, specifier: "%.0f")")
-                                .foregroundColor(.gray)
-                                .font(.Pretendard.Regular.size16)
-                        } else {
-                            Text("Selected Reps")
-                                .foregroundColor(.gray)
-                                .font(.Pretendard.Regular.size16)
-                        }
-                        Spacer()
+                    if rpeValue != 0.0 {
+                        Text("\(rpeValue, specifier: rpeValue.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
+                            .foregroundStyle(.myAccentcolor)
+                            .font(.setPretendard(weight: .semiBold, size: 18))
                     }
-                    .padding(.leading, 5)
+                    Spacer()
                 }
-                .padding()
-                .background(Color.stackBackground)
-                .cornerRadius(20)
-                .padding(.bottom)
-                
-                VStack {
-                    Text(getWeightLabel())
-                        .font(.system(size: 54, weight: .bold))
-                        .foregroundColor(Color.font)
+                HStack(spacing: 16) {
+                    Slider(value: $rpeValue, in: 6.5...10, step: 0.5, onEditingChanged: { editing in
+                        if !editing {
+                            /// 사용자가 슬라이더 조작을 마치면 selectRpe에 매핑된 값을 할당
+                            selectRpe = Int((10 - rpeValue) / 0.5)
+                        }
+                    })
+                    .tint(.myAccentcolor)
                     
-                    Text("\(workout) \(repsValue != 0.0 ? "x \(Int(repsValue))" : "") \(rpeValue != 0.0 ? "@" : "") \(rpeValue != 0.0 ? (rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue)) : "")")
-                        .padding(.top, 20)
-                        .foregroundColor(Color.font)
-                        .font(.Pretendard.Regular.size16)
+                    Text("10")
+                        .font(.setPretendard(weight: .semiBold, size: 17))
+                        .foregroundStyle(.myEBEBF5)
                 }
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.stackBackground)
-                .cornerRadius(20)
+                .padding(.horizontal)
             }
             .padding()
+            .background(.myBackBoxcolor.opacity(0.5))
+            .cornerRadius(12)
+            
+            VStack {
+                HStack {
+                    Text("REPS")
+                        .font(.setPretendard(weight: .semiBold, size:  18))
+                        .foregroundStyle(.white)
+                        .frame(width: 56)
+                    
+                    if repsValue != 0.0 {
+                        Text("\(repsValue, specifier: "%.0f")")
+                            .foregroundStyle(.myAccentcolor)
+                            .font(.setPretendard(weight: .semiBold, size: 18))
+                    }
+                    Spacer()
+                }
+                HStack(spacing: 16) {
+                    Slider(value: $repsValue, in: 1...12, step: 1, onEditingChanged: { editing in
+                        if !editing {
+                            selectReps = Int(repsValue-1)
+                        }
+                    })
+                    .tint(.myAccentcolor)
+                    
+                    Text("12")
+                        .font(.setPretendard(weight: .semiBold, size: 17))
+                        .foregroundStyle(.myEBEBF5)
+                }
+                .padding(.horizontal)
+                
+            }
+            .padding()
+            .background(.myBackBoxcolor.opacity(0.5))
+            .cornerRadius(12)
+            .padding(.vertical)
+            
+            VStack(spacing: 4) {
+                HStack {
+                    Spacer()
+                    
+                    if !workout.isEmpty {
+                        Text(workout.uppercased())
+                            .font(.setPretendard(weight: .medium, size: 14))
+                            .foregroundStyle(.myA09393)
+                            .padding(4)
+                            .padding(.horizontal, 4)
+                            .background(.my858585.opacity(0.13))
+                            .cornerRadius(24)
+                    }
+                    
+                    if repsValue != 0.0 {
+                        Text("x \(Int(repsValue))")
+                            .font(.setPretendard(weight: .medium, size: 14))
+                            .foregroundStyle(.myA09393)
+                            .padding(4)
+                            .padding(.horizontal, 4)
+                            .background(.my858585.opacity(0.13))
+                            .cornerRadius(24)
+                    }
+                    
+                    if rpeValue != 0.0 {
+                        Text("@ \(rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue))")
+                            .font(.setPretendard(weight: .medium, size: 14))
+                            .foregroundStyle(.myA09393)
+                            .padding(4)
+                            .padding(.horizontal, 4)
+                            .background(.my858585.opacity(0.13))
+                            .cornerRadius(24)
+                    }
+                }
+                .frame(height: 40)
+                .padding(.trailing)
+                
+                HStack {
+                    Text(getWeightLabel())
+                        .font(.system(size: 54, weight: .bold))
+                        .foregroundStyle(.myAccentcolor)
+                }
+                .padding(.bottom)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 136)
+            .background(.myBackBoxcolor.opacity(0.5))
+            .cornerRadius(12)
+            
+            Spacer()
         }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             viewModel.loadData()   // 뷰가 나타날 때마다 데이터를 새로 고침
         }
+        .background(
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    Gradient.Stop(color: Color.init(hex: "2F4753"),    location: 0.1),
+                    Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
+        
     }
     
     // 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
