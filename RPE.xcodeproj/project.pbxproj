@@ -30,6 +30,7 @@
 		1FE068882C9B122E00896830 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE068872C9B122E00896830 /* Color+.swift */; };
 		1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6E1492B2AFAA400FC5CB2 /* WeightUnitView.swift */; };
 		1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */; };
+		1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9E2D1BF0720062D349 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		1FE6E1492B2AFAA400FC5CB2 /* WeightUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnitView.swift; sourceTree = "<group>"; };
 		1FE9F63F2B4A7A1600BB46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		1FFF2F9E2D1BF0720062D349 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 			children = (
 				1F08D64D2B284F0700EEE82B /* RPEApp.swift */,
 				1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */,
+				1FFF2F9E2D1BF0720062D349 /* ContentView.swift */,
 			);
 			name = Application;
 			path = ../Application;
@@ -304,6 +307,7 @@
 				1F08D65C2B28A8BC00EEE82B /* RpeData.swift in Sources */,
 				1F5AD5602B3D6C3F00D5DE67 /* MySBDViewModel.swift in Sources */,
 				1F08D64E2B284F0700EEE82B /* RPEApp.swift in Sources */,
+				1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */,
 				1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */,
 				1F9DA1E32C9891D10024BD72 /* TabViewManagement.swift in Sources */,
 			);
