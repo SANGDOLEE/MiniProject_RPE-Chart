@@ -23,13 +23,14 @@
 		1F0DF3402CB910C8007996FC /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3372CB910C8007996FC /* Pretendard-Bold.otf */; };
 		1F0DF3412CB910C8007996FC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3382CB910C8007996FC /* Pretendard-Regular.otf */; };
 		1F5AD5602B3D6C3F00D5DE67 /* MySBDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */; };
-		1F5AD5622B3D6C7100D5DE67 /* ColorPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD5612B3D6C7100D5DE67 /* ColorPickers.swift */; };
-		1F9DA1E32C9891D10024BD72 /* TabViewManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */; };
+		1F9DA1E32C9891D10024BD72 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E22C9891D10024BD72 /* MainTabView.swift */; };
 		1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E52C9892870024BD72 /* SettingView.swift */; };
-		1FD792E32B2EBE7600D1482E /* FirstInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD792E22B2EBE7600D1482E /* FirstInputView.swift */; };
+		1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD792E22B2EBE7600D1482E /* OnboardingView.swift */; };
 		1FE068852C9AB21400896830 /* UpdateRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE068842C9AB21400896830 /* UpdateRecordView.swift */; };
 		1FE068882C9B122E00896830 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE068872C9B122E00896830 /* Color+.swift */; };
 		1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6E1492B2AFAA400FC5CB2 /* WeightUnitView.swift */; };
+		1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */; };
+		1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9E2D1BF0720062D349 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,14 +51,15 @@
 		1F0DF3372CB910C8007996FC /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1F0DF3382CB910C8007996FC /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySBDViewModel.swift; sourceTree = "<group>"; };
-		1F5AD5612B3D6C7100D5DE67 /* ColorPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickers.swift; sourceTree = "<group>"; };
-		1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManagement.swift; sourceTree = "<group>"; };
+		1F9DA1E22C9891D10024BD72 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		1F9DA1E52C9892870024BD72 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		1FD792E22B2EBE7600D1482E /* FirstInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstInputView.swift; sourceTree = "<group>"; };
+		1FD792E22B2EBE7600D1482E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		1FE068842C9AB21400896830 /* UpdateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRecordView.swift; sourceTree = "<group>"; };
 		1FE068872C9B122E00896830 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		1FE6E1492B2AFAA400FC5CB2 /* WeightUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnitView.swift; sourceTree = "<group>"; };
 		1FE9F63F2B4A7A1600BB46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		1FFF2F9E2D1BF0720062D349 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				1F08D64D2B284F0700EEE82B /* RPEApp.swift */,
-				1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */,
+				1F9DA1E22C9891D10024BD72 /* MainTabView.swift */,
+				1FFF2F9E2D1BF0720062D349 /* ContentView.swift */,
 			);
 			name = Application;
 			path = ../Application;
@@ -172,7 +175,6 @@
 			children = (
 				1F9DA1D92C9889850024BD72 /* Application */,
 				1FE068862C9B121900896830 /* Extension */,
-				1F9DA1DC2C988ABE0024BD72 /* Helper */,
 				1F5AD55B2B3D60A200D5DE67 /* Model */,
 				1F5AD55E2B3D6C0300D5DE67 /* ViewModel */,
 				1F5AD55D2B3D60C500D5DE67 /* View */,
@@ -180,18 +182,10 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		1F9DA1DC2C988ABE0024BD72 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				1F5AD5612B3D6C7100D5DE67 /* ColorPickers.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		1F9DA1DD2C988BA20024BD72 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				1FD792E22B2EBE7600D1482E /* FirstInputView.swift */,
+				1FD792E22B2EBE7600D1482E /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -219,6 +213,7 @@
 			children = (
 				1FE068872C9B122E00896830 /* Color+.swift */,
 				1F0DF3252CB90F26007996FC /* Font+.swift */,
+				1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -304,16 +299,17 @@
 			files = (
 				1F0DF3262CB90F26007996FC /* Font+.swift in Sources */,
 				1FE068852C9AB21400896830 /* UpdateRecordView.swift in Sources */,
+				1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */,
 				1F08D6502B284F0700EEE82B /* MainView.swift in Sources */,
 				1FE068882C9B122E00896830 /* Color+.swift in Sources */,
 				1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */,
-				1FD792E32B2EBE7600D1482E /* FirstInputView.swift in Sources */,
+				1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */,
 				1F08D65C2B28A8BC00EEE82B /* RpeData.swift in Sources */,
 				1F5AD5602B3D6C3F00D5DE67 /* MySBDViewModel.swift in Sources */,
 				1F08D64E2B284F0700EEE82B /* RPEApp.swift in Sources */,
+				1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */,
 				1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */,
-				1F9DA1E32C9891D10024BD72 /* TabViewManagement.swift in Sources */,
-				1F5AD5622B3D6C7100D5DE67 /* ColorPickers.swift in Sources */,
+				1F9DA1E32C9891D10024BD72 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +450,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -461,7 +458,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangdolee.RPE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -489,6 +486,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -496,7 +494,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangdolee.RPE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
