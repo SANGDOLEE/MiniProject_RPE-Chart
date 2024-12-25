@@ -7,20 +7,19 @@ struct WeightUnitView: View {
     
     @AppStorage("isText") private var isText: Bool = false
     
+    @Binding var isTabBarMainVisible: Bool
+    
     var body: some View {
         ZStack {
-            Color.mainBackground
-                .ignoresSafeArea()
-            
             VStack {
                 HStack {
                     Text("Unit of Weight :")
                         .padding(.leading)
-                        .foregroundStyle(Color.font)
+                        .foregroundStyle(.white)
                     
                     Text(isText ? "Lb" : "Kg")
-                        .bold()
-                        .foregroundColor(isText ? .blue : .primary)
+                        .font(.setPretendard(weight: .bold, size: 18))
+                        .foregroundColor(isText ? .myAccentcolor : .white)
                     
                     Spacer()
                     
@@ -30,7 +29,7 @@ struct WeightUnitView: View {
                 }
                 .padding(.vertical)
                 .frame(maxWidth: .infinity)
-                .background(Color.stackBackground)
+                .background(.myBackBoxcolor)
                 .cornerRadius(10)
                 .padding()
                 
@@ -39,22 +38,37 @@ struct WeightUnitView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .onAppear {
+            isTabBarMainVisible = false
+        }
+        .background(
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    Gradient.Stop(color: Color.init(hex: "2F4753"), location: 0.1),
+                    Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
     }
     
     // Custom navigation back button
     var backButton : some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
+            isTabBarMainVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left")
+                    .tint(.white)
                     .aspectRatio(contentMode: .fit)
-                    .bold()
             }
         }
     }
 }
 
 #Preview {
-    WeightUnitView()
+    WeightUnitView(isTabBarMainVisible: .constant(true))
 }
