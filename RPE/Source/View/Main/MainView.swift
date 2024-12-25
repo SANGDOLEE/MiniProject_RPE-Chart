@@ -15,8 +15,6 @@ struct MainView: View {
     @State private var textColor = Color.black
     
     private let rpeModel = RpeData()
-    private let colorData = ColorPickers.TypeColorData()
-    private let colorData2 = ColorPickers.TextColorData()
     
     //    init(viewModel: MySBDViewModel) {
     //        self.viewModel = viewModel

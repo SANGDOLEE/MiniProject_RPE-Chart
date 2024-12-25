@@ -23,7 +23,6 @@
 		1F0DF3402CB910C8007996FC /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3372CB910C8007996FC /* Pretendard-Bold.otf */; };
 		1F0DF3412CB910C8007996FC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3382CB910C8007996FC /* Pretendard-Regular.otf */; };
 		1F5AD5602B3D6C3F00D5DE67 /* MySBDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */; };
-		1F5AD5622B3D6C7100D5DE67 /* ColorPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD5612B3D6C7100D5DE67 /* ColorPickers.swift */; };
 		1F9DA1E32C9891D10024BD72 /* TabViewManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */; };
 		1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E52C9892870024BD72 /* SettingView.swift */; };
 		1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD792E22B2EBE7600D1482E /* OnboardingView.swift */; };
@@ -51,7 +50,6 @@
 		1F0DF3372CB910C8007996FC /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1F0DF3382CB910C8007996FC /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySBDViewModel.swift; sourceTree = "<group>"; };
-		1F5AD5612B3D6C7100D5DE67 /* ColorPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickers.swift; sourceTree = "<group>"; };
 		1F9DA1E22C9891D10024BD72 /* TabViewManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManagement.swift; sourceTree = "<group>"; };
 		1F9DA1E52C9892870024BD72 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		1FD792E22B2EBE7600D1482E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -174,20 +172,11 @@
 			children = (
 				1F9DA1D92C9889850024BD72 /* Application */,
 				1FE068862C9B121900896830 /* Extension */,
-				1F9DA1DC2C988ABE0024BD72 /* Helper */,
 				1F5AD55B2B3D60A200D5DE67 /* Model */,
 				1F5AD55E2B3D6C0300D5DE67 /* ViewModel */,
 				1F5AD55D2B3D60C500D5DE67 /* View */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		1F9DA1DC2C988ABE0024BD72 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				1F5AD5612B3D6C7100D5DE67 /* ColorPickers.swift */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		1F9DA1DD2C988BA20024BD72 /* Onboarding */ = {
@@ -317,7 +306,6 @@
 				1F08D64E2B284F0700EEE82B /* RPEApp.swift in Sources */,
 				1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */,
 				1F9DA1E32C9891D10024BD72 /* TabViewManagement.swift in Sources */,
-				1F5AD5622B3D6C7100D5DE67 /* ColorPickers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
