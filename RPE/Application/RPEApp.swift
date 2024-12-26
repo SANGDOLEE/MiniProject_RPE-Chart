@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct RPEApp: App {
+    
     @AppStorage("isFirstRun") private var isFirstRun = true
     @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
     @Environment(\.colorScheme) var systemColorScheme

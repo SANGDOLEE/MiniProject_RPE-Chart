@@ -3,11 +3,11 @@ import StoreKit
 
 struct SettingView: View {
     
-    @AppStorage("isText") private var isText: Bool = false
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
 //    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled: Bool = false
-    @Binding var isTabBarMainVisible: Bool
+    @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
         NavigationView {
@@ -29,7 +29,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "My BigThree" 버튼
-                        NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel(),isTabBarMainVisible: $isTabBarMainVisible)) {
+                        NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
                             HStack {
                                 Text("My BigThree")
                                     .font(.setPretendard(weight: .regular, size: 16))
@@ -54,7 +54,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "Weight Unit Conversion" 버튼
-                        NavigationLink(destination: WeightUnitView(isTabBarMainVisible: $isTabBarMainVisible)) {
+                        NavigationLink(destination: WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible)) {
                             HStack {
                                 Text("Weight Unit Conversion")
                                     .font(.setPretendard(weight: .regular, size: 16))
@@ -85,7 +85,6 @@ struct SettingView: View {
                     
                     // MARK: - 기타 정보 영역
                     VStack(alignment: .leading, spacing: 3) {
-                        
                         // 앱 버전 정보
                         HStack {
                             Text("My RPE version")
@@ -148,17 +147,7 @@ struct SettingView: View {
                 }
                 .padding()
             }
-            .background(
-                LinearGradient(
-                    gradient: Gradient(stops: [
-                        Gradient.Stop(color: Color.init(hex: "2F4753"),    location: 0.1),
-                        Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-            )
+            .applyGradientBackground()
         }
     }
     
@@ -169,5 +158,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(isTabBarMainVisible: .constant(true))
+    SettingView(isMainTabbarVisible: .constant(true))
 }
