@@ -41,7 +41,6 @@ struct OnboardingView: View {
                         Spacer()
                     }
                     HStack {
-                        
                         ZStack {
                             TextField("Enter Weight", text: $viewModel.squatValue)
                                 .font(.setPretendard(weight: .regular, size: 18))
@@ -152,22 +151,24 @@ struct OnboardingView: View {
                 
                 Spacer()
                 
-                Button("COMPLETE") {
-                    /// 3개중 1개라도 값이 비어있다면 데이터 저장되지 않음
+                Button {
+                    /// 3개 중 1개라도 값이 비어있다면 데이터 저장되지 않음
                     if viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty {
                         showAlert = true
                     } else {
                         viewModel.saveData()
                         UIApplication.shared.closeKeyboard()
-                        isPresented = false /// Dismiss the sheet
+                        isPresented = false
                     }
+                } label: {
+                    Text("COMPLETE")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 54)
+                        .font(.setPretendard(weight: .bold, size: 18))
+                        .foregroundStyle(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .white : .black)
+                        .background(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .myAccentcolor)
+                        .cornerRadius(12)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 54)
-                .font(.setPretendard(weight: .bold, size: 18))
-                .foregroundStyle(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .white : .black)
-                .background(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .myAccentcolor)
-                .cornerRadius(12)
                 .padding(.top, 20)
                 .alert(isPresented: $showAlert) {
                     Alert(
