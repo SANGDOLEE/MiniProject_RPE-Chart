@@ -93,10 +93,7 @@ struct UpdateRecordView: View {
                                         XmarkButton(text: $viewModel.squatValue)
                                     }
                                 }
-                                Text(unitOfWeight ? "lb" : "kg")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
+                                UnitOfWeightView()
                             }
                         }
                         .padding(.top, 20)
@@ -127,10 +124,7 @@ struct UpdateRecordView: View {
                                         XmarkButton(text: $viewModel.benchValue)
                                     }
                                 }
-                                Text(unitOfWeight ? "lb" : "kg")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
+                                UnitOfWeightView()
                             }
                         }
                         
@@ -160,10 +154,7 @@ struct UpdateRecordView: View {
                                         XmarkButton(text: $viewModel.deadValue)
                                     }
                                 }
-                                Text(unitOfWeight ? "lb" : "kg")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
+                                UnitOfWeightView()
                             }
                         }
                         
@@ -200,15 +191,23 @@ struct UpdateRecordView: View {
                 Spacer()
             }
         }
+        .applyGradientBackground()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
         .onAppear {
             isMainTabbarVisible = false
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
-        .applyGradientBackground()
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
+    }
+    
+    @ViewBuilder
+    private func UnitOfWeightView() -> some View {
+        Text(unitOfWeight ? "lb" : "kg")
+            .font(.setPretendard(weight: .bold, size: 18))
+            .foregroundStyle(.white)
+            .padding(.trailing)
     }
     
     private func totalUpdate() {
@@ -248,6 +247,6 @@ extension UpdateRecordView {
     }
 }
 
-//#Preview {
-//    UpdateRecordView(viewModel: MySBDViewModel())
-//}
+#Preview {
+    UpdateRecordView(viewModel: BigThreeViewModel(), isMainTabbarVisible: .constant(true))
+}
