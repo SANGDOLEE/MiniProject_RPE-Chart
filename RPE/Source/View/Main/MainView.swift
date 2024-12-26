@@ -3,7 +3,7 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject var viewModel: MySBDViewModel
+    @StateObject var viewModel: BigThreeViewModel
     
     @State private var workout = ""
     @State private var rpeValue = 0.0
@@ -14,7 +14,7 @@ struct MainView: View {
     @State private var typeColor = Color.white
     @State private var textColor = Color.black
     
-    private let rpeModel = RpeData()
+    private let rpeModel = Rpe()
     
     //    init(viewModel: MySBDViewModel) {
     //        self.viewModel = viewModel
@@ -243,5 +243,5 @@ extension Double {
 }
 
 #Preview {
-    MainView(viewModel: MySBDViewModel())
+    MainView(viewModel: BigThreeViewModel())
 }

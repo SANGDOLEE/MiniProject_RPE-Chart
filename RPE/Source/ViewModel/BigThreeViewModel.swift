@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-class MySBDViewModel: ObservableObject {
+class BigThreeViewModel: ObservableObject {
     
     @Published var squatValue: String = ""
     @Published var benchValue: String = ""

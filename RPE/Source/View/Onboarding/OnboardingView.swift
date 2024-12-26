@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - 앱의 첫 사용시에만 등장하는 뷰
 struct OnboardingView: View {
     
-    @StateObject private var viewModel = MySBDViewModel()
+    @StateObject private var viewModel = BigThreeViewModel()
     @State private var showAlert = false
     @Binding var isPresented: Bool
     

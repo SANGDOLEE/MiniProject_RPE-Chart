@@ -29,7 +29,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "My BigThree" 버튼
-                        NavigationLink(destination: UpdateRecordView(viewModel: MySBDViewModel(),isTabBarMainVisible: $isTabBarMainVisible)) {
+                        NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isTabBarMainVisible: $isTabBarMainVisible)) {
                             HStack {
                                 Text("My BigThree")
                                     .font(.setPretendard(weight: .regular, size: 16))

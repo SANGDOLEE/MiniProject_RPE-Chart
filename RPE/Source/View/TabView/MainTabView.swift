@@ -3,7 +3,7 @@ import SwiftUI
 struct MainTabView: View {
     
     // 실제로 보여줄 화면에 필요한 ViewModel
-    @StateObject private var viewModel = MySBDViewModel()
+    @StateObject private var viewModel = BigThreeViewModel()
     @State var isTabBarMainVisible = true  // 처음엔 보이도록 가정
     
     // 현재 선택된 탭

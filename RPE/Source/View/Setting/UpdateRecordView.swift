@@ -11,7 +11,7 @@ struct UpdateRecordView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @ObservedObject var viewModel: MySBDViewModel
+    @ObservedObject var viewModel: BigThreeViewModel
     @AppStorage("isText") private var isText: Bool = false
     
     @State private var showAlert = false
