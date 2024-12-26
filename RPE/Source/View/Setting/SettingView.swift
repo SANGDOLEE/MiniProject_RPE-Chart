@@ -85,7 +85,6 @@ struct SettingView: View {
                     
                     // MARK: - 기타 정보 영역
                     VStack(alignment: .leading, spacing: 3) {
-                        
                         // 앱 버전 정보
                         HStack {
                             Text("My RPE version")

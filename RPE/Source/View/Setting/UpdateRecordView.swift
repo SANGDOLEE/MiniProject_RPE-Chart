@@ -159,18 +159,11 @@ struct UpdateRecordView: View {
                         }
                         
                         HStack {
-                            Button {
+                            AccentButton {
                                 totalUpdate()
                             } label: {
                                 Text("UPDATE")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.black)
-                                    .cornerRadius(12)
                             }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 54)
-                            .background(.myAccentcolor)
-                            .cornerRadius(12)
                             .padding(.top, 22)
                         }
                         .alert(isPresented: $showAlert) {

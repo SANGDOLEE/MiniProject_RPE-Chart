@@ -33,6 +33,7 @@
 		1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9E2D1BF0720062D349 /* ContentView.swift */; };
 		1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */; };
 		1FFF2FA52D1D47EF0062D349 /* XmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */; };
+		1FFF2FA72D1D4D2F0062D349 /* AccentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		1FFF2F9E2D1BF0720062D349 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkButton.swift; sourceTree = "<group>"; };
+		1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			children = (
 				1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */,
 				1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */,
+				1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				1F08D6502B284F0700EEE82B /* MainView.swift in Sources */,
 				1FE068882C9B122E00896830 /* Color+.swift in Sources */,
 				1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */,
+				1FFF2FA72D1D4D2F0062D349 /* AccentButton.swift in Sources */,
 				1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */,
 				1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */,
 				1F08D65C2B28A8BC00EEE82B /* Rpe.swift in Sources */,
