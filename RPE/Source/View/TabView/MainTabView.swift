@@ -4,7 +4,7 @@ struct MainTabView: View {
     
     // 실제로 보여줄 화면에 필요한 ViewModel
     @StateObject private var viewModel = BigThreeViewModel()
-    @State var isTabBarMainVisible = true  // 처음엔 보이도록 가정
+    @State var isMainTabbarVisible = true  // 처음엔 보이도록 가정
     
     // 현재 선택된 탭
     @State private var selectedTab = "main"
@@ -28,8 +28,7 @@ struct MainTabView: View {
                 MainView(viewModel: viewModel)
                     .tag("main")
                 
-                // SettingView는 바인딩으로 isTabBarMainVisible을 전달
-                SettingView(isTabBarMainVisible: $isTabBarMainVisible)
+                SettingView(isMainTabbarVisible: $isMainTabbarVisible)
                     .tag("settings")
             }
             .onChange(of: selectedTab) { oldValue, newValue in
@@ -91,7 +90,7 @@ struct MainTabView: View {
                 .padding(.horizontal)
                 .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
             }
-            .opacity(isTabBarMainVisible ? 1 : 0)
+            .opacity(isMainTabbarVisible ? 1 : 0)
             
         }
         .ignoresSafeArea(.all, edges: .bottom)

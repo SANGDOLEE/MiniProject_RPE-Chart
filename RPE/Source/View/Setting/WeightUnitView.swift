@@ -5,9 +5,9 @@ struct WeightUnitView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @AppStorage("isText") private var isText: Bool = false
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
-    @Binding var isTabBarMainVisible: Bool
+    @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
         ZStack {
@@ -17,13 +17,13 @@ struct WeightUnitView: View {
                         .padding(.leading)
                         .foregroundStyle(.white)
                     
-                    Text(isText ? "Lb" : "Kg")
+                    Text(unitOfWeight ? "Lb" : "Kg")
                         .font(.setPretendard(weight: .bold, size: 18))
-                        .foregroundColor(isText ? .myAccentcolor : .white)
+                        .foregroundColor(unitOfWeight ? .myAccentcolor : .white)
                     
                     Spacer()
                     
-                    Toggle(isOn: $isText) { }
+                    Toggle(isOn: $unitOfWeight) { }
                         .frame(width: 80)
                         .padding(.trailing)
                 }
@@ -40,7 +40,7 @@ struct WeightUnitView: View {
         .navigationBarItems(leading: backButton)
         .applyGradientBackground()
         .onAppear {
-            isTabBarMainVisible = false
+            isMainTabbarVisible = false
         }
     }
     
@@ -48,7 +48,7 @@ struct WeightUnitView: View {
     var backButton : some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
-            isTabBarMainVisible = true
+            isMainTabbarVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left")
@@ -60,5 +60,5 @@ struct WeightUnitView: View {
 }
 
 #Preview {
-    WeightUnitView(isTabBarMainVisible: .constant(true))
+    WeightUnitView(isMainTabbarVisible: .constant(true))
 }

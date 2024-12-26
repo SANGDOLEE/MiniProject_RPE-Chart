@@ -3,11 +3,11 @@ import StoreKit
 
 struct SettingView: View {
     
-    @AppStorage("isText") private var isText: Bool = false
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
 //    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled: Bool = false
-    @Binding var isTabBarMainVisible: Bool
+    @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
         NavigationView {
@@ -29,7 +29,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "My BigThree" 버튼
-                        NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isTabBarMainVisible: $isTabBarMainVisible)) {
+                        NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
                             HStack {
                                 Text("My BigThree")
                                     .font(.setPretendard(weight: .regular, size: 16))
@@ -54,7 +54,7 @@ struct SettingView: View {
                             .padding(.leading, 8)
                         
                         // "Weight Unit Conversion" 버튼
-                        NavigationLink(destination: WeightUnitView(isTabBarMainVisible: $isTabBarMainVisible)) {
+                        NavigationLink(destination: WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible)) {
                             HStack {
                                 Text("Weight Unit Conversion")
                                     .font(.setPretendard(weight: .regular, size: 16))
@@ -159,5 +159,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(isTabBarMainVisible: .constant(true))
+    SettingView(isMainTabbarVisible: .constant(true))
 }

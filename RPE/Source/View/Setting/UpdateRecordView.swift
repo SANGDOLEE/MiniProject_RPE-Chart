@@ -12,10 +12,10 @@ struct UpdateRecordView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewModel: BigThreeViewModel
-    @AppStorage("isText") private var isText: Bool = false
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
-    @Binding var isTabBarMainVisible: Bool
+    @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
         ZStack {
@@ -51,7 +51,7 @@ struct UpdateRecordView: View {
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                             }
-                            Text(isText ? "lb" : "kg")
+                            Text(unitOfWeight ? "lb" : "kg")
                                 .font(.setPretendard(weight: .bold, size: 24))
                                 .foregroundStyle(.white)
                         }
@@ -102,7 +102,7 @@ struct UpdateRecordView: View {
                                         .padding(.trailing)
                                     }
                                 }
-                                Text(isText ? "lb" : "kg")
+                                Text(unitOfWeight ? "lb" : "kg")
                                     .font(.setPretendard(weight: .bold, size: 18))
                                     .foregroundStyle(.white)
                                     .padding(.trailing)
@@ -145,7 +145,7 @@ struct UpdateRecordView: View {
                                         .padding(.trailing)
                                     }
                                 }
-                                Text(isText ? "lb" : "kg")
+                                Text(unitOfWeight ? "lb" : "kg")
                                     .font(.setPretendard(weight: .bold, size: 18))
                                     .foregroundStyle(.white)
                                     .padding(.trailing)
@@ -187,7 +187,7 @@ struct UpdateRecordView: View {
                                         .padding(.trailing)
                                     }
                                 }
-                                Text(isText ? "lb" : "kg")
+                                Text(unitOfWeight ? "lb" : "kg")
                                     .font(.setPretendard(weight: .bold, size: 18))
                                     .foregroundStyle(.white)
                                     .padding(.trailing)
@@ -228,7 +228,7 @@ struct UpdateRecordView: View {
             }
         }
         .onAppear {
-            isTabBarMainVisible = false
+            isMainTabbarVisible = false
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
@@ -250,7 +250,7 @@ struct UpdateRecordView: View {
     var backButton : some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
-            isTabBarMainVisible = true
+            isMainTabbarVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left") // 화살표 Image
