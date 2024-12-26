@@ -182,17 +182,7 @@ struct OnboardingView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .padding()
-        .background(
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    Gradient.Stop(color: Color.init(hex: "2F4753"),    location: 0.1),
-                    Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        )
+        .applyGradientBackground()
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }

@@ -38,20 +38,10 @@ struct WeightUnitView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .applyGradientBackground()
         .onAppear {
             isTabBarMainVisible = false
         }
-        .background(
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    Gradient.Stop(color: Color.init(hex: "2F4753"), location: 0.1),
-                    Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        )
     }
     
     // Custom navigation back button

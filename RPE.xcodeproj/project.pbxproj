@@ -31,6 +31,7 @@
 		1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6E1492B2AFAA400FC5CB2 /* WeightUnitView.swift */; };
 		1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */; };
 		1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9E2D1BF0720062D349 /* ContentView.swift */; };
+		1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		1FE9F63F2B4A7A1600BB46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		1FFF2F9E2D1BF0720062D349 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			children = (
 				1F9DA1D92C9889850024BD72 /* Application */,
 				1FE068862C9B121900896830 /* Extension */,
+				1FFF2FA12D1D3B940062D349 /* Common */,
 				1F5AD55B2B3D60A200D5DE67 /* Model */,
 				1F5AD55E2B3D6C0300D5DE67 /* ViewModel */,
 				1F5AD55D2B3D60C500D5DE67 /* View */,
@@ -224,6 +227,14 @@
 				1FFF2F9E2D1BF0720062D349 /* ContentView.swift */,
 			);
 			path = TabView;
+			sourceTree = "<group>";
+		};
+		1FFF2FA12D1D3B940062D349 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +321,7 @@
 				1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */,
 				1F08D6502B284F0700EEE82B /* MainView.swift in Sources */,
 				1FE068882C9B122E00896830 /* Color+.swift in Sources */,
+				1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */,
 				1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */,
 				1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */,
 				1F08D65C2B28A8BC00EEE82B /* Rpe.swift in Sources */,
