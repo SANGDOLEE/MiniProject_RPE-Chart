@@ -32,6 +32,7 @@
 		1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */; };
 		1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9E2D1BF0720062D349 /* ContentView.swift */; };
 		1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */; };
+		1FFF2FA52D1D47EF0062D349 /* XmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		1FFF2F9E2D1BF0720062D349 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
+		1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */,
+				1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFF2FA52D1D47EF0062D349 /* XmarkButton.swift in Sources */,
 				1F0DF3262CB90F26007996FC /* Font+.swift in Sources */,
 				1FE068852C9AB21400896830 /* UpdateRecordView.swift in Sources */,
 				1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */,

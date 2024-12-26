@@ -53,19 +53,9 @@ struct OnboardingView: View {
                                 .onChange(of: viewModel.squatValue) { oldValue, newValue in
                                     viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                                 }
-                            
                             HStack {
                                 Spacer()
-                                Button {
-                                    viewModel.squatValue = ""
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .resizable()
-                                        .frame(width: 23, height: 23)
-                                        .foregroundStyle(.myB9B9B9)
-                                }
-                                .opacity(viewModel.squatValue.count > 0 ? 1 : 0)
-                                .padding(.trailing)
+                                XmarkButton(text: $viewModel.squatValue)
                             }
                         }
                         Spacer()
@@ -92,19 +82,9 @@ struct OnboardingView: View {
                                 .onChange(of: viewModel.benchValue) { oldValue, newValue in
                                     viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                                 }
-                            
                             HStack {
                                 Spacer()
-                                Button {
-                                    viewModel.benchValue = ""
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .resizable()
-                                        .frame(width: 23, height: 23)
-                                        .foregroundStyle(.myB9B9B9)
-                                }
-                                .opacity(viewModel.benchValue.count > 0 ? 1 : 0)
-                                .padding(.trailing)
+                                XmarkButton(text: $viewModel.benchValue)
                             }
                         }
                         Spacer()
@@ -130,25 +110,14 @@ struct OnboardingView: View {
                                 .onChange(of: viewModel.deadValue) { oldValue, newValue in
                                     viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
                                 }
-                            
                             HStack {
                                 Spacer()
-                                Button {
-                                    viewModel.deadValue = ""
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .resizable()
-                                        .frame(width: 23, height: 23)
-                                        .foregroundStyle(.myB9B9B9)
-                                }
-                                .opacity(viewModel.deadValue.count > 0 ? 1 : 0)
-                                .padding(.trailing)
+                                XmarkButton(text: $viewModel.deadValue)
                             }
                         }
                         Spacer()
                     }
                 }
-                
                 Spacer()
                 
                 Button {

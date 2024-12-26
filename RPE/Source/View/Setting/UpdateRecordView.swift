@@ -90,16 +90,7 @@ struct UpdateRecordView: View {
                                     
                                     HStack {
                                         Spacer()
-                                        Button {
-                                            viewModel.squatValue = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 23, height: 23)
-                                                .foregroundStyle(.myB9B9B9)
-                                        }
-                                        .opacity(viewModel.squatValue.count > 0 ? 1 : 0)
-                                        .padding(.trailing)
+                                        XmarkButton(text: $viewModel.squatValue)
                                     }
                                 }
                                 Text(unitOfWeight ? "lb" : "kg")
@@ -133,16 +124,7 @@ struct UpdateRecordView: View {
                                     
                                     HStack {
                                         Spacer()
-                                        Button {
-                                            viewModel.benchValue = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 23, height: 23)
-                                                .foregroundStyle(.myB9B9B9)
-                                        }
-                                        .opacity(viewModel.benchValue.count > 0 ? 1 : 0)
-                                        .padding(.trailing)
+                                        XmarkButton(text: $viewModel.benchValue)
                                     }
                                 }
                                 Text(unitOfWeight ? "lb" : "kg")
@@ -175,16 +157,7 @@ struct UpdateRecordView: View {
                                     
                                     HStack {
                                         Spacer()
-                                        Button {
-                                            viewModel.deadValue = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 23, height: 23)
-                                                .foregroundStyle(.myB9B9B9)
-                                        }
-                                        .opacity(viewModel.deadValue.count > 0 ? 1 : 0)
-                                        .padding(.trailing)
+                                        XmarkButton(text: $viewModel.deadValue)
                                     }
                                 }
                                 Text(unitOfWeight ? "lb" : "kg")
