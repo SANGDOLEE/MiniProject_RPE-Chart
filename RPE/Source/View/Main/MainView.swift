@@ -31,7 +31,7 @@ struct MainView: View {
             
             HStack {
                 Picker("Choose a type", selection: $workout) {
-                    ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
+                    ForEach(["Squat", "BenchPress", "Deadlift"], id: \.self) {
                         Text($0)
                     }
                 }
