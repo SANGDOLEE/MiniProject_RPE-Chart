@@ -34,6 +34,8 @@
 		1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */; };
 		1FFF2FA52D1D47EF0062D349 /* XmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */; };
 		1FFF2FA72D1D4D2F0062D349 /* AccentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */; };
+		1FFF2FAA2D1E5FD40062D349 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA92D1E5FD40062D349 /* Toast.swift */; };
+		1FFF2FAE2D1E80230062D349 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FAD2D1E80230062D349 /* ToastMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkButton.swift; sourceTree = "<group>"; };
 		1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButton.swift; sourceTree = "<group>"; };
+		1FFF2FA92D1E5FD40062D349 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		1FFF2FAD2D1E80230062D349 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +185,7 @@
 				1F9DA1D92C9889850024BD72 /* Application */,
 				1FE068862C9B121900896830 /* Extension */,
 				1FFF2FA12D1D3B940062D349 /* Common */,
+				1FFF2FA82D1E5FBF0062D349 /* Helper */,
 				1F5AD55B2B3D60A200D5DE67 /* Model */,
 				1F5AD55E2B3D6C0300D5DE67 /* ViewModel */,
 				1F5AD55D2B3D60C500D5DE67 /* View */,
@@ -241,6 +246,15 @@
 				1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		1FFF2FA82D1E5FBF0062D349 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1FFF2FA92D1E5FD40062D349 /* Toast.swift */,
+				1FFF2FAD2D1E80230062D349 /* ToastMessage.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +343,7 @@
 				1F08D6502B284F0700EEE82B /* MainView.swift in Sources */,
 				1FE068882C9B122E00896830 /* Color+.swift in Sources */,
 				1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */,
+				1FFF2FAE2D1E80230062D349 /* ToastMessage.swift in Sources */,
 				1FFF2FA72D1D4D2F0062D349 /* AccentButton.swift in Sources */,
 				1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */,
 				1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */,
@@ -336,6 +351,7 @@
 				1F5AD5602B3D6C3F00D5DE67 /* BigThreeViewModel.swift in Sources */,
 				1F08D64E2B284F0700EEE82B /* RPEApp.swift in Sources */,
 				1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */,
+				1FFF2FAA2D1E5FD40062D349 /* Toast.swift in Sources */,
 				1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */,
 				1F9DA1E32C9891D10024BD72 /* MainTabView.swift in Sources */,
 			);

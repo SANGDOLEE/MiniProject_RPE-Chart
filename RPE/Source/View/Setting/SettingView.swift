@@ -10,7 +10,7 @@ struct SettingView: View {
     @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 VStack(spacing: 30) {
                     // 상단 타이틀

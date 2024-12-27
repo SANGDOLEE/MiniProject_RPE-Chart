@@ -12,11 +12,13 @@ struct RPEApp: App {
             if isFirstRun {
                 OnboardingView(isPresented: $isFirstRun)
             } else {
-                MainTabView()
-                    .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
-                    .onAppear {
-                        updateUserInterfaceStyle()
-                    }
+                RootView {
+                    MainTabView()
+                        .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
+                        .onAppear {
+                            updateUserInterfaceStyle()
+                        }
+                }
             }
         }
     }
