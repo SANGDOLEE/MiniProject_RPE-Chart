@@ -115,20 +115,24 @@ fileprivate struct ToastView: View {
             if let symbol = item.symbol {
                 Image(symbol)
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 18, height: 18)
             }
             Text(item.text)
                 .font(.setPretendard(weight: .regular, size: 16))
-                .foregroundStyle(.black)
+                .foregroundStyle(.white)
         }
         .foregroundStyle(item.tint)
         .padding(.horizontal)
         .padding(.vertical, 10)
         .background(
-            .background
-                .shadow(.drop(color: .white.opacity(0.1), radius: 5, x: 5, y: 5))
-                .shadow(.drop(color: .white.opacity(0.1), radius: 8, x: -5, y: -5)),
+            .my1C1C1C
+                .shadow(.drop(color: .my3ED060.opacity(0.1), radius: 5, x: 5, y: 5))
+                .shadow(.drop(color: .my3ED060.opacity(0.1), radius: 8, x: -5, y: -5)),
             in: .capsule
+        )
+        .overlay(
+            Capsule()
+                .stroke(.my3ED060, lineWidth: 0.5)
         )
         .contentShape(.capsule)
         .gesture (
