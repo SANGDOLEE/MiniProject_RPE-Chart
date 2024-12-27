@@ -3,7 +3,7 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject var viewModel: MySBDViewModel
+    @StateObject var viewModel: BigThreeViewModel
     
     @State private var workout = ""
     @State private var rpeValue = 0.0
@@ -14,14 +14,14 @@ struct MainView: View {
     @State private var typeColor = Color.white
     @State private var textColor = Color.black
     
-    private let rpeModel = RpeData()
+    private let rpeModel = Rpe()
     
     //    init(viewModel: MySBDViewModel) {
     //        self.viewModel = viewModel
     //    }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Text("RPE Chart")
                     .font(.setPretendard(weight: .bold, size: 34))
@@ -31,7 +31,7 @@ struct MainView: View {
             
             HStack {
                 Picker("Choose a type", selection: $workout) {
-                    ForEach(["Squat", "Benchpress", "Deadlift"], id: \.self) {
+                    ForEach(["Squat", "BenchPress", "Deadlift"], id: \.self) {
                         Text($0)
                     }
                 }
@@ -123,8 +123,8 @@ struct MainView: View {
                         Text(workout.uppercased())
                             .font(.setPretendard(weight: .medium, size: 14))
                             .foregroundStyle(.myA09393)
-                            .padding(4)
-                            .padding(.horizontal, 4)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
                             .background(.my858585.opacity(0.13))
                             .cornerRadius(24)
                     }
@@ -133,8 +133,8 @@ struct MainView: View {
                         Text("x \(Int(repsValue))")
                             .font(.setPretendard(weight: .medium, size: 14))
                             .foregroundStyle(.myA09393)
-                            .padding(4)
-                            .padding(.horizontal, 4)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
                             .background(.my858585.opacity(0.13))
                             .cornerRadius(24)
                     }
@@ -143,8 +143,8 @@ struct MainView: View {
                         Text("@ \(rpeValue.isWhole ? String(format: "%.0f", rpeValue) : String(format: "%.1f", rpeValue))")
                             .font(.setPretendard(weight: .medium, size: 14))
                             .foregroundStyle(.myA09393)
-                            .padding(4)
-                            .padding(.horizontal, 4)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
                             .background(.my858585.opacity(0.13))
                             .cornerRadius(24)
                     }
@@ -170,21 +170,10 @@ struct MainView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .applyGradientBackground()
         .onAppear {
             viewModel.loadData()   // 뷰가 나타날 때마다 데이터를 새로 고침
         }
-        .background(
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    Gradient.Stop(color: Color.init(hex: "2F4753"),    location: 0.1),
-                    Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        )
-        
     }
     
     // 사용자가 입력한 종목에 따라 중량, RPE, REPS를 계산하여 표시함
@@ -243,5 +232,5 @@ extension Double {
 }
 
 #Preview {
-    MainView(viewModel: MySBDViewModel())
+    MainView(viewModel: BigThreeViewModel())
 }

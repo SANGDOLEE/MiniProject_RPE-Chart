@@ -11,7 +11,7 @@
 		1F08D6502B284F0700EEE82B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D64F2B284F0700EEE82B /* MainView.swift */; };
 		1F08D6522B284F0800EEE82B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D6512B284F0800EEE82B /* Assets.xcassets */; };
 		1F08D6552B284F0800EEE82B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D6542B284F0800EEE82B /* Preview Assets.xcassets */; };
-		1F08D65C2B28A8BC00EEE82B /* RpeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D65B2B28A8BC00EEE82B /* RpeData.swift */; };
+		1F08D65C2B28A8BC00EEE82B /* Rpe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D65B2B28A8BC00EEE82B /* Rpe.swift */; };
 		1F0DF3262CB90F26007996FC /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0DF3252CB90F26007996FC /* Font+.swift */; };
 		1F0DF3392CB910C8007996FC /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3302CB910C7007996FC /* Pretendard-SemiBold.otf */; };
 		1F0DF33A2CB910C8007996FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3312CB910C7007996FC /* Pretendard-Light.otf */; };
@@ -22,7 +22,7 @@
 		1F0DF33F2CB910C8007996FC /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3362CB910C8007996FC /* Pretendard-ExtraLight.otf */; };
 		1F0DF3402CB910C8007996FC /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3372CB910C8007996FC /* Pretendard-Bold.otf */; };
 		1F0DF3412CB910C8007996FC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0DF3382CB910C8007996FC /* Pretendard-Regular.otf */; };
-		1F5AD5602B3D6C3F00D5DE67 /* MySBDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */; };
+		1F5AD5602B3D6C3F00D5DE67 /* BigThreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD55F2B3D6C3F00D5DE67 /* BigThreeViewModel.swift */; };
 		1F9DA1E32C9891D10024BD72 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E22C9891D10024BD72 /* MainTabView.swift */; };
 		1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DA1E52C9892870024BD72 /* SettingView.swift */; };
 		1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD792E22B2EBE7600D1482E /* OnboardingView.swift */; };
@@ -31,6 +31,11 @@
 		1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6E1492B2AFAA400FC5CB2 /* WeightUnitView.swift */; };
 		1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */; };
 		1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2F9E2D1BF0720062D349 /* ContentView.swift */; };
+		1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */; };
+		1FFF2FA52D1D47EF0062D349 /* XmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */; };
+		1FFF2FA72D1D4D2F0062D349 /* AccentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */; };
+		1FFF2FAA2D1E5FD40062D349 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FA92D1E5FD40062D349 /* Toast.swift */; };
+		1FFF2FAE2D1E80230062D349 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF2FAD2D1E80230062D349 /* ToastMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +44,7 @@
 		1F08D64F2B284F0700EEE82B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1F08D6512B284F0800EEE82B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F08D6542B284F0800EEE82B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1F08D65B2B28A8BC00EEE82B /* RpeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RpeData.swift; sourceTree = "<group>"; };
+		1F08D65B2B28A8BC00EEE82B /* Rpe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rpe.swift; sourceTree = "<group>"; };
 		1F0DF3252CB90F26007996FC /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		1F0DF3302CB910C7007996FC /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		1F0DF3312CB910C7007996FC /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -50,7 +55,7 @@
 		1F0DF3362CB910C8007996FC /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		1F0DF3372CB910C8007996FC /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1F0DF3382CB910C8007996FC /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
-		1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySBDViewModel.swift; sourceTree = "<group>"; };
+		1F5AD55F2B3D6C3F00D5DE67 /* BigThreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigThreeViewModel.swift; sourceTree = "<group>"; };
 		1F9DA1E22C9891D10024BD72 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		1F9DA1E52C9892870024BD72 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		1FD792E22B2EBE7600D1482E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -60,6 +65,11 @@
 		1FE9F63F2B4A7A1600BB46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		1FFF2F9E2D1BF0720062D349 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
+		1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkButton.swift; sourceTree = "<group>"; };
+		1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButton.swift; sourceTree = "<group>"; };
+		1FFF2FA92D1E5FD40062D349 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		1FFF2FAD2D1E80230062D349 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +137,7 @@
 		1F5AD55B2B3D60A200D5DE67 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1F08D65B2B28A8BC00EEE82B /* RpeData.swift */,
+				1F08D65B2B28A8BC00EEE82B /* Rpe.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,6 +145,7 @@
 		1F5AD55D2B3D60C500D5DE67 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FFF2FA02D1D39360062D349 /* TabView */,
 				1F9DA1DD2C988BA20024BD72 /* Onboarding */,
 				1F9DA1DF2C988C620024BD72 /* Main */,
 				1F9DA1E42C9892600024BD72 /* Setting */,
@@ -145,7 +156,7 @@
 		1F5AD55E2B3D6C0300D5DE67 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1F5AD55F2B3D6C3F00D5DE67 /* MySBDViewModel.swift */,
+				1F5AD55F2B3D6C3F00D5DE67 /* BigThreeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -154,8 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				1F08D64D2B284F0700EEE82B /* RPEApp.swift */,
-				1F9DA1E22C9891D10024BD72 /* MainTabView.swift */,
-				1FFF2F9E2D1BF0720062D349 /* ContentView.swift */,
 			);
 			name = Application;
 			path = ../Application;
@@ -175,6 +184,8 @@
 			children = (
 				1F9DA1D92C9889850024BD72 /* Application */,
 				1FE068862C9B121900896830 /* Extension */,
+				1FFF2FA12D1D3B940062D349 /* Common */,
+				1FFF2FA82D1E5FBF0062D349 /* Helper */,
 				1F5AD55B2B3D60A200D5DE67 /* Model */,
 				1F5AD55E2B3D6C0300D5DE67 /* ViewModel */,
 				1F5AD55D2B3D60C500D5DE67 /* View */,
@@ -216,6 +227,34 @@
 				1FFF2F9C2D1BEC7F0062D349 /* UIApplication+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		1FFF2FA02D1D39360062D349 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				1F9DA1E22C9891D10024BD72 /* MainTabView.swift */,
+				1FFF2F9E2D1BF0720062D349 /* ContentView.swift */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
+		1FFF2FA12D1D3B940062D349 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1FFF2FA22D1D3BE90062D349 /* GradientBackground.swift */,
+				1FFF2FA42D1D47EF0062D349 /* XmarkButton.swift */,
+				1FFF2FA62D1D4D2F0062D349 /* AccentButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1FFF2FA82D1E5FBF0062D349 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1FFF2FA92D1E5FD40062D349 /* Toast.swift */,
+				1FFF2FAD2D1E80230062D349 /* ToastMessage.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,17 +336,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFF2FA52D1D47EF0062D349 /* XmarkButton.swift in Sources */,
 				1F0DF3262CB90F26007996FC /* Font+.swift in Sources */,
 				1FE068852C9AB21400896830 /* UpdateRecordView.swift in Sources */,
 				1FFF2F9D2D1BEC7F0062D349 /* UIApplication+.swift in Sources */,
 				1F08D6502B284F0700EEE82B /* MainView.swift in Sources */,
 				1FE068882C9B122E00896830 /* Color+.swift in Sources */,
+				1FFF2FA32D1D3BE90062D349 /* GradientBackground.swift in Sources */,
+				1FFF2FAE2D1E80230062D349 /* ToastMessage.swift in Sources */,
+				1FFF2FA72D1D4D2F0062D349 /* AccentButton.swift in Sources */,
 				1FE6E14A2B2AFAA400FC5CB2 /* WeightUnitView.swift in Sources */,
 				1FD792E32B2EBE7600D1482E /* OnboardingView.swift in Sources */,
-				1F08D65C2B28A8BC00EEE82B /* RpeData.swift in Sources */,
-				1F5AD5602B3D6C3F00D5DE67 /* MySBDViewModel.swift in Sources */,
+				1F08D65C2B28A8BC00EEE82B /* Rpe.swift in Sources */,
+				1F5AD5602B3D6C3F00D5DE67 /* BigThreeViewModel.swift in Sources */,
 				1F08D64E2B284F0700EEE82B /* RPEApp.swift in Sources */,
 				1FFF2F9F2D1BF0720062D349 /* ContentView.swift in Sources */,
+				1FFF2FAA2D1E5FD40062D349 /* Toast.swift in Sources */,
 				1F9DA1E62C9892870024BD72 /* SettingView.swift in Sources */,
 				1F9DA1E32C9891D10024BD72 /* MainTabView.swift in Sources */,
 			);
@@ -458,7 +502,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangdolee.RPE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -494,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangdolee.RPE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

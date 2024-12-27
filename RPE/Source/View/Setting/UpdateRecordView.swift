@@ -11,11 +11,11 @@ struct UpdateRecordView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @ObservedObject var viewModel: MySBDViewModel
-    @AppStorage("isText") private var isText: Bool = false
+    @ObservedObject var viewModel: BigThreeViewModel
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
-    @Binding var isTabBarMainVisible: Bool
+    @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
         ZStack {
@@ -51,7 +51,7 @@ struct UpdateRecordView: View {
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                             }
-                            Text(isText ? "lb" : "kg")
+                            Text(unitOfWeight ? "lb" : "kg")
                                 .font(.setPretendard(weight: .bold, size: 24))
                                 .foregroundStyle(.white)
                         }
@@ -90,22 +90,10 @@ struct UpdateRecordView: View {
                                     
                                     HStack {
                                         Spacer()
-                                        Button {
-                                            viewModel.squatValue = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 23, height: 23)
-                                                .foregroundStyle(.myB9B9B9)
-                                        }
-                                        .opacity(viewModel.squatValue.count > 0 ? 1 : 0)
-                                        .padding(.trailing)
+                                        XmarkButton(text: $viewModel.squatValue)
                                     }
                                 }
-                                Text(isText ? "lb" : "kg")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
+                                UnitOfWeightView()
                             }
                         }
                         .padding(.top, 20)
@@ -133,22 +121,10 @@ struct UpdateRecordView: View {
                                     
                                     HStack {
                                         Spacer()
-                                        Button {
-                                            viewModel.benchValue = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 23, height: 23)
-                                                .foregroundStyle(.myB9B9B9)
-                                        }
-                                        .opacity(viewModel.benchValue.count > 0 ? 1 : 0)
-                                        .padding(.trailing)
+                                        XmarkButton(text: $viewModel.benchValue)
                                     }
                                 }
-                                Text(isText ? "lb" : "kg")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
+                                UnitOfWeightView()
                             }
                         }
                         
@@ -175,38 +151,28 @@ struct UpdateRecordView: View {
                                     
                                     HStack {
                                         Spacer()
-                                        Button {
-                                            viewModel.deadValue = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 23, height: 23)
-                                                .foregroundStyle(.myB9B9B9)
-                                        }
-                                        .opacity(viewModel.deadValue.count > 0 ? 1 : 0)
-                                        .padding(.trailing)
+                                        XmarkButton(text: $viewModel.deadValue)
                                     }
                                 }
-                                Text(isText ? "lb" : "kg")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
+                                UnitOfWeightView()
                             }
                         }
                         
                         HStack {
-                            Button {
+                            AccentButton {
                                 totalUpdate()
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        Toast.shared.present(
+                                            text: "Record update completed",
+                                            symbol: "complete",
+                                            isUserInteractionEnabled: true,
+                                            timing: .short
+                                        )
+                                    }
                             } label: {
                                 Text("UPDATE")
-                                    .font(.setPretendard(weight: .bold, size: 18))
-                                    .foregroundStyle(.black)
-                                    .cornerRadius(12)
                             }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 54)
-                            .background(.myAccentcolor)
-                            .cornerRadius(12)
                             .padding(.top, 22)
                         }
                         .alert(isPresented: $showAlert) {
@@ -227,25 +193,23 @@ struct UpdateRecordView: View {
                 Spacer()
             }
         }
+        .applyGradientBackground()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
         .onAppear {
-            isTabBarMainVisible = false
+            isMainTabbarVisible = false
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
-        .background(
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    Gradient.Stop(color: Color.init(hex: "2F4753"), location: 0.1),
-                    Gradient.Stop(color: Color.init(hex: "0B001F"), location: 0.4),
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        )
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
+    }
+    
+    @ViewBuilder
+    private func UnitOfWeightView() -> some View {
+        Text(unitOfWeight ? "lb" : "kg")
+            .font(.setPretendard(weight: .bold, size: 18))
+            .foregroundStyle(.white)
+            .padding(.trailing)
     }
     
     private func totalUpdate() {
@@ -260,7 +224,7 @@ struct UpdateRecordView: View {
     var backButton : some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
-            isTabBarMainVisible = true
+            isMainTabbarVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left") // 화살표 Image
@@ -285,6 +249,9 @@ extension UpdateRecordView {
     }
 }
 
-//#Preview {
-//    UpdateRecordView(viewModel: MySBDViewModel())
-//}
+#Preview {
+    RootView {
+        UpdateRecordView(viewModel: BigThreeViewModel(), isMainTabbarVisible: .constant(true))
+    }
+}
+

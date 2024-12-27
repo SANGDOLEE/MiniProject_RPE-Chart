@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct RPEApp: App {
+    
     @AppStorage("isFirstRun") private var isFirstRun = true
     @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
     @Environment(\.colorScheme) var systemColorScheme
@@ -11,11 +12,13 @@ struct RPEApp: App {
             if isFirstRun {
                 OnboardingView(isPresented: $isFirstRun)
             } else {
-                MainTabView()
-                    .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
-                    .onAppear {
-                        updateUserInterfaceStyle()
-                    }
+                RootView {
+                    MainTabView()
+                        .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
+                        .onAppear {
+                            updateUserInterfaceStyle()
+                        }
+                }
             }
         }
     }
