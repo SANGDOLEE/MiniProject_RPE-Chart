@@ -48,7 +48,7 @@ class Toast {
     
     func present(text: String, symbol: String?, tint: Color = .primary, isUserInteractionEnabled: Bool = false, timing: ToastTime = .medium) {
         withAnimation(.snappy) {
-            toasts.append(.init(text: text, symbol: symbol, tint: tint, isUerInteractionEnabled: isUserInteractionEnabled, timing: timing))
+            toasts.append(.init(text: text, icon: symbol, tint: tint, isUerInteractionEnabled: isUserInteractionEnabled, timing: timing))
         }
     }
 }
@@ -56,7 +56,7 @@ class Toast {
 struct ToastItem: Identifiable {
     let id: UUID = .init()
     var text: String
-    var symbol: String?
+    var icon: String?
     var tint: Color
     var isUerInteractionEnabled: Bool
     var timing: ToastTime = .medium
@@ -112,7 +112,7 @@ fileprivate struct ToastView: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            if let symbol = item.symbol {
+            if let symbol = item.icon {
                 Image(symbol)
                     .resizable()
                     .frame(width: 18, height: 18)
