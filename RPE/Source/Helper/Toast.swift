@@ -126,8 +126,8 @@ fileprivate struct ToastView: View {
         .padding(.vertical, 10)
         .background(
             .background
-                .shadow(.drop(color: .primary.opacity(0.06), radius: 5, x: 5, y: 5))
-                .shadow(.drop(color: .primary.opacity(0.06), radius: 8, x: -5, y: -5)),
+                .shadow(.drop(color: .white.opacity(0.1), radius: 5, x: 5, y: 5))
+                .shadow(.drop(color: .white.opacity(0.1), radius: 8, x: -5, y: -5)),
             in: .capsule
         )
         .contentShape(.capsule)
