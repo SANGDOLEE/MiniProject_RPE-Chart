@@ -161,6 +161,15 @@ struct UpdateRecordView: View {
                         HStack {
                             AccentButton {
                                 totalUpdate()
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        Toast.shared.present(
+                                            text: "Record update completed",
+                                            symbol: "complete",
+                                            isUserInteractionEnabled: true,
+                                            timing: .short
+                                        )
+                                    }
                             } label: {
                                 Text("UPDATE")
                             }
@@ -241,5 +250,8 @@ extension UpdateRecordView {
 }
 
 #Preview {
-    UpdateRecordView(viewModel: BigThreeViewModel(), isMainTabbarVisible: .constant(true))
+    RootView {
+        UpdateRecordView(viewModel: BigThreeViewModel(), isMainTabbarVisible: .constant(true))
+    }
 }
+
