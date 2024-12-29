@@ -3,9 +3,6 @@ import StoreKit
 
 struct ProfileView: View {
     
-    @AppStorage("isText") private var unitOfWeight: Bool = false
-    
-    @State private var showAlert = false
     @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
@@ -118,68 +115,6 @@ struct ProfileView: View {
                             .background(.myBackBoxcolor)
                             .cornerRadius(12)
                             
-                        }
-                        
-                        // MARK: - Update
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("UPDATE")
-                                .font(.setPretendard(weight: .regular, size: 16))
-                                .foregroundStyle(.gray)
-                                .padding(.leading, 8)
-                            
-                            // "My BigThree" 버튼
-                            NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
-                                HStack {
-                                    Text("My BigThree")
-                                        .font(.setPretendard(weight: .regular, size: 16))
-                                        .foregroundStyle(.white)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.footnote)
-                                        .bold()
-                                        .foregroundColor(Color(hex: "555556"))
-                                }
-                                .padding()
-                                .background(.myBackBoxcolor)
-                                .cornerRadius(8)
-                            }
-                        }
-                        
-                        // MARK: - Configuration
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("CONFIGURATION")
-                                .font(.setPretendard(weight: .regular, size: 16))
-                                .foregroundStyle(.gray)
-                                .padding(.leading, 8)
-                            
-                            // "Weight Unit Conversion" 버튼
-                            NavigationLink(destination: WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible)) {
-                                HStack {
-                                    Text("Weight Unit Conversion")
-                                        .font(.setPretendard(weight: .regular, size: 16))
-                                        .foregroundStyle(.white)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.footnote)
-                                        .bold()
-                                        .foregroundColor(Color(hex: "555556"))
-                                }
-                                .padding()
-                                .background(Color.myBackBoxcolor)
-                                .cornerRadius(8)
-                            }
-                            
-                            //                    HStack {
-                            //                        Text("Display Mode")
-                            //                        Spacer()
-                            //                        Toggle("Auto Switch Mode", isOn: $isDarkModeEnabled)
-                            //                            .labelsHidden()
-                            //                            .onChange(of: isDarkModeEnabled) { value in
-                            //                                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                            //                                    windowScene.windows.first?.overrideUserInterfaceStyle = value ? .dark : .light
-                            //                                }
-                            //                            }
-                            //                    }
                         }
                         
                         // MARK: - 기타 정보 영역

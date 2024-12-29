@@ -10,11 +10,13 @@ import SwiftUI
 struct SettingView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
         ZStack {
             VStack {
+                // HeaderView
                 HStack {
                     Button {
                         dismiss()
@@ -31,9 +33,14 @@ struct SettingView: View {
                         .padding(.trailing, 16)
                     Spacer()
                 }
+                .padding(.bottom)
                 
-                
-                
+                VStack(spacing: 26) {
+                    
+                    MyInformationView()
+                    
+                    ConfigurationView()
+                }
                 Spacer()
                 
             }
@@ -44,6 +51,72 @@ struct SettingView: View {
         .applyGradientBackground()
         .onAppear {
             isMainTabbarVisible = false
+        }
+    }
+    
+    // MARK: MY INFORMATION View
+    private func MyInformationView() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("MY INFORMATION")
+                .font(.setPretendard(weight: .regular, size: 16))
+                .foregroundStyle(.gray)
+                .padding(.leading, 8)
+            
+            // "My BigThree" 버튼
+            NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
+                HStack {
+                    Text("My BigThree")
+                        .font(.setPretendard(weight: .regular, size: 16))
+                        .foregroundStyle(.white)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.footnote)
+                        .bold()
+                        .foregroundColor(Color(hex: "555556")) //  ⚠️ 나중에 색깔 변경 고려
+                }
+                .padding()
+                .background(.myBackBoxcolor)
+                .cornerRadius(8)
+            }
+        }
+    }
+    
+    // MARK: - CONFIGURATION View
+    private func ConfigurationView() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("CONFIGURATION")
+                .font(.setPretendard(weight: .regular, size: 16))
+                .foregroundStyle(.gray)
+                .padding(.leading, 8)
+            
+            // "Weight Unit Conversion" 버튼
+            NavigationLink(destination: WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible)) {
+                HStack {
+                    Text("Weight Unit Conversion")
+                        .font(.setPretendard(weight: .regular, size: 16))
+                        .foregroundStyle(.white)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.footnote)
+                        .bold()
+                        .foregroundColor(Color(hex: "555556"))  //  ⚠️ 나중에 색깔 변경 고려
+                }
+                .padding()
+                .background(Color.myBackBoxcolor)
+                .cornerRadius(8)
+            }
+            
+            //                    HStack {
+            //                        Text("Display Mode")
+            //                        Spacer()
+            //                        Toggle("Auto Switch Mode", isOn: $isDarkModeEnabled)
+            //                            .labelsHidden()
+            //                            .onChange(of: isDarkModeEnabled) { value in
+            //                                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            //                                    windowScene.windows.first?.overrideUserInterfaceStyle = value ? .dark : .light
+            //                                }
+            //                            }
+            //                    }
         }
     }
 }
