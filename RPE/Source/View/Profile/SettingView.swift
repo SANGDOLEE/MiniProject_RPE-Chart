@@ -27,7 +27,7 @@ struct SettingView: View {
                             .tint(.white)
                     }
                     Spacer()
-                    Text("Setting")
+                    Text("Settings")
                         .font(.setPretendard(weight: .semiBold, size: 17))
                         .foregroundStyle(.white)
                         .padding(.trailing, 16)
@@ -56,11 +56,11 @@ struct SettingView: View {
     
     // MARK: MY INFORMATION View
     private func MyInformationView() -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("MY INFORMATION")
-                .font(.setPretendard(weight: .regular, size: 16))
-                .foregroundStyle(.gray)
-                .padding(.leading, 8)
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Information")
+                .font(.setPretendard(weight: .semiBold, size: 14))
+                .foregroundStyle(.myB9B9B9)
+                .padding(.bottom, 8)
             
             // "My BigThree" 버튼
             NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
@@ -83,11 +83,11 @@ struct SettingView: View {
     
     // MARK: - CONFIGURATION View
     private func ConfigurationView() -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("CONFIGURATION")
-                .font(.setPretendard(weight: .regular, size: 16))
-                .foregroundStyle(.gray)
-                .padding(.leading, 8)
+        VStack(alignment: .leading, spacing: 4) {
+            Text("User settings")
+                .font(.setPretendard(weight: .semiBold, size: 14))
+                .foregroundStyle(.myB9B9B9)
+                .padding(.bottom, 8)
             
             // "Weight Unit Conversion" 버튼
             NavigationLink(destination: WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible)) {

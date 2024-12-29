@@ -118,7 +118,12 @@ struct ProfileView: View {
                         }
                         
                         // MARK: - 기타 정보 영역
-                        VStack(alignment: .leading, spacing: 3) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Customer Services")
+                                .font(.setPretendard(weight: .semiBold, size: 14))
+                                .foregroundStyle(.myB9B9B9)
+                                .padding(.bottom, 8)
+                            
                             // 앱 버전 정보
                             HStack {
                                 Text("My RPE version")
