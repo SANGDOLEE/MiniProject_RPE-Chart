@@ -59,15 +59,32 @@ struct SettingView: View {
     // MARK: MY INFORMATION View
     private func MyInformationView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Information")
+            Text("My Information")
                 .font(.setPretendard(weight: .semiBold, size: 14))
                 .foregroundStyle(.myB9B9B9)
                 .padding(.bottom, 8)
             
             // "My BigThree" 버튼
+            NavigationLink(destination: EditProfileView()) {
+                HStack {
+                    Text("Edit Pofile")
+                        .font(.setPretendard(weight: .regular, size: 16))
+                        .foregroundStyle(.white)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.footnote)
+                        .bold()
+                        .foregroundColor(Color(hex: "555556")) //  ⚠️ 나중에 색깔 변경 고려
+                }
+                .padding()
+                .background(.myBackBoxcolor)
+                .cornerRadius(8)
+            }
+            
+            // "My BigThree" 버튼
             NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
                 HStack {
-                    Text("My BigThree")
+                    Text("BigThree Weight")
                         .font(.setPretendard(weight: .regular, size: 16))
                         .foregroundStyle(.white)
                     Spacer()
