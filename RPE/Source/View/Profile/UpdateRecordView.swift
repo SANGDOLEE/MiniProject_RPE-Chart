@@ -228,8 +228,8 @@ struct UpdateRecordView: View {
         } label: {
             HStack {
                 Image(systemName: "chevron.left") // 화살표 Image
+                    .frame(width: 24, height: 24)
                     .tint(.white)
-                    .aspectRatio(contentMode: .fit)
             }
         }
     }
