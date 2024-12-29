@@ -6,7 +6,6 @@ struct ProfileView: View {
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
-    //    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled: Bool = false
     @Binding var isMainTabbarVisible: Bool
     
     var body: some View {
@@ -20,7 +19,9 @@ struct ProfileView: View {
                                 .font(.setPretendard(weight: .bold, size: 34))
                                 .foregroundStyle(.white)
                             Spacer()
-                            Image("gear")
+                            NavigationLink(destination: SettingView()) {
+                                Image("gear")
+                            }
                         }
                         
                         VStack(spacing: 10) {
