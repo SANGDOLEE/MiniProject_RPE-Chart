@@ -1,7 +1,7 @@
 import SwiftUI
 import StoreKit
 
-struct SettingView: View {
+struct ProfileView: View {
     
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
@@ -257,5 +257,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(isMainTabbarVisible: .constant(true))
+    ProfileView(isMainTabbarVisible: .constant(true))
 }
