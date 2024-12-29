@@ -8,19 +8,21 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                ScrollView {
-                    VStack(spacing: 30) {
-                        // 상단 타이틀
-                        HStack {
-                            Text("Profile")
-                                .font(.setPretendard(weight: .bold, size: 34))
-                                .foregroundStyle(.white)
-                            Spacer()
-                            NavigationLink(destination: SettingView(isMainTabbarVisible: $isMainTabbarVisible)) {
-                                Image("gear")
-                            }
+                VStack(spacing: 0) {
+                    HStack {
+                        Text("Profile")
+                            .font(.setPretendard(weight: .bold, size: 34))
+                            .foregroundStyle(.white)
+                        Spacer()
+                        NavigationLink(destination: SettingView(isMainTabbarVisible: $isMainTabbarVisible)) {
+                            Image("gear")
                         }
-                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom)
+                    
+                    // 상단 타이틀
+                    ScrollView {
                         VStack(spacing: 10) {
                             Image(systemName: "person.crop.circle")
                                 .resizable()
@@ -114,8 +116,8 @@ struct ProfileView: View {
                             .frame(height: 166)
                             .background(.myBackBoxcolor)
                             .cornerRadius(12)
-                            
                         }
+                        .padding(.top)
                         
                         // MARK: - 기타 정보 영역
                         VStack(alignment: .leading, spacing: 4) {
@@ -180,10 +182,9 @@ struct ProfileView: View {
                                 }
                             }
                         }
-                        .padding(.top)
+                        .padding(.top, 32)
                     }
-                    .padding()
-                    .padding(.bottom, 12)
+                    .padding(.horizontal)
                 }
                 .padding(.bottom, 68)
             }

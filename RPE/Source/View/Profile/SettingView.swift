@@ -17,21 +17,23 @@ struct SettingView: View {
         ZStack {
             VStack {
                 // HeaderView
-                HStack {
-                    Button {
-                        dismiss()
-                        isMainTabbarVisible = true
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .frame(width: 24, height: 24)
-                            .tint(.white)
+                ZStack {
+                    HStack {
+                        Button {
+                            dismiss()
+                            isMainTabbarVisible = true
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .frame(width: 24, height: 24)
+                                .tint(.white)
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                    Text("Settings")
-                        .font(.setPretendard(weight: .semiBold, size: 17))
-                        .foregroundStyle(.white)
-                        .padding(.trailing, 16)
-                    Spacer()
+                    HStack {
+                        Text("Settings")
+                            .font(.setPretendard(weight: .semiBold, size: 17))
+                            .foregroundStyle(.white)
+                    }
                 }
                 .padding(.bottom)
                 
@@ -41,10 +43,10 @@ struct SettingView: View {
                     
                     ConfigurationView()
                 }
-                Spacer()
                 
+                Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal) // 제일 바깥 padding 
         }
         .navigationBarBackButtonHidden()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -168,7 +168,7 @@ struct MainView: View {
             
             Spacer()
         }
-        .padding()
+        .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
         .onAppear {
