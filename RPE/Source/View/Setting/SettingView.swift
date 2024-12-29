@@ -15,10 +15,11 @@ struct SettingView: View {
                 VStack(spacing: 30) {
                     // 상단 타이틀
                     HStack {
-                        Text("Setting")
+                        Text("Profile")
                             .font(.setPretendard(weight: .bold, size: 34))
                             .foregroundStyle(.white)
                         Spacer()
+                        Image("gear")
                     }
                     
                     // MARK: - Update
