@@ -19,7 +19,7 @@ struct ProfileView: View {
                                 .font(.setPretendard(weight: .bold, size: 34))
                                 .foregroundStyle(.white)
                             Spacer()
-                            NavigationLink(destination: SettingView()) {
+                            NavigationLink(destination: SettingView(isMainTabbarVisible: $isMainTabbarVisible)) {
                                 Image("gear")
                             }
                         }

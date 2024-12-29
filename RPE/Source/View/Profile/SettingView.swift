@@ -8,11 +8,46 @@
 import SwiftUI
 
 struct SettingView: View {
+    
+    @Environment(\.dismiss) private var dismiss
+    @Binding var isMainTabbarVisible: Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack {
+                HStack {
+                    Button {
+                        dismiss()
+                        isMainTabbarVisible = true
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .frame(width: 24, height: 24)
+                            .tint(.white)
+                    }
+                    Spacer()
+                    Text("Setting")
+                        .font(.setPretendard(weight: .semiBold, size: 17))
+                        .foregroundStyle(.white)
+                        .padding(.trailing, 16)
+                    Spacer()
+                }
+                
+                
+                
+                Spacer()
+                
+            }
+            .padding(.horizontal)
+        }
+        .navigationBarBackButtonHidden()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .applyGradientBackground()
+        .onAppear {
+            isMainTabbarVisible = false
+        }
     }
 }
 
 #Preview {
-    SettingView()
+    SettingView(isMainTabbarVisible: .constant(true))
 }
