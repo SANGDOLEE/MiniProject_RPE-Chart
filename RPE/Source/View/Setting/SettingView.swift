@@ -26,7 +26,7 @@ struct SettingView: View {
                         VStack(spacing: 10) {
                             Image(systemName: "person.crop.circle")
                                 .resizable()
-                                .frame(width: 136, height: 136)
+                                .frame(width: 112, height: 112)
                             
                             Text("Hello, Lifter")
                                 .font(.setPretendard(weight: .semiBold, size: 18))
