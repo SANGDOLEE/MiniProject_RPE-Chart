@@ -12,9 +12,10 @@ import SwiftUI
 struct UserInformationView: View {
     
     @Environment(NavigationRouter.self) var navigationRouter
+    @AppStorage("isFirstRun") private var isFirstRun: Bool?
     @StateObject private var viewModel = BigThreeViewModel()
+    
     @State private var showAlert = false
-    @Binding var isPresented: Bool
     
     @State private var isSelectedGender = "MALE"
     
@@ -33,7 +34,7 @@ struct UserInformationView: View {
                 }
                 Spacer()
                 Button {
-                    isPresented = false
+                    isFirstRun = false
                 } label: {
                     Text("SKIP")
                         .font(.setPretendard(weight: .semiBold, size: 18))
@@ -67,7 +68,7 @@ struct UserInformationView: View {
                             Text("MALE")
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
-                                .font(.setPretendard(weight: isSelectedGender == "MALE" ? .bold : .regular, size: 18))
+                                .font(.setPretendard(weight: isSelectedGender == "MALE" ? .bold : .regular, size: 16))
                                 .foregroundStyle(isSelectedGender == "MALE" ? .black : .white)
                                 .background(isSelectedGender == "MALE" ? .myAccentcolor : .myB9B9B9)
                                 .cornerRadius(12)
@@ -79,7 +80,7 @@ struct UserInformationView: View {
                             Text("FEMALE")
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
-                                .font(.setPretendard(weight: isSelectedGender == "FEMALE" ? .bold : .regular, size: 18))
+                                .font(.setPretendard(weight: isSelectedGender == "FEMALE" ? .bold : .regular, size: 16))
                                 .foregroundStyle(isSelectedGender == "FEMALE" ? .black : .white)
                                 .background(isSelectedGender == "FEMALE" ? .myAccentcolor : .myB9B9B9)
                                 .cornerRadius(12)
@@ -117,14 +118,13 @@ struct UserInformationView: View {
                 Spacer()
                 
                 Button {
-                    isPresented = false
                     /// 3개 중 1개라도 값이 비어있다면 데이터 저장되지 않음
                     if bodyWeight.count == 0 {
                         showAlert = true
                     } else {
                         viewModel.saveData()
                         UIApplication.shared.closeKeyboard()
-                        isPresented = false
+                        isFirstRun = false
                     }
                 } label: {
                     Text("COMPLETE")
@@ -166,6 +166,6 @@ extension NumberFormatter {
 }
 
 #Preview {
-    UserInformationView(isPresented: .constant(true))
+    UserInformationView()
         .environment(NavigationRouter())
 }

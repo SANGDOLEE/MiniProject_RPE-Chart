@@ -44,8 +44,7 @@ struct OnboardingView: View {
                         }
                         HStack {
                             ZStack {
-                                TextField("Enter Weight", text: $viewModel.squatValue)
-                                    .font(.setPretendard(weight: .regular, size: 18))
+                                TextField("Squat Weight", text: $viewModel.squatValue)
                                     .multilineTextAlignment(.leading)
                                     .frame(height: 44)
                                     .padding(.horizontal)
@@ -74,7 +73,7 @@ struct OnboardingView: View {
                         }
                         HStack {
                             ZStack {
-                                TextField("Enter Weight", text: $viewModel.benchValue)
+                                TextField("BenchPress Weight", text: $viewModel.benchValue)
                                     .multilineTextAlignment(.leading)
                                     .frame(height: 44)
                                     .padding(.horizontal)
@@ -102,7 +101,7 @@ struct OnboardingView: View {
                         }
                         HStack {
                             ZStack {
-                                TextField("Enter Weight", text: $viewModel.deadValue)
+                                TextField("Deadlift Weight", text: $viewModel.deadValue)
                                     .multilineTextAlignment(.leading)
                                     .frame(height: 44)
                                     .padding(.horizontal)
