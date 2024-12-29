@@ -22,6 +22,22 @@ struct SettingView: View {
                         Image("gear")
                     }
                     
+                    VStack(spacing: 12) {
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .frame(width: 136, height: 136)
+                        
+                        Text("Nickname")
+                            .font(.setPretendard(weight: .semiBold, size: 18))
+                            .foregroundStyle(.white)
+                            .kerning(2)
+                        
+                        Text("Male 77.6+")
+                            .font(.setPretendard(weight: .regular, size: 14))
+                            .foregroundStyle(.my1DA4E7)
+                            .kerning(1)
+                    }
+                    
                     // MARK: - Update
                     VStack(alignment: .leading, spacing: 8) {
                         Text("UPDATE")
