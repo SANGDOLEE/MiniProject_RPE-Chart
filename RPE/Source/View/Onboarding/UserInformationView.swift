@@ -135,7 +135,7 @@ struct UserInformationView: View {
                     .alert(isPresented: $showAlert) {
                         Alert(
                             title: Text("Message"),
-                            message: Text("Please enter weight values \n for all types."),
+                            message: Text("Please enter Bodyweight."),
                             dismissButton: .default(Text("OK"))
                         )
                     }

@@ -139,7 +139,7 @@ struct OnboardingView: View {
                             .frame(height: 54)
                             .font(.setPretendard(weight: .bold, size: 18))
                             .foregroundStyle(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .white : .black)
-                            .background(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .gray : .myAccentcolor)
+                            .background(viewModel.squatValue.isEmpty || viewModel.benchValue.isEmpty || viewModel.deadValue.isEmpty ? .myB9B9B9 : .myAccentcolor)
                             .cornerRadius(12)
                     }
                     .padding(.top, 20)
