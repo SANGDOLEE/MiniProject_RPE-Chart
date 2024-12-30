@@ -197,7 +197,7 @@ struct MainView: View {
                 return "Invalid squat value"
             }
             
-        case "Benchpress":
+        case "BenchPress":
             if let benchValue = Double(viewModel.benchValue) {
                 let calculatedValue = benchValue * rpeModel.rpeArray[selectRpe][selectReps]
                 return calculatedValue.isWhole ? String(Int(calculatedValue)) : String(format: "%.1f", calculatedValue)
