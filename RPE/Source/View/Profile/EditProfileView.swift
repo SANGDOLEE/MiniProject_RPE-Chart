@@ -9,29 +9,47 @@ import SwiftUI
 
 struct EditProfileView: View {
     
+    @Environment(\.dismiss) private var dismiss
     @State private var nickName = "Eninem"
     @State private var isSelectedGender = "MALE"
     @State private var bodyWeight: String = ""
+    
+    @State var showEditProfile: Bool // EditProfileSheet
     
     var body: some View {
         ZStack {
             VStack {
                 // HeaderView
                 HStack {
-                    Image(systemName: "xmark")
-                        .frame(width: 17, height: 17)
-                        .foregroundStyle(.white)
-                        .bold()
+                    Button {
+                        dismiss()
+                        showEditProfile = false
+                    } label: {
+                        Image(systemName: "xmark")
+                            .frame(width: 17, height: 17)
+                            .foregroundStyle(.white)
+                            .bold()
+                    }
                     Spacer()
                     Text("Edit Profile")
                         .font(.setPretendard(weight: .semiBold, size: 17))
                         .foregroundStyle(.white)
                     Spacer()
-                    Text("완료")
-                        .font(.setPretendard(weight: .regular, size: 15))
-                        .foregroundStyle(.white)
+                    Button {
+                        dismiss()
+                        showEditProfile = false
+                    } label: {
+                        Text("완료")
+                            .font(.setPretendard(weight: .regular, size: 15))
+                            .foregroundStyle(.white)
+                    }
                 }
-                .padding(.bottom)
+                .padding(.horizontal) // 바깥 padding 16
+                
+                Divider()
+                    .frame(height: 1) // 두께를 조정
+                    .background(.myB9B9B9.opacity(0.3))
+                    .padding(.bottom)
                 
                 ScrollView {
                     Image(systemName: "person.crop.circle")
@@ -48,16 +66,21 @@ struct EditProfileView: View {
                                 Spacer()
                             }
                             HStack {
-                                TextField("Squat Weight", text: $nickName)
-                                    .multilineTextAlignment(.leading)
-                                    .frame(height: 44)
-                                    .padding(.horizontal)
-                                    .background(.white)
-                                    .cornerRadius(12)
-                                    .keyboardType(.decimalPad)
-                                //                                .onChange(of: nickName) { oldValue, newValue in
-                                //                                    nickName = String(newValue.prefix(18))
-                                //                                }
+                                ZStack {
+                                    TextField("", text: $nickName)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(height: 44)
+                                        .padding(.horizontal)
+                                        .background(.white)
+                                        .cornerRadius(12)
+                                    //                                .onChange(of: nickName) { oldValue, newValue in
+                                    //                                    nickName = String(newValue.prefix(18))
+                                    //                                }
+                                    HStack {
+                                        Spacer()
+                                        XmarkButton(text: $nickName)
+                                    }
+                                }
                             }
                             HStack {
                                 // 닉네임은 18자 이하로 입력해주세요.
@@ -128,16 +151,19 @@ struct EditProfileView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top)
                 }
+                .padding(.horizontal) // 바깥 padding 16
                 
                 Spacer()
             }
-            .padding(.horizontal) // 제일 바깥 padding
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
+        .onTapGesture {
+            UIApplication.shared.closeKeyboard()
+        }
     }
 }
 
 #Preview {
-    EditProfileView()
+    EditProfileView(showEditProfile: true)
 }

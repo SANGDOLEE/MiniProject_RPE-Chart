@@ -13,6 +13,8 @@ struct SettingView: View {
     @AppStorage("isText") private var unitOfWeight: Bool = false
     @Binding var isMainTabbarVisible: Bool
     
+    @State private var showEditProfile = false // EditProfileSheet
+    
     var body: some View {
         ZStack {
             VStack {
@@ -46,13 +48,16 @@ struct SettingView: View {
                 
                 Spacer()
             }
-            .padding(.horizontal) // 제일 바깥 padding 
+            .padding(.horizontal) // 제일 바깥 padding
         }
         .navigationBarBackButtonHidden()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
         .onAppear {
             isMainTabbarVisible = false
+        }
+        .fullScreenCover(isPresented: $showEditProfile) {
+            EditProfileView(showEditProfile: showEditProfile)
         }
     }
     
@@ -65,16 +70,18 @@ struct SettingView: View {
                 .padding(.bottom, 8)
             
             // "My BigThree" 버튼
-            NavigationLink(destination: EditProfileView()) {
+            Button {
+                showEditProfile = true // fullScreenCover 띄우기
+            } label: {
                 HStack {
-                    Text("Edit Pofile")
+                    Text("Edit Profile")
                         .font(.setPretendard(weight: .regular, size: 16))
                         .foregroundStyle(.white)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.footnote)
                         .bold()
-                        .foregroundColor(Color(hex: "555556")) //  ⚠️ 나중에 색깔 변경 고려
+                        .foregroundColor(Color(hex: "555556"))
                 }
                 .padding()
                 .background(.myBackBoxcolor)
