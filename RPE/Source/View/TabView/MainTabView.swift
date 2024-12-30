@@ -13,7 +13,7 @@ struct MainTabView: View {
     @State private var xAxis: CGFloat = 0
     @Namespace private var animation
     
-    let tabs = ["main", "settings"]
+    let tabs = ["main", "profile"]
     
     init() {
         // 시스템 탭 바 숨기기
@@ -28,8 +28,8 @@ struct MainTabView: View {
                 MainView(viewModel: viewModel)
                     .tag("main")
                 
-                SettingView(isMainTabbarVisible: $isMainTabbarVisible)
-                    .tag("settings")
+                ProfileView(isMainTabbarVisible: $isMainTabbarVisible, viewModel: BigThreeViewModel())
+                    .tag("profile")
             }
             .onChange(of: selectedTab) { oldValue, newValue in
                 triggerHaptic()
@@ -101,8 +101,8 @@ struct MainTabView: View {
         switch tab {
         case "main":
             return "chart.bar.fill"
-        case "settings":
-            return "gear"
+        case "profile":
+            return "person.fill"
         default:
             return "questionmark"
         }
@@ -113,7 +113,7 @@ struct MainTabView: View {
         switch tab {
         case "main":
             return .blue
-        case "settings":
+        case "profile":
             return .blue
         default:
             return .gray

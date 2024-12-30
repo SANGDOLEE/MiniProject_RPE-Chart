@@ -2,34 +2,33 @@
 <img src="https://github.com/SANGDOLEE/MiniProject_RPEChart/assets/108053426/3e803547-ba2c-4bbe-a12e-42266a5e7d0a" width="200px;" alt=""/>
 <br/>
 
+> RPE Chart </br>
+> 개인프로젝트 </br>
+> 개발기간 : 2023.12 ~ 2024.01 </br>
+>
+> Rate of Perceived Exertion을 기반의 운동 자각도 서비스 앱
 
-<h1>RPE Chart v1.0</h1>
-<p> MVP (Minimum Viable Product) 미니 개인프로젝트 </p>
-<p> 개발기간 : 2023.12 ~ 2024.01 </p>
+---
 
-<br/>
+### 🟣 RPE Chart
+<b>3대 운동을 하는 사람이 조금 더 쳬계적인 훈련을 통해 증량을 보다 쉽게 도와주는 앱 RPE Chart입니다. </b>
+</br>
+</br>
+RPE란 Rate of Perceived Exertion의 약자로 운동 자각도로써,</br>
+쉽게 말해서 내가 하고 있는 운동이 얼마나 힘든지를 숫자로 나타낸 것입니다. </br>
+특정 중량에 일정한 비율을 계산하여 원하는 운동 강도의 중량을 계산할 수 있습니다. </br>
+> 🧑🏻‍💻 개발자 본인이 개인적인 목적으로 사용하기 위해 가볍게 만들었다가, 실제 파워리프팅이라는 운동을 하는 국내, 국외사람들도 점점 많아지는 추세이기에 배포까지 해보게되었습니다. 현재는 버전을 관리하며 업데이트를 하고 있습니다.
 
-<h2> 배포 주소 </h2>
-<p> 앱스토어 : https://apps.apple.com/kr/app/rpe-chart/id6475646908 </p>
+---
 
-<br/>
+### 🟣 주요 기능
+🏋🏻‍♀️ 사용자가 반복횟수와 강도를 선택하여, 하고하자는 강도를 계산할 수 있어요.</br>
+📈 사용자의 기록을 업데이트 할 수 있어요.
 
-<h2> 프로젝트 소개 </h2>
-<p> RPE란 Rate of Perceived Exertion의 약자로 운동 자각도를 나타냅니다. 쉽게 말해서 내가 하고 있는 운동이 얼마나 힘든지를 숫자로 나타낸 것입니다. 사용자는 특정 중량에 일정한 퍼센테이지를 곱하여 원하는 운동강도의 중량을 계산할 수 있습니다. </p>
-<p> 개발자 본인이 개인적인 목적으로 사용하기 위해 가볍게 만들었다가, 실제 파워리프팅이라는 운동을 하는 국내, 국외사람들도 점점 많아지는 추세이기에 배포까지 해보게되었습니다. 실제 앱스토어에 출시되어있는 1개의 RPE APP을 사용해본 후, 사용자의 시각에서 보았을 때 조금 더 편리하고 쉽게 사용할 수 있게 제작하였습니다.</p>
+---
 
-<br/>
-
-<h1> Stacks 📚 </h1>
-<h3> Environment </h3>
-<p><img src="https://img.shields.io/badge/XCODE-147EFB?style=for-the-badge&logo=xcode&logoColor=white"> <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white"></p>
-
-<h3> Development </h3>
-<p><img src="https://img.shields.io/badge/SWIFTUI-FF9A00?style=for-the-badge&logo=swiftUI&logoColor=white"></p>
-
-<br/>
-
-<h1> 화면 구성 </h1>
+### 🟣 앱 스크린샷
+<b> 1️⃣ 1.0 버전 </b>
 <!-- 첫번째 테이블 -->
 <table>
    <tbody>
@@ -68,20 +67,23 @@
    </tbody>
 </table>
 
-<br/>
+---
 
-<h1> 주요 기능 </h1>
-<h3> ⭐️ 맞춤 강도 계산 기능 </h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; - 선택한 Reps와 Rpe에 따라 원하는 강도 제공 </p>
+### 🟣 배포 주소
+[AppStore](https://apps.apple.com/kr/app/rpe-chart/id6475646908 "앱스토어로 이동")
 
-<h3> ⭐️ 자유로운 사용자 중량 업데이트 기능 </h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; - 언제든지 편하게 사용자의 기록을 업데이트하며 강도를 계산 가능 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; - 추후 운동종목을 추가 혹은 변경하는 기능 업데이트 예정 </p>
+---
 
-<h3> ⭐️ UI 변경 기능 </h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; - BackgroundColor, FontColor를 사용자가 지정 가능 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; - 중량단위를 KG와 LBS중 변환 가능 </p>
-
-<br/>
-<br/>
-<br/>
+### ⚠️ 커밋 컨벤션
+```
+Example) Feat: 중량 단위 KG/LBS 변환 기능 추가
+```
+| 태크 | 설명 |
+|----------|----------|
+| Feat    | 기능추가    |
+| Design    | 디자인 작업    |
+| Fix    | 수정    |
+| Hotfix    | 긴급 수정    |
+| Chore    | 파일 관리 및 코드 외 작업    |
+| Refactor    | 코드 리팩토링    |
+| Release    | 버전 관리    |

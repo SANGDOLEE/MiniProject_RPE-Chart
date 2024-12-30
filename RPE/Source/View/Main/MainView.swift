@@ -11,9 +11,6 @@ struct MainView: View {
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    @State private var typeColor = Color.white
-    @State private var textColor = Color.black
-    
     private let rpeModel = Rpe()
     
     //    init(viewModel: MySBDViewModel) {
@@ -168,7 +165,7 @@ struct MainView: View {
             
             Spacer()
         }
-        .padding()
+        .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
         .onAppear {
@@ -197,7 +194,7 @@ struct MainView: View {
                 return "Invalid squat value"
             }
             
-        case "Benchpress":
+        case "BenchPress":
             if let benchValue = Double(viewModel.benchValue) {
                 let calculatedValue = benchValue * rpeModel.rpeArray[selectRpe][selectReps]
                 return calculatedValue.isWhole ? String(Int(calculatedValue)) : String(format: "%.1f", calculatedValue)

@@ -52,8 +52,8 @@ struct WeightUnitView: View {
         } label: {
             HStack {
                 Image(systemName: "chevron.left")
+                    .frame(width: 24, height: 24)
                     .tint(.white)
-                    .aspectRatio(contentMode: .fit)
             }
         }
     }
