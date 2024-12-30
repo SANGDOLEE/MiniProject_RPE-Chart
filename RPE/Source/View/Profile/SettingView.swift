@@ -91,7 +91,7 @@ struct SettingView: View {
             // "My BigThree" 버튼
             NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
                 HStack {
-                    Text("BigThree Weight")
+                    Text("Update BigThree Weight")
                         .font(.setPretendard(weight: .regular, size: 16))
                         .foregroundStyle(.white)
                     Spacer()
