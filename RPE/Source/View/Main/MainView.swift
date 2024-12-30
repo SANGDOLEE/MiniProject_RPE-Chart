@@ -11,9 +11,6 @@ struct MainView: View {
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    @State private var typeColor = Color.white
-    @State private var textColor = Color.black
-    
     private let rpeModel = Rpe()
     
     //    init(viewModel: MySBDViewModel) {
