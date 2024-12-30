@@ -28,7 +28,7 @@ struct MainTabView: View {
                 MainView(viewModel: viewModel)
                     .tag("main")
                 
-                ProfileView(isMainTabbarVisible: $isMainTabbarVisible)
+                ProfileView(isMainTabbarVisible: $isMainTabbarVisible, viewModel: BigThreeViewModel())
                     .tag("profile")
             }
             .onChange(of: selectedTab) { oldValue, newValue in

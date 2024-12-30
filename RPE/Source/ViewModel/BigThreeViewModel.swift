@@ -13,6 +13,12 @@ class BigThreeViewModel: ObservableObject {
         deadValue = UserDefaults.standard.string(forKey: "deadValue") ?? ""
     }
     
+    var totalValue: Double {
+        (Double(squatValue) ?? 0.0) +
+        (Double(benchValue) ?? 0.0) +
+        (Double(deadValue) ?? 0.0)
+    }
+    
     func saveData() {
         UserDefaults.standard.setValue(squatValue, forKey: "squatValue")
         UserDefaults.standard.setValue(benchValue, forKey: "benchValue")

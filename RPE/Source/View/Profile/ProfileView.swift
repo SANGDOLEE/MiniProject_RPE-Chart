@@ -4,6 +4,7 @@ import StoreKit
 struct ProfileView: View {
     
     @Binding var isMainTabbarVisible: Bool
+    @ObservedObject var viewModel: BigThreeViewModel
     
     var body: some View {
         NavigationStack {
@@ -48,7 +49,8 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .padding(.vertical)
                                 
-                                Text("485")
+                                // ⚠️ 나중에 정수형으로 딱 떨어지면, 소수점 표시 X
+                                Text("\(viewModel.totalValue, specifier: "%.1f")")
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                                     .kerning(0.6)
@@ -191,6 +193,10 @@ struct ProfileView: View {
             .applyGradientBackground()
         }
     }
+
+    func weightTotal() {
+
+    }
     
     var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -199,5 +205,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(isMainTabbarVisible: .constant(true))
+    ProfileView(isMainTabbarVisible: .constant(true), viewModel: BigThreeViewModel())
 }
