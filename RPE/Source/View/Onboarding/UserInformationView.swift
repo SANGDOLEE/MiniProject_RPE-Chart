@@ -19,7 +19,7 @@ struct UserInformationView: View {
     
     @State private var showAlert = false
     
-    @State private var isSelectedGender = "MALE"
+    @State private var isSelectedGender = "Male"
     
     @State private var bodyWeight: String = ""
     
@@ -70,9 +70,9 @@ struct UserInformationView: View {
                             Text("MALE")
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
-                                .font(.setPretendard(weight: isSelectedGender == "MALE" ? .bold : .regular, size: 16))
-                                .foregroundStyle(isSelectedGender == "MALE" ? .black : .white)
-                                .background(isSelectedGender == "MALE" ? .myAccentcolor : .myB9B9B9)
+                                .font(.setPretendard(weight: isSelectedGender == "Male" ? .bold : .regular, size: 16))
+                                .foregroundStyle(isSelectedGender == "Male" ? .black : .white)
+                                .background(isSelectedGender == "Male" ? .myAccentcolor : .myB9B9B9)
                                 .cornerRadius(12)
                         }
                         
@@ -82,9 +82,9 @@ struct UserInformationView: View {
                             Text("FEMALE")
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
-                                .font(.setPretendard(weight: isSelectedGender == "FEMALE" ? .bold : .regular, size: 16))
-                                .foregroundStyle(isSelectedGender == "FEMALE" ? .black : .white)
-                                .background(isSelectedGender == "FEMALE" ? .myAccentcolor : .myB9B9B9)
+                                .font(.setPretendard(weight: isSelectedGender == "Female" ? .bold : .regular, size: 16))
+                                .foregroundStyle(isSelectedGender == "Female" ? .black : .white)
+                                .background(isSelectedGender == "Female" ? .myAccentcolor : .myB9B9B9)
                                 .cornerRadius(12)
                         }
                     }
