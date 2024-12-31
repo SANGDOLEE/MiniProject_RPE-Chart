@@ -103,7 +103,7 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .padding(.vertical)
                                 
-                                Text("360.5")
+                                Text(getWilksScore())
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                                     .kerning(0.6)
@@ -280,6 +280,49 @@ struct ProfileView: View {
         return dotsScore.truncatingRemainder(dividingBy: 1) == 0
             ? String(format: "%.0f", dotsScore) // 정수로 출력
             : String(format: "%.2f", dotsScore) // 소수점 1자리까지 출력
+    }
+    
+    // Wilks 계산 함수
+    private func getWilksScore() -> String {
+        let realm = try! Realm()
+        
+        guard let profileData = realm.objects(Profile.self).first else {
+            print("⚠️ Profile 데이터 없음")
+            return "N/A"
+        }
+        
+        let bodyWeight = profileData.bodyWeight
+        let isMale = profileData.gender == "Male"
+        let totalWeight = viewModel.totalValue
+        
+        guard totalWeight > 0 else {
+            print("⚠️ Total Weight 없음")
+            return "N/A"
+        }
+        
+        return calculateWilks(totalWeight: totalWeight, bodyWeight: bodyWeight, isMale: isMale)
+    }
+    
+    // Wilks 계산 로직
+    private func calculateWilks(totalWeight: Double, bodyWeight: Double, isMale: Bool) -> String {
+        guard bodyWeight > 0 else { return "N/A" }
+        
+        // Wilks 상수 (성별에 따라 다름)
+        let constants = isMale
+            ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
+            : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
+        
+        // 분모 계산
+        let denominator = constants.enumerated().reduce(0.0) { partialResult, term in
+            let (index, coefficient) = term
+            return partialResult + coefficient * pow(bodyWeight, Double(index))
+        }
+        
+        // Wilks 점수 계산
+        let wilksScore = (500 * totalWeight) / denominator
+        return wilksScore.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", wilksScore) // 정수로 출력
+            : String(format: "%.2f", wilksScore) // 소수점 2자리까지 출력
     }
     
     var appVersion: String {
