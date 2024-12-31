@@ -46,7 +46,7 @@ struct EditProfileView: View {
                     } label: {
                         Text("완료")
                             .font(.setPretendard(weight: .regular, size: 15))
-                            .foregroundStyle(.white)
+                            .foregroundStyle( .white)
                     }
                 }
                 .padding(.horizontal) // 바깥 padding 16
@@ -93,13 +93,13 @@ struct EditProfileView: View {
                                        // 닉네임이 18자를 초과할 경우 안내 문구
                                        Text("Names need to be less than 18 characters long.")
                                            .font(.setPretendard(weight: .medium, size: 12))
-                                           .foregroundStyle(.red)
+                                           .foregroundStyle(.myBF2418)
                                            .opacity(1)
                                    } else if userNickname.isEmpty {
                                        // 닉네임이 비어있을 경우 안내 문구
                                        Text("Please enter name")
                                            .font(.setPretendard(weight: .medium, size: 12))
-                                           .foregroundStyle(.red)
+                                           .foregroundStyle(.myBF2418)
                                            .opacity(1)
                                    } else {
                                        // 문구를 숨기기
@@ -174,7 +174,7 @@ struct EditProfileView: View {
                             HStack {
                                 Text("If bodyweight is not entered, it will be set to 0.")
                                     .font(.setPretendard(weight: .medium, size: 12))
-                                    .foregroundStyle(.red)
+                                    .foregroundStyle(.myBF2418)
                                     .opacity(userBodyweight.count == 0 ? 1 : 0)
                                 Spacer()
                             }
