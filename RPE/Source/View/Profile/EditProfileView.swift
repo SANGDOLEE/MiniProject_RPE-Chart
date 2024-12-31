@@ -155,16 +155,22 @@ struct EditProfileView: View {
                                     .foregroundStyle(.white)
                                 Spacer()
                             }
-                            TextField("BodyWeight", text: $userBodyweight)
-                                .multilineTextAlignment(.leading)
-                                .frame(height: 44)
-                                .padding(.horizontal)
-                                .background(.white)
-                                .cornerRadius(12)
-                                .keyboardType(.decimalPad)
-                                .onChange(of: userBodyweight) { oldValue, newValue in
-                                    userBodyweight = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                            ZStack {
+                                TextField("BodyWeight", text: $userBodyweight)
+                                    .multilineTextAlignment(.leading)
+                                    .frame(height: 44)
+                                    .padding(.horizontal)
+                                    .background(.white)
+                                    .cornerRadius(12)
+                                    .keyboardType(.decimalPad)
+                                    .onChange(of: userBodyweight) { oldValue, newValue in
+                                        userBodyweight = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                    }
+                                HStack {
+                                    Spacer()
+                                    XmarkButton(text: $userBodyweight)
                                 }
+                            }
                             HStack {
                                 Text("If bodyweight is not entered, it will be set to 0.")
                                     .font(.setPretendard(weight: .medium, size: 12))
