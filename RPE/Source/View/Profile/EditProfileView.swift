@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct EditProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @State private var nickName = "Eninem"
-    @State private var isSelectedGender = "MALE"
+    @State private var userNickname = ""
+    @State private var isSelectedGender = "Male"
     @State private var bodyWeight: String = ""
     
     @State var showEditProfile: Bool // EditProfileSheet
@@ -36,6 +37,8 @@ struct EditProfileView: View {
                         .foregroundStyle(.white)
                     Spacer()
                     Button {
+                        setUserNickname()
+                        
                         dismiss()
                         showEditProfile = false
                     } label: {
@@ -67,7 +70,7 @@ struct EditProfileView: View {
                             }
                             HStack {
                                 ZStack {
-                                    TextField("", text: $nickName)
+                                    TextField("", text: $userNickname)
                                         .multilineTextAlignment(.leading)
                                         .frame(height: 44)
                                         .padding(.horizontal)
@@ -78,7 +81,7 @@ struct EditProfileView: View {
                                     //                                }
                                     HStack {
                                         Spacer()
-                                        XmarkButton(text: $nickName)
+                                        XmarkButton(text: $userNickname)
                                     }
                                 }
                             }
@@ -87,7 +90,7 @@ struct EditProfileView: View {
                                 Text("Names need to be less than 18 characters long.")
                                     .font(.setPretendard(weight: .medium, size: 12))
                                     .foregroundStyle(.red)
-                                    .opacity(nickName.count > 18 ? 1 : 0) // ⚠️ 이게 Visible 상태면 닉네임 저장 안되게 해야함 ! 18자 이하일때만 닉네임 변경되게.
+                                    .opacity(userNickname.count > 18 ? 1 : 0) // ⚠️ 이게 Visible 상태면 닉네임 저장 안되게 해야함 ! 18자 이하일때만 닉네임 변경되게.
                                 Spacer()
                             }
                         }
@@ -158,8 +161,45 @@ struct EditProfileView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
+        .onAppear {
+            loadUserNickname() // View가 나타날 때 닉네임 로드
+        }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
+        }
+    }
+    
+    private func loadUserNickname() {
+        let realm = try! Realm()
+        
+        if let profile = realm.objects(Profile.self).first {
+            userNickname = profile.nickname ?? ""
+        }
+    }
+    
+    private func setUserNickname() {
+        let realm = try! Realm()
+        
+        // 기본적으로 존재하는 Profile 객체를 검색
+        if let existingProfile = realm.objects(Profile.self).first {
+            // Profile이 이미 존재하면 닉네임을 업데이트
+            try! realm.write {
+                existingProfile.nickname = userNickname
+            }
+            print("Nickname updated: \(userNickname)")
+        } else {
+            // Profile이 없으면 새로 생성
+            let newProfile = Profile(
+                nickname: userNickname,
+                image: nil, // 이미지 저장 로직이 별도로 필요
+                gender: isSelectedGender,
+                bodyWeight: Double(bodyWeight) ?? 0.0
+            )
+            
+            try! realm.write {
+                realm.add(newProfile)
+            }
+            print("New profile created with nickname: \(userNickname)")
         }
     }
 }

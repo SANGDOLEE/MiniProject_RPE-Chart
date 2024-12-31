@@ -223,7 +223,7 @@ struct MainView: View {
         let realm = try! Realm()
         if let profileData = realm.objects(Profile.self).first {
             profile = profileData
-            print("Nickname: \(profileData.nickname ?? "N/A")")
+            print("Nickname: \(profileData.nickname)")
             print("Gender: \(profileData.gender)")
             print("BodyWeight: \(profileData.bodyWeight)")
         } else {

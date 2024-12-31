@@ -31,7 +31,7 @@ struct ProfileView: View {
                                 .resizable()
                                 .frame(width: 112, height: 112)
                             
-                            Text("Hello, Lifter")
+                            Text(getUserNickname())
                                 .font(.setPretendard(weight: .semiBold, size: 18))
                                 .foregroundStyle(.white)
                                 .kerning(2)
@@ -196,6 +196,19 @@ struct ProfileView: View {
         }
     }
     
+    // User 닉네임
+    private func getUserNickname() -> String {
+        let realm = try! Realm()
+        
+        if let profileData = realm.objects(Profile.self).first {
+            let userNickname = profileData.nickname
+            return userNickname
+        } else {
+            print("⚠️ 유저 성별 입력되지 않음")
+            return "Hello, Lifter"
+        }
+    }
+    
     // User 체중
     private func getUserGender() -> String {
         let realm = try! Realm()
@@ -208,7 +221,6 @@ struct ProfileView: View {
             return "N/A"
         }
     }
-    
     
     // User 체중
     private func getUserBodyweight() -> String {

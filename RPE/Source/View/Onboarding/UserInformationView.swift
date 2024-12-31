@@ -124,7 +124,7 @@ struct UserInformationView: View {
                     if bodyWeight.count == 0 {
                         showAlert = true
                     } else {
-                        saveProfileData()
+                        setProfileData()
                         UIApplication.shared.closeKeyboard()
                         isFirstRun = false
                     }
@@ -157,13 +157,13 @@ struct UserInformationView: View {
         }
     }
     
-    private func saveProfileData() {
+    private func setProfileData() {
         let realm = try! Realm()
         let weight = Double(bodyWeight) ?? 0.0
         let profileImageData = UIImage(named: "default_image")?.jpegData(compressionQuality: 0.8) // 기본 이미지 사용
         
         let profile = Profile(
-            nickname: "",
+            nickname: "Hello, Lifter",
             image: profileImageData,
             gender: isSelectedGender,
             bodyWeight: weight

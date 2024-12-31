@@ -13,13 +13,13 @@ class Profile: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     
     // Properties
-    @Persisted var nickname: String? = ""
+    @Persisted var nickname: String = "Hello, Lifter"
     @Persisted var image: Data? // 이미지 데이터를 저장 (옵션)
     @Persisted var gender: String = "Male" // "Male" or "Female"
     @Persisted var bodyWeight: Double = 0.0 // 몸무게
     
     // Convenience initializer
-    convenience init(nickname: String?, image: Data?, gender: String, bodyWeight: Double) {
+    convenience init(nickname: String, image: Data?, gender: String, bodyWeight: Double) {
         self.init()
         self.nickname = nickname
         self.image = image
