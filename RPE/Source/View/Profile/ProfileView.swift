@@ -36,7 +36,7 @@ struct ProfileView: View {
                                 .foregroundStyle(.white)
                                 .kerning(2)
                             
-                            Text("Male \(getUserBodyweight())+")
+                            Text("\(getUserGender()) \(getUserBodyweight())+")
                                 .font(.setPretendard(weight: .regular, size: 14))
                                 .foregroundStyle(.my1DA4E7)
                                 .kerning(1)
@@ -196,6 +196,18 @@ struct ProfileView: View {
         }
     }
     
+    // User 체중
+    private func getUserGender() -> String {
+        let realm = try! Realm()
+        
+        if let profileData = realm.objects(Profile.self).first {
+            let userGender = profileData.gender
+            return userGender
+        } else {
+            print("⚠️ 유저 성별 입력되지 않음")
+            return "N/A"
+        }
+    }
     
     
     // User 체중

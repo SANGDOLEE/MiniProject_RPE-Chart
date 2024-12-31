@@ -65,7 +65,7 @@ struct UserInformationView: View {
                     }
                     HStack(spacing: 16) {
                         Button {
-                            isSelectedGender = "MALE"
+                            isSelectedGender = "Male"
                         } label: {
                             Text("MALE")
                                 .frame(maxWidth: .infinity)
@@ -77,7 +77,7 @@ struct UserInformationView: View {
                         }
                         
                         Button {
-                            isSelectedGender = "FEMALE"
+                            isSelectedGender = "Female"
                         } label: {
                             Text("FEMALE")
                                 .frame(maxWidth: .infinity)
