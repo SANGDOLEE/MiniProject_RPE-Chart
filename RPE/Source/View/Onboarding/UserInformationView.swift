@@ -166,16 +166,27 @@ struct UserInformationView: View {
         let realm = try! Realm()
         let weight = Double(bodyWeight) ?? 0.0
         let profileImageData = UIImage(named: "default_image")?.jpegData(compressionQuality: 0.8) // 기본 이미지 사용
-        
-        let profile = Profile(
-            nickname: "Hello, Lifter",
-            image: profileImageData,
-            gender: isSelectedGender,
-            bodyWeight: weight
-        )
-        
-        try! realm.write {
-            realm.add(profile)
+
+        if let existingProfile = realm.objects(Profile.self).first {
+            // 이미 존재하는 Profile이 있을 경우 업데이트
+            try! realm.write {
+                existingProfile.nickname = "Hello, Lifter"
+                existingProfile.image = profileImageData
+                existingProfile.gender = isSelectedGender
+                existingProfile.bodyWeight = weight
+            }
+        } else {
+            // 존재하지 않을 경우 새로운 Profile 생성
+            let newProfile = Profile(
+                nickname: "Hello, Lifter",
+                image: profileImageData,
+                gender: isSelectedGender,
+                bodyWeight: weight
+            )
+            
+            try! realm.write {
+                realm.add(newProfile)
+            }
         }
     }
 }
