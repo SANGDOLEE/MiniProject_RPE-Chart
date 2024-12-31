@@ -77,7 +77,7 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .padding(.vertical)
                                 
-                                Text("355.5")
+                                Text(getDotsScore())
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                                     .kerning(0.6)
@@ -241,6 +241,45 @@ struct ProfileView: View {
             print("No profile data found. Returning default body weight of 0.0.")
             return "N/A"
         }
+    }
+    // Dots 계산 함수
+    private func getDotsScore() -> String {
+        let realm = try! Realm()
+        
+        guard let profileData = realm.objects(Profile.self).first else {
+            print("⚠️ Profile 데이터 없음")
+            return "N/A"
+        }
+        
+        let bodyWeight = profileData.bodyWeight
+        let isMale = profileData.gender == "Male" // 성별 확인
+        let totalWeight = viewModel.totalValue // Total Weight
+        
+        guard totalWeight > 0 else {
+            print("⚠️ Total Weight 없음")
+            return "N/A"
+        }
+        
+        return calculateDots(totalWeight: totalWeight, bodyWeight: bodyWeight, isMale: isMale)
+    }
+    
+    // Dots 계산 추가 로직
+    private func calculateDots(totalWeight: Double, bodyWeight: Double, isMale: Bool) -> String {
+        guard bodyWeight > 0 else { return "N/A" }
+        
+        let constants = isMale
+            ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
+            : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
+        
+        let denominator = constants.enumerated().reduce(0.0) { partialResult, term in
+            let (index, coefficient) = term
+            return partialResult + coefficient * pow(bodyWeight, Double(index))
+        }
+        
+        let dotsScore = (500 * totalWeight) / denominator
+        return dotsScore.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", dotsScore) // 정수로 출력
+            : String(format: "%.2f", dotsScore) // 소수점 1자리까지 출력
     }
     
     var appVersion: String {
