@@ -225,8 +225,8 @@
 		1F9DA1DD2C988BA20024BD72 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				1FD792E22B2EBE7600D1482E /* OnboardingView.swift */,
 				1FFF2FB12D211D990062D349 /* UserInformationView.swift */,
+				1FD792E22B2EBE7600D1482E /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
