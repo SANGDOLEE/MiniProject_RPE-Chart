@@ -13,7 +13,7 @@ struct EditProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var userNickname = ""
     @State private var userGender = ""
-    @State private var bodyWeight: String = ""
+    @State private var userBodyweight: String = ""
     
     @State var showEditProfile: Bool // EditProfileSheet
     
@@ -39,6 +39,7 @@ struct EditProfileView: View {
                     Button {
                         setUserNickname()
                         setUserGender()
+                        setUserBodyweight()
                         
                         dismiss()
                         showEditProfile = false
@@ -140,15 +141,15 @@ struct EditProfileView: View {
                                     .foregroundStyle(.white)
                                 Spacer()
                             }
-                            TextField("BodyWeight", text: $bodyWeight)
+                            TextField("BodyWeight", text: $userBodyweight)
                                 .multilineTextAlignment(.leading)
                                 .frame(height: 44)
                                 .padding(.horizontal)
                                 .background(.white)
                                 .cornerRadius(12)
                                 .keyboardType(.decimalPad)
-                                .onChange(of: bodyWeight) { oldValue, newValue in
-                                    bodyWeight = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                .onChange(of: userBodyweight) { oldValue, newValue in
+                                    userBodyweight = newValue.prefix(5).filter { "0123456789.".contains($0) }
                                 }
                         }
                     }
@@ -165,11 +166,32 @@ struct EditProfileView: View {
         .onAppear {
             getUserNickname() // View가 나타날 때 닉네임 로드
             getUserGender() // View가 나타날 때 성별 로드
+            getUserBodyweight() // View가 나타날 때 몸무게 로드
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
     }
+    
+    private func getUserBodyweight() {
+        let realm = try! Realm()
+        
+        if let profile = realm.objects(Profile.self).first {
+            userBodyweight = String(profile.bodyWeight)
+        }
+    }
+    
+    private func setUserBodyweight() {
+        let realm = try! Realm()
+        
+        if let existingBodyweiht = realm.objects(Profile.self).first {
+            try! realm.write {
+                existingBodyweiht.bodyWeight = Double(userBodyweight) ?? 0.0
+            }
+            print("⚠️유저 체중 업데이트: \(userBodyweight)")
+        }
+    }
+    
     private func getUserGender() {
         let realm = try! Realm()
         
@@ -177,6 +199,7 @@ struct EditProfileView: View {
             userGender = profile.gender
         }
     }
+    
     private func setUserGender() {
         let realm = try! Realm()
         
@@ -187,7 +210,6 @@ struct EditProfileView: View {
             print("⚠️유저 성별 업데이트: \(userGender)")
         }
     }
-    
     
     private func getUserNickname() {
         let realm = try! Realm()
@@ -213,7 +235,7 @@ struct EditProfileView: View {
                 nickname: userNickname,
                 image: nil, // 이미지 저장 로직이 별도로 필요
                 gender: userGender,
-                bodyWeight: Double(bodyWeight) ?? 0.0
+                bodyWeight: Double(userBodyweight) ?? 0.0
             )
             
             try! realm.write {
