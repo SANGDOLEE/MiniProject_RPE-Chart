@@ -151,6 +151,14 @@ struct EditProfileView: View {
                                 .onChange(of: userBodyweight) { oldValue, newValue in
                                     userBodyweight = newValue.prefix(5).filter { "0123456789.".contains($0) }
                                 }
+                            HStack {
+                                // 닉네임은 18자 이하로 입력해주세요.
+                                Text("Names need to be less than 18 characters long.")
+                                    .font(.setPretendard(weight: .medium, size: 12))
+                                    .foregroundStyle(.red)
+                                    .opacity(userNickname.count > 18 ? 1 : 0) // ⚠️ 이게 Visible 상태면 닉네임 저장 안되게 해야함 ! 18자 이하일때만 닉네임 변경되게.
+                                Spacer()
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity)
