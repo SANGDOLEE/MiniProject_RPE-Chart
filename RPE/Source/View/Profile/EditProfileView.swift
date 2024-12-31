@@ -12,7 +12,7 @@ struct EditProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State private var userNickname = ""
-    @State private var isSelectedGender = "Male"
+    @State private var userGender = ""
     @State private var bodyWeight: String = ""
     
     @State var showEditProfile: Bool // EditProfileSheet
@@ -38,6 +38,7 @@ struct EditProfileView: View {
                     Spacer()
                     Button {
                         setUserNickname()
+                        setUserGender()
                         
                         dismiss()
                         showEditProfile = false
@@ -106,26 +107,26 @@ struct EditProfileView: View {
                             
                             HStack(spacing: 16) {
                                 Button {
-                                    isSelectedGender = "MALE"
+                                    userGender = "Male"
                                 } label: {
                                     Text("MALE")
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 44)
-                                        .font(.setPretendard(weight: isSelectedGender == "MALE" ? .bold : .regular, size: 16))
-                                        .foregroundStyle(isSelectedGender == "MALE" ? .black : .white)
-                                        .background(isSelectedGender == "MALE" ? .myAccentcolor : .myB9B9B9)
+                                        .font(.setPretendard(weight: userGender == "Male" ? .bold : .regular, size: 16))
+                                        .foregroundStyle(userGender == "Male" ? .black : .white)
+                                        .background(userGender == "Male" ? .myAccentcolor : .myB9B9B9)
                                         .cornerRadius(12)
                                 }
                                 
                                 Button {
-                                    isSelectedGender = "FEMALE"
+                                    userGender = "Female"
                                 } label: {
                                     Text("FEMALE")
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 44)
-                                        .font(.setPretendard(weight: isSelectedGender == "FEMALE" ? .bold : .regular, size: 16))
-                                        .foregroundStyle(isSelectedGender == "FEMALE" ? .black : .white)
-                                        .background(isSelectedGender == "FEMALE" ? .myAccentcolor : .myB9B9B9)
+                                        .font(.setPretendard(weight: userGender == "Female" ? .bold : .regular, size: 16))
+                                        .foregroundStyle(userGender == "Female" ? .black : .white)
+                                        .background(userGender == "Female" ? .myAccentcolor : .myB9B9B9)
                                         .cornerRadius(12)
                                 }
                             }
@@ -162,18 +163,37 @@ struct EditProfileView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
         .onAppear {
-            loadUserNickname() // View가 나타날 때 닉네임 로드
+            getUserNickname() // View가 나타날 때 닉네임 로드
+            getUserGender() // View가 나타날 때 성별 로드
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
     }
-    
-    private func loadUserNickname() {
+    private func getUserGender() {
         let realm = try! Realm()
         
         if let profile = realm.objects(Profile.self).first {
-            userNickname = profile.nickname ?? ""
+            userGender = profile.gender
+        }
+    }
+    private func setUserGender() {
+        let realm = try! Realm()
+        
+        if let existingGender = realm.objects(Profile.self).first {
+            try! realm.write {
+                existingGender.gender = userGender
+            }
+            print("⚠️유저 성별 업데이트: \(userGender)")
+        }
+    }
+    
+    
+    private func getUserNickname() {
+        let realm = try! Realm()
+        
+        if let profile = realm.objects(Profile.self).first {
+            userNickname = profile.nickname
         }
     }
     
@@ -192,7 +212,7 @@ struct EditProfileView: View {
             let newProfile = Profile(
                 nickname: userNickname,
                 image: nil, // 이미지 저장 로직이 별도로 필요
-                gender: isSelectedGender,
+                gender: userGender,
                 bodyWeight: Double(bodyWeight) ?? 0.0
             )
             
