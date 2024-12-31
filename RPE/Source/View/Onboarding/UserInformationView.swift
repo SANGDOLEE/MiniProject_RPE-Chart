@@ -7,6 +7,8 @@
 
 
 import SwiftUI
+import Realm
+import RealmSwift
 
 // MARK: - 앱의 첫 사용시에만 등장하는 뷰
 struct UserInformationView: View {
@@ -122,7 +124,7 @@ struct UserInformationView: View {
                     if bodyWeight.count == 0 {
                         showAlert = true
                     } else {
-                        viewModel.saveData()
+                        saveProfileData()
                         UIApplication.shared.closeKeyboard()
                         isFirstRun = false
                     }
@@ -152,6 +154,23 @@ struct UserInformationView: View {
         //        .ignoresSafeArea(.keyboard, edges: .bottom)
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
+        }
+    }
+    
+    private func saveProfileData() {
+        let realm = try! Realm()
+        let weight = Double(bodyWeight) ?? 0.0
+        let profileImageData = UIImage(named: "default_image")?.jpegData(compressionQuality: 0.8) // 기본 이미지 사용
+        
+        let profile = Profile(
+            nickname: "",
+            image: profileImageData,
+            gender: isSelectedGender,
+            bodyWeight: weight
+        )
+        
+        try! realm.write {
+            realm.add(profile)
         }
     }
 }

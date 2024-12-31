@@ -1,10 +1,12 @@
 import SwiftUI
 import StoreKit
+import RealmSwift
 
 struct ProfileView: View {
     
     @Binding var isMainTabbarVisible: Bool
     @ObservedObject var viewModel: BigThreeViewModel
+    @State private var profile: Profile? // Profile 데이터를 저장할 변수
     
     var body: some View {
         NavigationStack {
@@ -34,7 +36,7 @@ struct ProfileView: View {
                                 .foregroundStyle(.white)
                                 .kerning(2)
                             
-                            Text("Male 77.6+")
+                            Text("Male \(getUserBodyweight())+")
                                 .font(.setPretendard(weight: .regular, size: 14))
                                 .foregroundStyle(.my1DA4E7)
                                 .kerning(1)
@@ -193,9 +195,28 @@ struct ProfileView: View {
             .applyGradientBackground()
         }
     }
-
-    func weightTotal() {
-
+    
+    
+    
+    // User 체중
+    private func getUserBodyweight() -> String {
+        let realm = try! Realm()
+        
+        if let profileData = realm.objects(Profile.self).first {
+            let bodyWeight = profileData.bodyWeight
+            
+            // 소수점이 0인지 확인 후 형식 지정
+            let formattedWeight: String
+            if bodyWeight.truncatingRemainder(dividingBy: 1) == 0 {
+                formattedWeight = String(format: "%.0f", bodyWeight) // 정수로 출력
+            } else {
+                formattedWeight = String(format: "%.1f", bodyWeight) // 소수점 1자리까지 출력
+            }
+            return formattedWeight
+        } else {
+            print("No profile data found. Returning default body weight of 0.0.")
+            return "N/A"
+        }
     }
     
     var appVersion: String {
