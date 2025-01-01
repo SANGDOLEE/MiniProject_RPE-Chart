@@ -195,7 +195,39 @@ struct EditProfileView: View {
                                     .cornerRadius(12)
                                     .keyboardType(.decimalPad)
                                     .onChange(of: userBodyweight) { oldValue, newValue in
-                                        userBodyweight = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                        // 1) 숫자와 점(.)만 허용
+                                        var filtered = newValue.filter { "0123456789.".contains($0) }
+                                        
+                                        // 2) 소수점이 2개 이상이면 제거
+                                        let dotCount = filtered.filter { $0 == "." }.count
+                                        if dotCount > 1 {
+                                            if let lastDotIndex = filtered.lastIndex(of: ".") {
+                                                filtered.remove(at: lastDotIndex)
+                                            }
+                                        }
+                                        
+                                        // 3) 소수점 1자리까지만 허용
+                                        if let dotIndex = filtered.firstIndex(of: ".") {
+                                            let afterDot = filtered[filtered.index(after: dotIndex)...]
+                                            if afterDot.count > 1 {
+                                                filtered = String(filtered.prefix(filtered.distance(from: filtered.startIndex, to: dotIndex) + 2))
+                                            }
+                                        }
+                                        
+                                        // 4) 앞자리가 0이거나 .으로 시작하는 경우 제거
+                                        if filtered.hasPrefix(".") || filtered.hasPrefix("0") {
+                                            if filtered.count > 1 && filtered.prefix(2) == "0." {
+                                                // "0."은 허용
+                                            } else {
+                                                // 잘못된 경우 전체 삭제
+                                                filtered = ""
+                                            }
+                                        }
+                                        
+                                        // 5) 최종적으로 수정된 filtered를 대입
+                                        if filtered != newValue {
+                                            userBodyweight = filtered
+                                        }
                                     }
                                 HStack {
                                     Spacer()
