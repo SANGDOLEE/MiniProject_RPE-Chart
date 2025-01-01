@@ -7,10 +7,15 @@
 
 import SwiftUI
 import RealmSwift
+import PhotosUI
 
 struct EditProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
+    
+    @State private var userProfileImage: UIImage?
+    @State private var photosPickerItem: PhotosPickerItem?
+    
     @State private var userNickname = ""
     @State private var userGender = ""
     @State private var userBodyweight: String = ""
@@ -40,6 +45,7 @@ struct EditProfileView: View {
                         setUserNickname()
                         setUserGender()
                         setUserBodyweight()
+                        setUserImage()    // 이미지 저장 로직
                         
                         dismiss()
                         showEditProfile = false
@@ -57,9 +63,34 @@ struct EditProfileView: View {
                     .padding(.bottom)
                 
                 ScrollView {
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .frame(width: 98, height: 98)
+                    PhotosPicker(selection: $photosPickerItem) {
+                        if let uiImage = userProfileImage {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 98, height: 98)
+                                .clipShape(.circle)
+                        } else {
+                            // userProfileImage가 없을 경우 대체 이미지
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .tint(.myB9B9B9)
+                                .frame(width: 98, height: 98)
+                                .clipShape(.circle)
+                        }
+                    }
+                    .onChange(of: photosPickerItem) { _, _ in
+                        Task {
+                            if let photosPickerItem,
+                               let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
+                                if let image = UIImage(data: data) {
+                                    userProfileImage = image
+                                }
+                            }
+                            photosPickerItem = nil
+                        }
+                    }
                     
                     VStack(spacing: 16) {
                         // Nickname
@@ -90,24 +121,24 @@ struct EditProfileView: View {
                             HStack {
                                 // 닉네임은 18자 이하로 입력해주세요.
                                 if userNickname.count > 18 {
-                                       // 닉네임이 18자를 초과할 경우 안내 문구
-                                       Text("Names need to be less than 18 characters long.")
-                                           .font(.setPretendard(weight: .medium, size: 12))
-                                           .foregroundStyle(.myBF2418)
-                                           .opacity(1)
-                                   } else if userNickname.isEmpty {
-                                       // 닉네임이 비어있을 경우 안내 문구
-                                       Text("Please enter name")
-                                           .font(.setPretendard(weight: .medium, size: 12))
-                                           .foregroundStyle(.myBF2418)
-                                           .opacity(1)
-                                   } else {
-                                       // 문구를 숨기기
-                                       Text("")
-                                           .font(.setPretendard(weight: .medium, size: 12))
-                                           .opacity(0)
-                                   }
-                                   Spacer()
+                                    // 닉네임이 18자를 초과할 경우 안내 문구
+                                    Text("Names need to be less than 18 characters long.")
+                                        .font(.setPretendard(weight: .medium, size: 12))
+                                        .foregroundStyle(.myBF2418)
+                                        .opacity(1)
+                                } else if userNickname.isEmpty {
+                                    // 닉네임이 비어있을 경우 안내 문구
+                                    Text("Please enter name")
+                                        .font(.setPretendard(weight: .medium, size: 12))
+                                        .foregroundStyle(.myBF2418)
+                                        .opacity(1)
+                                } else {
+                                    // 문구를 숨기기
+                                    Text("")
+                                        .font(.setPretendard(weight: .medium, size: 12))
+                                        .opacity(0)
+                                }
+                                Spacer()
                             }
                         }
                         
@@ -179,6 +210,7 @@ struct EditProfileView: View {
                                 Spacer()
                             }
                         }
+                        
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.top)
@@ -194,9 +226,41 @@ struct EditProfileView: View {
             getUserNickname() // View가 나타날 때 닉네임 로드
             getUserGender() // View가 나타날 때 성별 로드
             getUserBodyweight() // View가 나타날 때 몸무게 로드
+            getUserImage() // View가 나타날 때 이미지 로드
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
+        }
+    }
+    /// 기존에 저장된 이미지를 로드해 UI에 표시
+    private func getUserImage() {
+        let realm = try! Realm()
+        if let profile = realm.objects(Profile.self).first, let imgData = profile.image {
+            userProfileImage = UIImage(data: imgData)
+        }
+    }
+    
+    /// **이미지**를 `Data`로 변환하여 Realm에 저장
+    private func setUserImage() {
+        guard let image = userProfileImage else { return }
+        let realm = try! Realm()
+        
+        if let existingProfile = realm.objects(Profile.self).first {
+            let imgData = image.jpegData(compressionQuality: 0.8)
+            try! realm.write {
+                existingProfile.image = imgData
+            }
+        } else {
+            let imgData = image.jpegData(compressionQuality: 0.8)
+            let newProfile = Profile(
+                nickname: userNickname,
+                image: imgData,
+                gender: userGender,
+                bodyWeight: Double(userBodyweight) ?? 0.0
+            )
+            try! realm.write {
+                realm.add(newProfile)
+            }
         }
     }
     

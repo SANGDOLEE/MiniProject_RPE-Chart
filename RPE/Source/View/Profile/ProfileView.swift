@@ -27,9 +27,22 @@ struct ProfileView: View {
                     // 상단 타이틀
                     ScrollView {
                         VStack(spacing: 10) {
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .frame(width: 112, height: 112)
+                            if let uiImage = getUserImage() {
+                                    // 이미지가 있으면 저장된 이미지 표시
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 112, height: 112)
+                                        .clipShape(Circle())
+                                } else {
+                                    // 이미지가 없을 경우 대체 이미지
+                                    Image(systemName: "person.crop.circle")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .tint(.myB9B9B9) // 원하는 색상
+                                        .frame(width: 98, height: 98)
+                                        .clipShape(Circle())
+                                }
                             
                             Text(getUserNickname())
                                 .font(.setPretendard(weight: .semiBold, size: 18))
@@ -195,6 +208,18 @@ struct ProfileView: View {
             .applyGradientBackground()
         }
     }
+    // 기존에 저장된 이미지를 로드해 UI에 표시
+    private func getUserImage() -> UIImage? {
+        let realm = try! Realm()
+        if let profile = realm.objects(Profile.self).first,
+           let imgData = profile.image,
+           let uiImage = UIImage(data: imgData) {
+            return uiImage
+        } else {
+            // 이미지가 없으면 `nil` 반환
+            return nil
+        }
+    }
     
     // User 닉네임
     private func getUserNickname() -> String {
@@ -270,8 +295,8 @@ struct ProfileView: View {
         // @nikkiselev/ipf 에서 발췌한 Dots 계수
         // 남성(m), 여성(f)에 따른 서로 다른 5개 항
         let constants = isMale
-            ? [-1.093e-6, 7.391293e-4, -0.1918759221, 24.0900756, -307.75076]
-            : [-1.0706e-6, 5.158568e-4, -0.1126655495, 13.6175032, -57.96288]
+        ? [-1.093e-6, 7.391293e-4, -0.1918759221, 24.0900756, -307.75076]
+        : [-1.0706e-6, 5.158568e-4, -0.1126655495, 13.6175032, -57.96288]
         
         // 분모 계산: a*x^4 + b*x^3 + c*x^2 + d*x + e
         let x4 = constants[0] * pow(bodyWeight, 4)
@@ -287,8 +312,8 @@ struct ProfileView: View {
         
         // 소수점 이하가 0이면 정수, 아니면 소수점 둘째 자리까지
         return dotsScore.truncatingRemainder(dividingBy: 1) == 0
-            ? String(format: "%.0f", dotsScore)
-            : String(format: "%.2f", dotsScore)
+        ? String(format: "%.0f", dotsScore)
+        : String(format: "%.2f", dotsScore)
     }
     
     // Wilks 계산 함수
@@ -318,8 +343,8 @@ struct ProfileView: View {
         
         // Wilks 상수 (성별에 따라 다름)
         let constants = isMale
-            ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
-            : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
+        ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
+        : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
         
         // 분모 계산
         let denominator = constants.enumerated().reduce(0.0) { partialResult, term in
@@ -330,8 +355,8 @@ struct ProfileView: View {
         // Wilks 점수 계산
         let wilksScore = (500 * totalWeight) / denominator
         return wilksScore.truncatingRemainder(dividingBy: 1) == 0
-            ? String(format: "%.0f", wilksScore) // 정수로 출력
-            : String(format: "%.2f", wilksScore) // 소수점 2자리까지 출력
+        ? String(format: "%.0f", wilksScore) // 정수로 출력
+        : String(format: "%.2f", wilksScore) // 소수점 2자리까지 출력
     }
     
     var appVersion: String {
