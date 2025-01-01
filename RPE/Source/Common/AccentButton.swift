@@ -25,10 +25,10 @@ struct AccentButton<Content: View>: View {
             label
                 .font(.setPretendard(weight: .bold, size: 18))
                 .foregroundStyle(.black)
+                .frame(maxWidth: .infinity)                       
+                .frame(height: 54)
                 .cornerRadius(12)
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 54)
         .background(.myAccentcolor)
         .cornerRadius(12)
     }
