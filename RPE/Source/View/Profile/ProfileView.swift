@@ -65,7 +65,6 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .padding(.vertical)
                                 
-                                // ⚠️ 나중에 정수형으로 딱 떨어지면, 소수점 표시 X
                                 Text(formattedTotal(viewModel.totalValue))
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
