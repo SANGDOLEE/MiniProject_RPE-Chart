@@ -53,7 +53,8 @@ struct EditProfileView: View {
                     } label: {
                         Text("완료")
                             .font(.setPretendard(weight: .regular, size: 15))
-                            .foregroundStyle( .white)
+                            .foregroundStyle(userNickname.isEmpty ? .gray : .white)
+                            .disabled(userNickname.isEmpty)
                     }
                 }
                 .padding(.horizontal) // 바깥 padding 16
