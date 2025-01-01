@@ -188,7 +188,7 @@ struct EditProfileView: View {
                                 Spacer()
                             }
                             ZStack {
-                                TextField("Body weight", text: $userBodyweight)
+                                TextField("0", text: $userBodyweight)
                                     .multilineTextAlignment(.leading)
                                     .frame(height: 44)
                                     .padding(.horizontal)
@@ -238,7 +238,7 @@ struct EditProfileView: View {
                             HStack {
                                 Text("If bodyweight is not entered, it will be set to 0.")
                                     .font(.setPretendard(weight: .medium, size: 12))
-                                    .foregroundStyle(.myBF2418)
+                                    .foregroundStyle(.green)
                                     .opacity(userBodyweight.count == 0 ? 1 : 0)
                                 Spacer()
                             }
