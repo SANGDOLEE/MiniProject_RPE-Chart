@@ -4,18 +4,28 @@ import SwiftUI
 // MARK: - 앱의 첫 사용시에만 등장하는 뷰
 struct OnboardingView: View {
     
-    @State private var navigationRouter = NavigationRouter()
+    @Environment(NavigationRouter.self) var navigationRouter
     @StateObject private var viewModel = BigThreeViewModel()
-    @State private var showAlert = false
+    
+    @AppStorage("isFirstRun") private var isFirstRun: Bool?
     @Binding var isPresented: Bool
     
+    @State private var showAlert = false
+    
     var body: some View {
-        NavigationStack(path: $navigationRouter.path) {
             VStack {
                 HStack {
+                    Button {
+                        navigationRouter.pop()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .frame(width: 24, height: 24)
+                            .tint(.white)
+                    }
                     Spacer()
                     Button {
-                        isPresented = false 
+                        isPresented = false
+                        isFirstRun = false
                     } label: {
                         Text("SKIP")
                             .font(.setPretendard(weight: .semiBold, size: 18))
@@ -128,12 +138,11 @@ struct OnboardingView: View {
                         } else {
                             viewModel.saveData()
                             UIApplication.shared.closeKeyboard()
-                            //                        isPresented = false
-                            navigationRouter.push(to: .onboardingUserInformation)
+                            isFirstRun = false
                             
                         }
                     } label: {
-                        Text("NEXT")
+                        Text("COMPLETE")
                             .frame(maxWidth: .infinity)
                             .frame(height: 54)
                             .font(.setPretendard(weight: .bold, size: 18))
@@ -158,11 +167,6 @@ struct OnboardingView: View {
             .onTapGesture {
                 UIApplication.shared.closeKeyboard()
             }
-            .navigationDestination(for: PathType.self) { pathType in
-                            pathType.NavigatingView()
-            }
-        }
-        .environment(navigationRouter)
     }
 }
 

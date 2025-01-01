@@ -1,5 +1,6 @@
 
 import SwiftUI
+import RealmSwift
 
 struct MainView: View {
     
@@ -10,6 +11,8 @@ struct MainView: View {
     @State private var repsValue = 0.0
     @State private var selectRpe = 0
     @State private var selectReps = 0
+    
+    @State private var profile: Profile? // Profile 데이터를 저장할 변수
     
     private let rpeModel = Rpe()
     
@@ -169,6 +172,7 @@ struct MainView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
         .onAppear {
+            loadProfileData()
             viewModel.loadData()   // 뷰가 나타날 때마다 데이터를 새로 고침
         }
     }
@@ -211,6 +215,19 @@ struct MainView: View {
             }
         default:
             return ""
+        }
+    }
+    
+    // 테스트용 프린트문
+    private func loadProfileData() {
+        let realm = try! Realm()
+        if let profileData = realm.objects(Profile.self).first {
+            profile = profileData
+            print("Nickname: \(profileData.nickname)")
+            print("Gender: \(profileData.gender)")
+            print("BodyWeight: \(profileData.bodyWeight)")
+        } else {
+            print("No profile data found.")
         }
     }
     

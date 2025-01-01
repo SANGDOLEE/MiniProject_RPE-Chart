@@ -161,15 +161,6 @@ struct UpdateRecordView: View {
                         HStack {
                             AccentButton {
                                 totalUpdate()
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        Toast.shared.present(
-                                            text: "Record update completed",
-                                            symbol: "complete",
-                                            isUserInteractionEnabled: true,
-                                            timing: .short
-                                        )
-                                    }
                             } label: {
                                 Text("UPDATE")
                             }
@@ -209,7 +200,7 @@ struct UpdateRecordView: View {
         Text(unitOfWeight ? "lb" : "kg")
             .font(.setPretendard(weight: .bold, size: 18))
             .foregroundStyle(.white)
-            .padding(.trailing)
+            .padding([.trailing, .top])
     }
     
     private func totalUpdate() {
@@ -218,6 +209,14 @@ struct UpdateRecordView: View {
         } else {
             viewModel.saveData()
             UIApplication.shared.closeKeyboard()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Toast.shared.present(
+                    text: "Record update completed",
+                    symbol: "complete",
+                    isUserInteractionEnabled: true,
+                    timing: .short
+                )
+            }
         }
     }
     

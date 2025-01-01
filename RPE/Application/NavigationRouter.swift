@@ -20,8 +20,9 @@ extension PathType {
             // 온보딩 case
         case .onboardingView:
             OnboardingView(isPresented: .constant(true))
+                .navigationBarBackButtonHidden()
         case .onboardingUserInformation:
-            UserInformationView()
+            UserInformationView(isPresented: .constant(true))
                 .navigationBarBackButtonHidden()
         }
     }
