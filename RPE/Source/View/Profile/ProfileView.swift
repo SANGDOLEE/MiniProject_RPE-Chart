@@ -7,6 +7,7 @@ struct ProfileView: View {
     @Binding var isMainTabbarVisible: Bool
     @ObservedObject var viewModel: BigThreeViewModel
     @State private var profile: Profile? // Profile 데이터를 저장할 변수
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -292,28 +293,38 @@ struct ProfileView: View {
     private func calculateDots(totalWeight: Double, bodyWeight: Double, isMale: Bool) -> String {
         guard bodyWeight > 0 else { return "N/A" }
         
-        // @nikkiselev/ipf 에서 발췌한 Dots 계수
-        // 남성(m), 여성(f)에 따른 서로 다른 5개 항
-        let constants = isMale
-        ? [-1.093e-6, 7.391293e-4, -0.1918759221, 24.0900756, -307.75076]
-        : [-1.0706e-6, 5.158568e-4, -0.1126655495, 13.6175032, -57.96288]
+        // (1) unitOfWeight == true → 사용자 입력이 LB 모드
+        var bw = bodyWeight
+        var tw = totalWeight
         
-        // 분모 계산: a*x^4 + b*x^3 + c*x^2 + d*x + e
-        let x4 = constants[0] * pow(bodyWeight, 4)
-        let x3 = constants[1] * pow(bodyWeight, 3)
-        let x2 = constants[2] * pow(bodyWeight, 2)
-        let x1 = constants[3] * bodyWeight
+        if unitOfWeight {
+            // 실제 nikkiselev/ipf에 맞춰서, "lb -> kg"로 환산:
+            // kg = lb / 2.2046226218
+            bw = bodyWeight / 2.2046226218
+            tw = totalWeight / 2.2046226218
+        }
+        
+        // (2) Dots 계수 (nikkiselev/ipf)
+        let constants = isMale
+            ? [-1.093e-6, 7.391293e-4, -0.1918759221, 24.0900756, -307.75076]
+            : [-1.0706e-6, 5.158568e-4, -0.1126655495, 13.6175032, -57.96288]
+        
+        // (3) 분모 계산: a*x^4 + b*x^3 + c*x^2 + d*x + e
+        let x4 = constants[0] * pow(bw, 4)
+        let x3 = constants[1] * pow(bw, 3)
+        let x2 = constants[2] * pow(bw, 2)
+        let x1 = constants[3] * bw
         let x0 = constants[4]
         
         let denominator = x4 + x3 + x2 + x1 + x0
         
-        // dotsScore = totalWeight * (500 / 분모)
-        let dotsScore = totalWeight * (500.0 / denominator)
+        // (4) dotsScore = (kg기준 totalWeight) * (500 / 분모)
+        let dotsScore = tw * (500.0 / denominator)
         
-        // 소수점 이하가 0이면 정수, 아니면 소수점 둘째 자리까지
+        // (5) 출력 (정수 or 소수점 둘째 자리)
         return dotsScore.truncatingRemainder(dividingBy: 1) == 0
-        ? String(format: "%.0f", dotsScore)
-        : String(format: "%.2f", dotsScore)
+            ? String(format: "%.0f", dotsScore)
+            : String(format: "%.2f", dotsScore)
     }
     
     // Wilks 계산 함수
@@ -341,22 +352,34 @@ struct ProfileView: View {
     private func calculateWilks(totalWeight: Double, bodyWeight: Double, isMale: Bool) -> String {
         guard bodyWeight > 0 else { return "N/A" }
         
-        // Wilks 상수 (성별에 따라 다름)
-        let constants = isMale
-        ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
-        : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
-        
-        // 분모 계산
-        let denominator = constants.enumerated().reduce(0.0) { partialResult, term in
-            let (index, coefficient) = term
-            return partialResult + coefficient * pow(bodyWeight, Double(index))
+        // (1) 단위 변환 처리
+        // unitOfWeight == true → LB 모드라면 lb -> kg 로 환산
+        var bw = bodyWeight
+        var tw = totalWeight
+        if unitOfWeight {
+            // lb를 kg로 변환 (1 lb ≈ 0.45359237 kg)
+            bw = bodyWeight * 0.45359237
+            tw = totalWeight * 0.45359237
         }
         
-        // Wilks 점수 계산
-        let wilksScore = (500 * totalWeight) / denominator
+        // (2) Wilks 상수 (성별에 따라 다름)
+        let constants = isMale
+            ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
+            : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
+        
+        // (3) 분모 계산
+        let denominator = constants.enumerated().reduce(0.0) { partialResult, term in
+            let (index, coefficient) = term
+            return partialResult + coefficient * pow(bw, Double(index))
+        }
+        
+        // (4) Wilks 점수 계산
+        let wilksScore = (500.0 * tw) / denominator
+        
+        // (5) 정수/소수점 출력
         return wilksScore.truncatingRemainder(dividingBy: 1) == 0
-        ? String(format: "%.0f", wilksScore) // 정수로 출력
-        : String(format: "%.2f", wilksScore) // 소수점 2자리까지 출력
+            ? String(format: "%.0f", wilksScore)  // 정수로 출력
+            : String(format: "%.2f", wilksScore)  // 소수점 2자리까지 출력
     }
     
     /// 사용자 Total `Double` 값에 대해, 소수점이 0이면 정수로, 아니면 소수점 한 자리까지만 출력

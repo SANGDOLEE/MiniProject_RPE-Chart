@@ -19,6 +19,7 @@ struct EditProfileView: View {
     @State private var userNickname = ""
     @State private var userGender = ""
     @State private var userBodyweight: String = ""
+    @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State var showEditProfile: Bool // EditProfileSheet
     
@@ -180,13 +181,13 @@ struct EditProfileView: View {
                         // Body Weight
                         VStack(spacing: 10) {
                             HStack {
-                                Text("Bodyweight")
+                                Text("Body weight \(unitOfWeight ? "(lb)" : "(kg)")")
                                     .font(.setPretendard(weight: .semiBold, size: 14))
                                     .foregroundStyle(.white)
                                 Spacer()
                             }
                             ZStack {
-                                TextField("BodyWeight", text: $userBodyweight)
+                                TextField("Body weight", text: $userBodyweight)
                                     .multilineTextAlignment(.leading)
                                     .frame(height: 44)
                                     .padding(.horizontal)

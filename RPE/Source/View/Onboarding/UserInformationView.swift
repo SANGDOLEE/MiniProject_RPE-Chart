@@ -20,6 +20,7 @@ struct UserInformationView: View {
     
     @State private var showAlert = false
     @State private var isSelectedGender = "Male"
+    @AppStorage("isText") private var unitOfWeight: Bool = false // false면 KG
     @State private var bodyWeight: String = ""
     
     var body: some View {
@@ -93,14 +94,48 @@ struct UserInformationView: View {
                     
                     VStack {
                         HStack(spacing: 2) {
-                            Text("BodyWeight(kgs)")
+                            Text("Unit of measure")
+                                .font(.setPretendard(weight: .bold, size: 18))
+                                .foregroundStyle(.myAccentcolor)
+                            Spacer()
+                        }
+                        HStack(spacing: 16) {
+                            Button {
+                                unitOfWeight = false
+                            } label: {
+                                Text("KG")
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 44)
+                                    .font(.setPretendard(weight: !unitOfWeight ? .bold : .regular, size: 16))
+                                    .foregroundStyle(!unitOfWeight ? .black : .white)
+                                    .background(!unitOfWeight ? .myAccentcolor : .myB9B9B9)
+                                    .cornerRadius(12)
+                            }
+                            
+                            Button {
+                                unitOfWeight = true
+                            } label: {
+                                Text("LB")
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 44)
+                                    .font(.setPretendard(weight: unitOfWeight ? .bold : .regular, size: 16))
+                                    .foregroundStyle(unitOfWeight ? .black : .white)
+                                    .background(unitOfWeight ? .myAccentcolor : .myB9B9B9)
+                                    .cornerRadius(12)
+                            }
+                        }
+                    }
+                    
+                    VStack {
+                        HStack(spacing: 2) {
+                            Text("Body weight \(unitOfWeight ? "(lb)" : "(kg)")")
                                 .font(.setPretendard(weight: .bold, size: 18))
                                 .foregroundStyle(.myAccentcolor)
                             Spacer()
                         }
                         HStack {
                             ZStack {
-                                TextField("BodyWeight", text: $bodyWeight)
+                                TextField("Body weight", text: $bodyWeight)
                                     .multilineTextAlignment(.leading)
                                     .frame(height: 44)
                                     .padding(.horizontal)
