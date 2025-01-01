@@ -40,7 +40,7 @@ struct ProfileView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .tint(.myB9B9B9) // 원하는 색상
-                                        .frame(width: 98, height: 98)
+                                        .frame(width: 112, height: 112)
                                         .clipShape(Circle())
                                 }
                             

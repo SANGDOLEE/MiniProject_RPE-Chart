@@ -72,12 +72,11 @@ struct EditProfileView: View {
                                 .clipShape(.circle)
                         } else {
                             // userProfileImage가 없을 경우 대체 이미지
-                            Image(systemName: "person.crop.circle")
+                            Image(systemName: "person.crop.circle.badge.plus")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .tint(.myB9B9B9)
                                 .frame(width: 98, height: 98)
-                                .clipShape(.circle)
                         }
                     }
                     .onChange(of: photosPickerItem) { _, _ in
