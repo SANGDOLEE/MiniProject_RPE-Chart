@@ -267,19 +267,28 @@ struct ProfileView: View {
     private func calculateDots(totalWeight: Double, bodyWeight: Double, isMale: Bool) -> String {
         guard bodyWeight > 0 else { return "N/A" }
         
+        // @nikkiselev/ipf 에서 발췌한 Dots 계수
+        // 남성(m), 여성(f)에 따른 서로 다른 5개 항
         let constants = isMale
-            ? [-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6, -1.291e-8]
-            : [594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913, 4.731582e-5, -9.054e-8]
+            ? [-1.093e-6, 7.391293e-4, -0.1918759221, 24.0900756, -307.75076]
+            : [-1.0706e-6, 5.158568e-4, -0.1126655495, 13.6175032, -57.96288]
         
-        let denominator = constants.enumerated().reduce(0.0) { partialResult, term in
-            let (index, coefficient) = term
-            return partialResult + coefficient * pow(bodyWeight, Double(index))
-        }
+        // 분모 계산: a*x^4 + b*x^3 + c*x^2 + d*x + e
+        let x4 = constants[0] * pow(bodyWeight, 4)
+        let x3 = constants[1] * pow(bodyWeight, 3)
+        let x2 = constants[2] * pow(bodyWeight, 2)
+        let x1 = constants[3] * bodyWeight
+        let x0 = constants[4]
         
-        let dotsScore = (500 * totalWeight) / denominator
+        let denominator = x4 + x3 + x2 + x1 + x0
+        
+        // dotsScore = totalWeight * (500 / 분모)
+        let dotsScore = totalWeight * (500.0 / denominator)
+        
+        // 소수점 이하가 0이면 정수, 아니면 소수점 둘째 자리까지
         return dotsScore.truncatingRemainder(dividingBy: 1) == 0
-            ? String(format: "%.0f", dotsScore) // 정수로 출력
-            : String(format: "%.2f", dotsScore) // 소수점 1자리까지 출력
+            ? String(format: "%.0f", dotsScore)
+            : String(format: "%.2f", dotsScore)
     }
     
     // Wilks 계산 함수
