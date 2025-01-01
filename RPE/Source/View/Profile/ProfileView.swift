@@ -65,7 +65,7 @@ struct ProfileView: View {
                                     .padding(.vertical)
                                 
                                 // ⚠️ 나중에 정수형으로 딱 떨어지면, 소수점 표시 X
-                                Text("\(viewModel.totalValue, specifier: "%.1f")")
+                                Text(formattedTotal(viewModel.totalValue))
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                                     .kerning(0.6)
@@ -357,6 +357,17 @@ struct ProfileView: View {
         return wilksScore.truncatingRemainder(dividingBy: 1) == 0
         ? String(format: "%.0f", wilksScore) // 정수로 출력
         : String(format: "%.2f", wilksScore) // 소수점 2자리까지 출력
+    }
+    
+    /// 사용자 Total `Double` 값에 대해, 소수점이 0이면 정수로, 아니면 소수점 한 자리까지만 출력
+    func formattedTotal(_ value: Double) -> String {
+        if value.truncatingRemainder(dividingBy: 1) == 0 {
+            // 정수로 표기 (ex: 123)
+            return String(format: "%.0f", value)
+        } else {
+            // 소수점 한 자리만 표기 (ex: 123.4)
+            return String(format: "%.1f", value)
+        }
     }
     
     var appVersion: String {
