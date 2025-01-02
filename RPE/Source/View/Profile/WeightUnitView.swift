@@ -35,7 +35,7 @@ struct WeightUnitView: View {
                         dismiss()
                         showUnitofMesaure = false
                     } label: {
-                        Text("완료")
+                        Text("Done")
                             .font(.setPretendard(weight: .regular, size: 15))
                             .foregroundStyle(tappedUnit ? .white : .gray)
                             .disabled(!tappedUnit)

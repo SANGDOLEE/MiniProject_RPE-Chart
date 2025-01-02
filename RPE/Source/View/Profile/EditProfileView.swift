@@ -51,7 +51,7 @@ struct EditProfileView: View {
                         dismiss()
                         showEditProfile = false
                     } label: {
-                        Text("완료")
+                        Text("Done")
                             .font(.setPretendard(weight: .regular, size: 15))
                             .foregroundStyle(userNickname.isEmpty ? .gray : .white)
                             .disabled(userNickname.isEmpty)
