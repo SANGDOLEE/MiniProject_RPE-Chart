@@ -1,9 +1,10 @@
 
 import SwiftUI
+import RealmSwift
 
 struct MainView: View {
     
-    @StateObject var viewModel: BigThreeViewModel
+    @State private var viewModel = BigThreeViewModel()
     
     @State private var workout = ""
     @State private var rpeValue = 0.0
@@ -11,8 +12,7 @@ struct MainView: View {
     @State private var selectRpe = 0
     @State private var selectReps = 0
     
-    @State private var typeColor = Color.white
-    @State private var textColor = Color.black
+    @State private var profile: Profile? // Profile 데이터를 저장할 변수
     
     private let rpeModel = Rpe()
     
@@ -168,10 +168,11 @@ struct MainView: View {
             
             Spacer()
         }
-        .padding()
+        .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .applyGradientBackground()
         .onAppear {
+            loadProfileData()
             viewModel.loadData()   // 뷰가 나타날 때마다 데이터를 새로 고침
         }
     }
@@ -197,7 +198,7 @@ struct MainView: View {
                 return "Invalid squat value"
             }
             
-        case "Benchpress":
+        case "BenchPress":
             if let benchValue = Double(viewModel.benchValue) {
                 let calculatedValue = benchValue * rpeModel.rpeArray[selectRpe][selectReps]
                 return calculatedValue.isWhole ? String(Int(calculatedValue)) : String(format: "%.1f", calculatedValue)
@@ -217,6 +218,19 @@ struct MainView: View {
         }
     }
     
+    // 테스트용 프린트문
+    private func loadProfileData() {
+        let realm = try! Realm()
+        if let profileData = realm.objects(Profile.self).first {
+            profile = profileData
+            print("Nickname: \(profileData.nickname)")
+            print("Gender: \(profileData.gender)")
+            print("BodyWeight: \(profileData.bodyWeight)")
+        } else {
+            print("No profile data found.")
+        }
+    }
+    
     // 햅틱
     private func triggerHaptic() {
         let generator = UIImpactFeedbackGenerator(style: .soft)
@@ -232,5 +246,5 @@ extension Double {
 }
 
 #Preview {
-    MainView(viewModel: BigThreeViewModel())
+    MainView()
 }

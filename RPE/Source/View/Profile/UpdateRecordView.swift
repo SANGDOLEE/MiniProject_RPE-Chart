@@ -9,17 +9,56 @@ import SwiftUI
 
 struct UpdateRecordView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @ObservedObject var viewModel: BigThreeViewModel
+    @Environment(\.dismiss) private var dismiss
+    @State private var viewModel = BigThreeViewModel()
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
     @Binding var isMainTabbarVisible: Bool
     
+    @State var showUpdateRecord: Bool // EditProfileSheet
+    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                // HeaderView
+                HStack {
+                    Spacer()
+                    Text("Update Record")
+                        .font(.setPretendard(weight: .semiBold, size: 17))
+                        .foregroundStyle(.white)
+                    Spacer()
+//                    Button {
+////                        setUserNickname()
+////                        setUserGender()
+////                        setUserBodyweight()
+////                        setUserImage()    // 이미지 저장 로직
+////                        
+////                        dismiss()
+////                        showEditProfile = false
+//                    } label: {
+//                        Text("완료")
+//                            .font(.setPretendard(weight: .regular, size: 15))
+//                            .foregroundStyle(.white)
+//                    }
+                    Button {
+                        dismiss()
+                        showUpdateRecord = false
+                    } label: {
+                        Image(systemName: "xmark")
+                            .frame(width: 17, height: 17)
+                            .foregroundStyle(.white)
+                            .bold()
+                    }
+                }
+                .padding(.horizontal) // 바깥 padding 16
+                
+                Divider()
+                    .frame(height: 1) // 두께를 조정
+                    .background(.myB9B9B9.opacity(0.3))
+                    .padding(.bottom)
+                    .padding(.top, 10)
+                
                 HStack {
                     Text("Congratulations !\nBe careful of injuries")
                         .padding(.leading, 30)
@@ -85,7 +124,7 @@ struct UpdateRecordView: View {
                                         .cornerRadius(12)
                                         .keyboardType(.decimalPad)
                                         .onChange(of: viewModel.squatValue) { oldValue, newValue in
-                                            viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                            viewModel.squatValue = newValue.prefix(6).filter { "0123456789.".contains($0) }
                                         }
                                     
                                     HStack {
@@ -116,7 +155,7 @@ struct UpdateRecordView: View {
                                         .cornerRadius(12)
                                         .keyboardType(.decimalPad)
                                         .onChange(of: viewModel.benchValue) { oldValue, newValue in
-                                            viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                            viewModel.benchValue = newValue.prefix(6).filter { "0123456789.".contains($0) }
                                         }
                                     
                                     HStack {
@@ -146,7 +185,7 @@ struct UpdateRecordView: View {
                                         .cornerRadius(12)
                                         .keyboardType(.decimalPad)
                                         .onChange(of: viewModel.deadValue) { oldValue, newValue in
-                                            viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                            viewModel.deadValue = newValue.prefix(6).filter { "0123456789.".contains($0) }
                                         }
                                     
                                     HStack {
@@ -161,15 +200,6 @@ struct UpdateRecordView: View {
                         HStack {
                             AccentButton {
                                 totalUpdate()
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        Toast.shared.present(
-                                            text: "Record update completed",
-                                            symbol: "complete",
-                                            isUserInteractionEnabled: true,
-                                            timing: .short
-                                        )
-                                    }
                             } label: {
                                 Text("UPDATE")
                             }
@@ -209,7 +239,7 @@ struct UpdateRecordView: View {
         Text(unitOfWeight ? "lb" : "kg")
             .font(.setPretendard(weight: .bold, size: 18))
             .foregroundStyle(.white)
-            .padding(.trailing)
+            .padding([.trailing, .top])
     }
     
     private func totalUpdate() {
@@ -218,18 +248,26 @@ struct UpdateRecordView: View {
         } else {
             viewModel.saveData()
             UIApplication.shared.closeKeyboard()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Toast.shared.present(
+                    text: "Record update completed",
+                    symbol: "complete",
+                    isUserInteractionEnabled: true,
+                    timing: .short
+                )
+            }
         }
     }
     
     var backButton : some View {
         Button{
-            self.presentationMode.wrappedValue.dismiss()
+            dismiss()
             isMainTabbarVisible = true
         } label: {
             HStack {
                 Image(systemName: "chevron.left") // 화살표 Image
+                    .frame(width: 24, height: 24)
                     .tint(.white)
-                    .aspectRatio(contentMode: .fit)
             }
         }
     }
@@ -251,7 +289,7 @@ extension UpdateRecordView {
 
 #Preview {
     RootView {
-        UpdateRecordView(viewModel: BigThreeViewModel(), isMainTabbarVisible: .constant(true))
+        UpdateRecordView(isMainTabbarVisible: .constant(true), showUpdateRecord: true)
     }
 }
 

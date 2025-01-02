@@ -10,7 +10,7 @@ struct RPEApp: App {
     var body: some Scene {
         WindowGroup {
             if isFirstRun {
-                OnboardingView(isPresented: $isFirstRun)
+                UserInformationView(isPresented: $isFirstRun)
             } else {
                 RootView {
                     MainTabView()

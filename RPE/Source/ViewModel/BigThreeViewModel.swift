@@ -1,16 +1,31 @@
 
 import SwiftUI
 
+@Observable
 class BigThreeViewModel: ObservableObject {
     
-    @Published var squatValue: String = ""
-    @Published var benchValue: String = ""
-    @Published var deadValue: String = ""
+    var squatValue: String = ""
+    var benchValue: String = ""
+    var deadValue: String = ""
     
     init() {
         squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
         benchValue = UserDefaults.standard.string(forKey: "benchValue") ?? ""
         deadValue = UserDefaults.standard.string(forKey: "deadValue") ?? ""
+    }
+    
+    var totalValue: Double {
+        (Double(squatValue) ?? 0.0) +
+        (Double(benchValue) ?? 0.0) +
+        (Double(deadValue) ?? 0.0)
+    }
+    
+    func formattedTotal() -> String {
+        if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
+            return String(format: "%.0f", totalValue)
+        } else {
+            return String(format: "%.1f", totalValue)
+        }
     }
     
     func saveData() {
