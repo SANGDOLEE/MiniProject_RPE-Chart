@@ -11,11 +11,13 @@ struct UpdateRecordView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @ObservedObject var viewModel: BigThreeViewModel
+    @State private var viewModel = BigThreeViewModel()
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
     @State private var showAlert = false
     @Binding var isMainTabbarVisible: Bool
+    
+    @State var showUpdateRecord: Bool // EditProfileSheet
     
     var body: some View {
         ZStack {
@@ -250,7 +252,7 @@ extension UpdateRecordView {
 
 #Preview {
     RootView {
-        UpdateRecordView(viewModel: BigThreeViewModel(), isMainTabbarVisible: .constant(true))
+        UpdateRecordView(isMainTabbarVisible: .constant(true), showUpdateRecord: true)
     }
 }
 

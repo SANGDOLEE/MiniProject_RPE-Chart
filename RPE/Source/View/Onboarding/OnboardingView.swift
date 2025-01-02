@@ -5,7 +5,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Environment(NavigationRouter.self) var navigationRouter
-    @StateObject private var viewModel = BigThreeViewModel()
+    @State private var viewModel = BigThreeViewModel()
     
     @AppStorage("isFirstRun") private var isFirstRun: Bool?
     @Binding var isPresented: Bool

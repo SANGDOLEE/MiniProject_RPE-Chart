@@ -5,7 +5,7 @@ import RealmSwift
 struct ProfileView: View {
     
     @Binding var isMainTabbarVisible: Bool
-    @ObservedObject var viewModel: BigThreeViewModel
+    @State private var viewModel = BigThreeViewModel()
     @State private var profile: Profile? // Profile 데이터를 저장할 변수
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
@@ -399,5 +399,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(isMainTabbarVisible: .constant(true), viewModel: BigThreeViewModel())
+    ProfileView(isMainTabbarVisible: .constant(true))
 }

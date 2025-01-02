@@ -1,11 +1,12 @@
 
 import SwiftUI
 
+@Observable
 class BigThreeViewModel: ObservableObject {
     
-    @Published var squatValue: String = ""
-    @Published var benchValue: String = ""
-    @Published var deadValue: String = ""
+    var squatValue: String = ""
+    var benchValue: String = ""
+    var deadValue: String = ""
     
     init() {
         squatValue = UserDefaults.standard.string(forKey: "squatValue") ?? ""
