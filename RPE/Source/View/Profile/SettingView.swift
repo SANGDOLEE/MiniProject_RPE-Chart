@@ -14,6 +14,8 @@ struct SettingView: View {
     @Binding var isMainTabbarVisible: Bool
     
     @State private var showEditProfile = false // EditProfileSheet
+    @State private var showUpdateRecord = false
+    @State private var showUnitofMesaure = false
     
     var body: some View {
         ZStack {
@@ -59,6 +61,12 @@ struct SettingView: View {
         .fullScreenCover(isPresented: $showEditProfile) {
             EditProfileView(showEditProfile: showEditProfile)
         }
+        .fullScreenCover(isPresented: $showUpdateRecord) {
+            UpdateRecordView(isMainTabbarVisible: $isMainTabbarVisible, showUpdateRecord: showUpdateRecord)
+        }
+        .fullScreenCover(isPresented: $showUnitofMesaure) {
+            WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible, showUnitofMesaure: showUnitofMesaure)
+        }
     }
     
     // MARK: MY INFORMATION View
@@ -69,7 +77,7 @@ struct SettingView: View {
                 .foregroundStyle(.myB9B9B9)
                 .padding(.bottom, 8)
             
-            // "My BigThree" 버튼
+            // "Edit Profile" 버튼
             Button {
                 showEditProfile = true // fullScreenCover 띄우기
             } label: {
@@ -89,7 +97,9 @@ struct SettingView: View {
             }
             
             // "My BigThree" 버튼
-            NavigationLink(destination: UpdateRecordView(viewModel: BigThreeViewModel(),isMainTabbarVisible: $isMainTabbarVisible)) {
+            Button {
+                showUpdateRecord = true // fullScreenCover 띄우기
+            } label: {
                 HStack {
                     Text("Update BigThree Weight")
                         .font(.setPretendard(weight: .regular, size: 16))
@@ -98,7 +108,7 @@ struct SettingView: View {
                     Image(systemName: "chevron.right")
                         .font(.footnote)
                         .bold()
-                        .foregroundColor(Color(hex: "555556")) //  ⚠️ 나중에 색깔 변경 고려
+                        .foregroundColor(Color(hex: "555556"))
                 }
                 .padding()
                 .background(.myBackBoxcolor)
@@ -115,20 +125,21 @@ struct SettingView: View {
                 .foregroundStyle(.myB9B9B9)
                 .padding(.bottom, 8)
             
-            // "Weight Unit Conversion" 버튼
-            NavigationLink(destination: WeightUnitView(isMainTabbarVisible: $isMainTabbarVisible)) {
+            Button {
+                showUnitofMesaure = true
+            } label: {
                 HStack {
-                    Text("Weight Unit Conversion")
+                    Text("Unit of measure")
                         .font(.setPretendard(weight: .regular, size: 16))
                         .foregroundStyle(.white)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.footnote)
                         .bold()
-                        .foregroundColor(Color(hex: "555556"))  //  ⚠️ 나중에 색깔 변경 고려
+                        .foregroundColor(Color(hex: "555556"))
                 }
                 .padding()
-                .background(Color.myBackBoxcolor)
+                .background(.myBackBoxcolor)
                 .cornerRadius(8)
             }
             

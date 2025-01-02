@@ -5,7 +5,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Environment(NavigationRouter.self) var navigationRouter
-    @StateObject private var viewModel = BigThreeViewModel()
+    @State private var viewModel = BigThreeViewModel()
     
     @AppStorage("isFirstRun") private var isFirstRun: Bool?
     @Binding var isPresented: Bool
@@ -62,7 +62,7 @@ struct OnboardingView: View {
                                     .cornerRadius(12)
                                     .keyboardType(.decimalPad)
                                     .onChange(of: viewModel.squatValue) { oldValue, newValue in
-                                        viewModel.squatValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                        viewModel.squatValue = newValue.prefix(6).filter { "0123456789.".contains($0) }
                                     }
                                 HStack {
                                     Spacer()
@@ -91,7 +91,7 @@ struct OnboardingView: View {
                                     .cornerRadius(12)
                                     .keyboardType(.decimalPad)
                                     .onChange(of: viewModel.benchValue) { oldValue, newValue in
-                                        viewModel.benchValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                        viewModel.benchValue = newValue.prefix(6).filter { "0123456789.".contains($0) }
                                     }
                                 HStack {
                                     Spacer()
@@ -119,7 +119,7 @@ struct OnboardingView: View {
                                     .cornerRadius(12)
                                     .keyboardType(.decimalPad)
                                     .onChange(of: viewModel.deadValue) { oldValue, newValue in
-                                        viewModel.deadValue = newValue.prefix(5).filter { "0123456789.".contains($0) }
+                                        viewModel.deadValue = newValue.prefix(6).filter { "0123456789.".contains($0) }
                                     }
                                 HStack {
                                     Spacer()

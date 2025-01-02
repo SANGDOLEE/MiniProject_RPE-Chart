@@ -5,7 +5,7 @@ import RealmSwift
 struct ProfileView: View {
     
     @Binding var isMainTabbarVisible: Bool
-    @ObservedObject var viewModel: BigThreeViewModel
+    @State private var viewModel = BigThreeViewModel()
     @State private var profile: Profile? // Profile 데이터를 저장할 변수
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
@@ -65,7 +65,7 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .padding(.vertical)
                                 
-                                Text(formattedTotal(viewModel.totalValue))
+                                Text(viewModel.formattedTotal())
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                                     .kerning(0.6)
@@ -206,6 +206,9 @@ struct ProfileView: View {
                 .padding(.bottom, 68)
             }
             .applyGradientBackground()
+            .onAppear {
+                viewModel.loadData()
+            }
         }
     }
     // 기존에 저장된 이미지를 로드해 UI에 표시
@@ -243,7 +246,7 @@ struct ProfileView: View {
             return userGender
         } else {
             print("⚠️ 유저 성별 입력되지 않음")
-            return "N/A"
+            return "Gender"
         }
     }
     
@@ -264,9 +267,10 @@ struct ProfileView: View {
             return formattedWeight
         } else {
             print("No profile data found. Returning default body weight of 0.0.")
-            return "N/A"
+            return "Bodyweight"
         }
     }
+    
     // Dots 계산 함수
     private func getDotsScore() -> String {
         let realm = try! Realm()
@@ -399,5 +403,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(isMainTabbarVisible: .constant(true), viewModel: BigThreeViewModel())
+    ProfileView(isMainTabbarVisible: .constant(true))
 }

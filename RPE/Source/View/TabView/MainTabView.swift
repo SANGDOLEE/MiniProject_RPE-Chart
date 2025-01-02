@@ -2,8 +2,6 @@ import SwiftUI
 
 struct MainTabView: View {
     
-    // 실제로 보여줄 화면에 필요한 ViewModel
-    @StateObject private var viewModel = BigThreeViewModel()
     @State var isMainTabbarVisible = true  // 처음엔 보이도록 가정
     
     // 현재 선택된 탭
@@ -25,10 +23,10 @@ struct MainTabView: View {
             
             // MARK: - 본문 컨텐츠(탭마다 다른 View)
             TabView(selection: $selectedTab) {
-                MainView(viewModel: viewModel)
+                MainView()
                     .tag("main")
                 
-                ProfileView(isMainTabbarVisible: $isMainTabbarVisible, viewModel: BigThreeViewModel())
+                ProfileView(isMainTabbarVisible: $isMainTabbarVisible)
                     .tag("profile")
             }
             .onChange(of: selectedTab) { oldValue, newValue in

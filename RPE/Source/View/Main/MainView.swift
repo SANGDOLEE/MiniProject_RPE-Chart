@@ -4,7 +4,7 @@ import RealmSwift
 
 struct MainView: View {
     
-    @StateObject var viewModel: BigThreeViewModel
+    @State private var viewModel = BigThreeViewModel()
     
     @State private var workout = ""
     @State private var rpeValue = 0.0
@@ -246,5 +246,5 @@ extension Double {
 }
 
 #Preview {
-    MainView(viewModel: BigThreeViewModel())
+    MainView()
 }

@@ -15,7 +15,7 @@ struct UserInformationView: View {
     
     @State private var navigationRouter = NavigationRouter()
     @AppStorage("isFirstRun") private var isFirstRun: Bool?
-    @StateObject private var viewModel = BigThreeViewModel()
+    @State private var viewModel = BigThreeViewModel()
     @Binding var isPresented: Bool
     
     @State private var showAlert = false
@@ -197,7 +197,7 @@ struct UserInformationView: View {
                             navigationRouter.push(to: .onboardingView)
                         }
                     } label: {
-                        Text("COMPLETE")
+                        Text("NEXT")
                             .frame(maxWidth: .infinity)
                             .frame(height: 54)
                             .font(.setPretendard(weight: .bold, size: 18))
