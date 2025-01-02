@@ -54,8 +54,8 @@ struct EditProfileView: View {
                         Text("Done")
                             .font(.setPretendard(weight: .regular, size: 15))
                             .foregroundStyle(userNickname.isEmpty ? .gray : .white)
-                            .disabled(userNickname.isEmpty)
                     }
+                    .disabled(userNickname.isEmpty)
                 }
                 .padding(.horizontal) // 바깥 padding 16
                 

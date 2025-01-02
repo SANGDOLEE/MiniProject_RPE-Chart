@@ -246,7 +246,7 @@ struct ProfileView: View {
             return userGender
         } else {
             print("⚠️ 유저 성별 입력되지 않음")
-            return "N/A"
+            return "Gender"
         }
     }
     
@@ -267,9 +267,10 @@ struct ProfileView: View {
             return formattedWeight
         } else {
             print("No profile data found. Returning default body weight of 0.0.")
-            return "N/A"
+            return "Bodyweight"
         }
     }
+    
     // Dots 계산 함수
     private func getDotsScore() -> String {
         let realm = try! Realm()
