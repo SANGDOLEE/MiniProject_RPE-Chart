@@ -80,7 +80,7 @@ struct WeightUnitView: View {
                                 .foregroundStyle(.green)
                                 .font(.setPretendard(weight: .medium, size: 12))
                             
-                            Text("If lb, Dots & Wilks Point may have an error of about 0.02")
+                            Text("If lb, Dots & Wilks Point may have an error of about 0.02~0.1")
                                 .font(.setPretendard(weight: .medium, size: 12))
                                 .foregroundStyle(.green)
                                 .lineSpacing(2)
