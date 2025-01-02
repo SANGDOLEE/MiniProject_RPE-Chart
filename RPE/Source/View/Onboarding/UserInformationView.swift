@@ -197,7 +197,7 @@ struct UserInformationView: View {
                             navigationRouter.push(to: .onboardingView)
                         }
                     } label: {
-                        Text("COMPLETE")
+                        Text("NEXT")
                             .frame(maxWidth: .infinity)
                             .frame(height: 54)
                             .font(.setPretendard(weight: .bold, size: 18))
