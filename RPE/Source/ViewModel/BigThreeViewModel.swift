@@ -20,6 +20,14 @@ class BigThreeViewModel: ObservableObject {
         (Double(deadValue) ?? 0.0)
     }
     
+    func formattedTotal() -> String {
+        if totalValue.truncatingRemainder(dividingBy: 1) == 0 {
+            return String(format: "%.0f", totalValue)
+        } else {
+            return String(format: "%.1f", totalValue)
+        }
+    }
+    
     func saveData() {
         UserDefaults.standard.setValue(squatValue, forKey: "squatValue")
         UserDefaults.standard.setValue(benchValue, forKey: "benchValue")

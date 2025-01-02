@@ -9,8 +9,7 @@ import SwiftUI
 
 struct UpdateRecordView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+    @Environment(\.dismiss) private var dismiss
     @State private var viewModel = BigThreeViewModel()
     @AppStorage("isText") private var unitOfWeight: Bool = false
     
@@ -22,6 +21,44 @@ struct UpdateRecordView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                // HeaderView
+                HStack {
+                    Spacer()
+                    Text("Update Record")
+                        .font(.setPretendard(weight: .semiBold, size: 17))
+                        .foregroundStyle(.white)
+                    Spacer()
+//                    Button {
+////                        setUserNickname()
+////                        setUserGender()
+////                        setUserBodyweight()
+////                        setUserImage()    // 이미지 저장 로직
+////                        
+////                        dismiss()
+////                        showEditProfile = false
+//                    } label: {
+//                        Text("완료")
+//                            .font(.setPretendard(weight: .regular, size: 15))
+//                            .foregroundStyle(.white)
+//                    }
+                    Button {
+                        dismiss()
+                        showUpdateRecord = false
+                    } label: {
+                        Image(systemName: "xmark")
+                            .frame(width: 17, height: 17)
+                            .foregroundStyle(.white)
+                            .bold()
+                    }
+                }
+                .padding(.horizontal) // 바깥 padding 16
+                
+                Divider()
+                    .frame(height: 1) // 두께를 조정
+                    .background(.myB9B9B9.opacity(0.3))
+                    .padding(.bottom)
+                    .padding(.top, 10)
+                
                 HStack {
                     Text("Congratulations !\nBe careful of injuries")
                         .padding(.leading, 30)
@@ -224,7 +261,7 @@ struct UpdateRecordView: View {
     
     var backButton : some View {
         Button{
-            self.presentationMode.wrappedValue.dismiss()
+            dismiss()
             isMainTabbarVisible = true
         } label: {
             HStack {

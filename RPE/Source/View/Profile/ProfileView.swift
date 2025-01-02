@@ -65,7 +65,7 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .padding(.vertical)
                                 
-                                Text(formattedTotal(viewModel.totalValue))
+                                Text(viewModel.formattedTotal())
                                     .font(.setPretendard(weight: .bold, size: 24))
                                     .foregroundStyle(.white)
                                     .kerning(0.6)
@@ -206,6 +206,9 @@ struct ProfileView: View {
                 .padding(.bottom, 68)
             }
             .applyGradientBackground()
+            .onAppear {
+                viewModel.loadData()
+            }
         }
     }
     // 기존에 저장된 이미지를 로드해 UI에 표시
