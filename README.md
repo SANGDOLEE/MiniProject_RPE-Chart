@@ -1,23 +1,49 @@
 ![Frame 7868](https://github.com/user-attachments/assets/c61d0397-6666-439c-8b76-f95dde8c66fa)
-<img src="https://github.com/user-attachments/assets/16bfb1ca-51a6-4432-8e98-ee55e41e4c40" width="35px;">
-<img src="https://github.com/user-attachments/assets/9073a623-7e70-4685-9eee-39d6c226f0f6" width="35px;"> </br>
-> RPE Chart </br>
-> 개인프로젝트 </br>
-> 개발기간 : 2023.12 ~ 2024.01 ( 1.0 Version )</br>
->
-> RPE(Rate of Perceived Exertion) 기반의 운동 자각도 서비스 앱
+# 🏋🏻‍♀️ 3대 중량을 체계적으로 증량하다, RPE Chart!
+> 운동 자각도 시스템을 통하여 효율적이고 체계적으로 3대 운동을 원하는 강도로 조절하며 증량을 보다 쉽게 도와주는 앱 서비스
+<table>
+  <tr>
+    <td colspan="1" align="center"><b>앱 이름</b></td>
+    <td colspan="1" align="leading"><b>RPE Chart</b></td>
+  </tr>
+  <tr>
+    <td colspan="1" align="center">로고</td>
+    <td colspan="1" align="leading">
+       <img src="https://github.com/user-attachments/assets/16bfb1ca-51a6-4432-8e98-ee55e41e4c40" width="44px;">
+       <img src="https://github.com/user-attachments/assets/9073a623-7e70-4685-9eee-39d6c226f0f6" width="44px;">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="1" align="center">기간</td>
+    <td colspan="1" align="leading">2023. 12. ~ 2024. 01.</td>
+  </tr>
+  <tr>
+    <td colspan="1" align="center">상태</td>
+    <td colspan="1" align="leading">앱스토어 배포 완료 및 업데이트 진행 중(v1.4.0) </td>
+  </tr>
+   <tr>
+    <td colspan="1" align="center">참여인원</td>
+    <td colspan="1" align="leading">개인 프로젝트</td>
+  </tr>
+  <tr>
+    <td colspan="1" align="center">기술 스택</td>
+    <td colspan="1" align="leading">SwiftUI, UserDefaults, Realm, StoreKit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+  </tr>
+    <tr>
+    <td colspan="1" align="center">앱스토어</td>
+    <td colspan="1" align="leading">
+      <a href="https://apps.apple.com/kr/app/rpe-chart/id6475646908">RPE Chart</a>
+    </td>
+  </tr>
+</table>
 
 ---
 
-### 🟡 RPE Chart
-<b>3대 운동을 하는 사람이 조금 더 쳬계적인 훈련을 통해 증량을 보다 쉽게 도와주는 앱 RPE Chart입니다. </b>
-</br>
-</br>
+### 🟡 RPE ?
 RPE란 Rate of Perceived Exertion의 약자로 운동 자각도로써,</br>
 쉽게 말해서 내가 하고 있는 운동이 얼마나 힘든지를 숫자로 나타낸 것입니다. </br>
 특정 중량에 일정한 비율을 계산하여 원하는 운동 강도의 중량을 계산할 수 있습니다. </br>
 RPE Chart를 사용하면 개인의 피트니스 루틴을 최적화하고 피트니스 목표를 조금 더 효과적으로 달성할 수 있습니다.</br>
-> 🧑🏻‍💻 : 개발자 본인이 개인적인 목적으로 사용하기 위해 가볍게 만들었다가, 실제 파워리프팅 운동을 하는 국내·외사람들도 많아지는 추세로 배포까지 해보게되었습니다.</br>현재는 버전을 관리하며 업데이트를 하고 있습니다.
 
 ---
 
@@ -28,13 +54,6 @@ RPE Chart를 사용하면 개인의 피트니스 루틴을 최적화하고 피�
 
 ---
 
-### 🟡 Frameworks and Libraries
-- SwiftUI
-- UserDefaults
-- Realm
-- StoreKit
-
----
 ### 🟡 앱 스크린샷
 > 1.0 배포 ~ 최신 버전 </br>
 
